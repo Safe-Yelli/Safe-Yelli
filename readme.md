@@ -29,3 +29,11 @@ Corridor of movement between SFS and Campus area has higher density of incidents
 ## Need more data, can't make conclusions
 We only have 24 entries at the time of writing this (2021-10-01 | 20:10), so we cannot make conclusions of any kind that can be empirically backed up.
 
+
+# ToDo
+## Going to the browser
+https://handsondataviz.org/leaflet-maps-with-google-sheets.html
+Consider porting to native js to have it pull data from google sheets directly. Run a shiny app?
+
+## Refining data collection
+Name the place rather than just fill location coordinates

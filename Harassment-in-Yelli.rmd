@@ -1,28 +1,29 @@
 ---
-title: "Harassment in Yelahanka"
-author: "Adhavan"
+title: "Mapping harassment in Yelahanka"
 date: "28/09/2021"
 output:
   html_document:
-    theme: flatly
-    toc: TRUE
-    toc_float: TRUE
+    theme: cosmo
+    toc: yes
+    toc_float: yes
     toc_depth: 2
-    number_sections: TRUE
+    number_sections: no
     code_folding: hide
-    code_download: TRUE
-abstract: To find spatial correlations between catcalling hot-spots and public-utility and attempt to affect public policy by running a public campaign with this tool
+    code_download: yes
 ---
+```{css, echo = F}
+.title{
+ font-size: 30px;
+}
+```
+Abstract: To find spatial correlations between catcalling hot-spots and public-utility and attempt to affect public policy by running a pro-policing campaign with this tool
+
+**This is currently only a working proof of concept. Not meant for public release yet.**
+
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-#library(prettymapr)
-#library(tmap)
-
-#library(rnaturalearth)
-#library(rnaturalearthdata)
-#library(osmdata)
-#library(osmplotr)
 
 library(tidyverse)
 library(sf)
@@ -31,62 +32,18 @@ library(leaflet.providers)
 library(leaflet.extras)
 library(rgdal)
 library(crosstalk)
-
 ```
 
-
-
-```{r reading data, echo=TRUE}
+```{r reading data, include=FALSE}
 harassData <- read_csv('formResponses.csv')
 harassData <- harassData %>% separate(., col = `Incident Location in Coordinates`, into = c("lat", "lng"), sep = "\\,")
 # Attach a coordinate reference 
 harassCoords <- harassData %>%
   st_as_sf(coords = c('lng', 'lat'),crs = 4326) 
 harassCoords
-
 ```
-
-
-```{r plotting, include=FALSE, eval=FALSE}
-# Get bounding box for geom plots
-bbox <- prettymapr::searchbbox("Yelahanka") %>%
-  prettymapr::zoombbox(factor = 0, offset = c(0,4)) 
-bbox
-dat_B <- extract_osm_objects (key = "building", bbox = bbox) 
-dat_H <- extract_osm_objects (key = 'highway', bbox = bbox)
-dat_P <- extract_osm_objects (key = 'park', bbox = bbox)
-#dat_G <- extract_osm_objects (key = 'landuse', value = 'grass', bbox = bbox)
-#dat_T <- extract_osm_objects (key = 'natural', value = 'tree', bbox = bbox)
-```
-
-```{r tmap, include=FALSE, eval=FALSE}
-data("World")
-
-tmap_mode('view')
-
-tm_shape(World)+
-  tm_polygons()+
-
-tm_shape(harassCoords)+
-  tm_dots(col='green')
-
-```
-
-```{r geom plot, include=FALSE, eval=FALSE}
-ggplot() + 
-  geom_sf(data = dat_B, colour = "burlywood1") + 
-  geom_sf(data = dat_H, colour = "gray80") +
-  geom_sf(data = harassCoords, colour = "red")+
-  theme(legend.position = "right") 
-
-```
-
-
-
-# Leaflet!
-
-
-```{r }
+# Use the map here {.tabset}
+```{r reading files and other stuff, include=FALSE}
 mapUrl="https://api.mapbox.com/styles/v1/rungdung/cku6gh76r1dvh17o3zkfllvjz/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicnVuZ2R1bmciLCJhIjoiY2tqeWh6cXF4MDgzMjJvbWVmbGQzYjAwMyJ9.U-aJyoqyKvTXlhVk43jV1A"
 
 # Read KML file's layers into separate objects
@@ -98,21 +55,22 @@ infrasPlot = readOGR("hotspots.kml", layer="Dilipated public infrastructure")
 # Convert year to field
 #harassCoords <- harassCoords %>% mutate(`Year of Occurence`=as.Date(`Year of Occurence`))
 shared_data <- SharedData$new(harassCoords)
-filter_slider("date", "Date", shared_data, ~`Year of Occurence`)
+filter_slider("date", "Date", shared_data, ~`Year of Occurence`) # not working yet 
+# https://stackoverflow.com/questions/62849300/r-leaflet-add-a-range-slider-to-filter-markers-without-shiny
 
+```
 
-pal <- colorBin("YlOrRd", domain = shared_data$`Year of Occurence`)
-
+```{r Mappinnng!, echo=F, out.width='100%'}
 #addProviderTiles(providers$CartoDB.Positron) not working
-# map
 map<-leaflet(shared_data) %>% 
   addTiles(urlTemplate = mapUrl) %>% 
   fitBounds(77.554808,13.087922,77.608495,13.114213) %>% 
   setMaxBounds(77.554808,13.087922,77.608495,13.114213) %>% 
   addCircleMarkers(label = harassCoords$Misc,
                    opacity=0.09,
-                   fillColor = ~pal(`Year of Occurence`),
-                   clusterOptions = markerClusterOptions()
+                   #fillColor = ~pal(`Year of Occurence`),
+                   clusterOptions = markerClusterOptions(),
+                   group = "Incident markers"
                    ) %>%
   
   # Layers
@@ -122,7 +80,7 @@ map<-leaflet(shared_data) %>%
               label = emptyPlot$Name,
               group="Empty Plots") %>% 
   addPolygons(data = infrasPlot,
-              color = 'green',
+              color = 'red',
               stroke=FALSE,
               label = infrasPlot$Name,
               group="Dilipated infrastructure") %>% 
@@ -133,24 +91,41 @@ map<-leaflet(shared_data) %>%
               group="Shops") %>%
   
   
-  addHeatmap(radius =18, blur =15, intensity = 0.7, cellSize = 0.1, minOpacity = 0.1) %>% 
+  addHeatmap(radius =18, 
+             blur =15, 
+             intensity = 0.7, 
+             cellSize = 0.1, 
+             minOpacity = 0.1,
+             group = "Heat Map") %>% 
   
   # UI controls
-  addLegend(pal=pal, title="what is this", values= ~`Year of Occurence`) %>% 
+  # addLegend(pal=pal,
+  #          title="what is this",
+  #          values= ~`Year of Occurence`) %>% 
   addScaleBar() %>% 
   addLayersControl(
+    baseGroups = c("Heat Map","Incident markers"),
     overlayGroups = c("Empty Plots", "Dilipated infrastructure", "Shops"),
     options = layersControlOptions(collapsed = FALSE))
 
 map
 ```
 
+## Usage  {.tabset}
 
-## Going to the browser
-https://handsondataviz.org/leaflet-maps-with-google-sheets.html
-Consider porting to native Js tohave it pull data from google sheets directly.
+Use the selection tool on the right to shift between viewing a heat map and precise incidents.
 
-# Refining data collection
-Name the place rather than just fill location coordinates
+## Infrastructure mapping 
 
+You can use the checkboxes to enable and disable seeing the status of infrastructure around Yelahanka. Ill lit streets and parks are some of the infrastructure that would be mapped (InProgress)
 
+# Concerns to focus on
+
+# Affecting policy
+
+# Telling your story
+
+# Creators, contributors
+Adhavan Mohana Sivaraj
+Shashank C
+Shresth Meharia
