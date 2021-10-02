@@ -2,18 +2,39 @@
 title: "Mapping harassment in Yelahanka"
 date: "28/09/2021"
 output:
-  html_document:
+  html_document: 
     theme: cosmo
     toc: yes
     toc_float: yes
     toc_depth: 2
-    number_sections: no
     code_folding: hide
     code_download: yes
 ---
 ```{css, echo = F}
 .title{
- font-size: 30px;
+ font-size: 80px;
+ background-color: #D1CFC0;
+ color: black;
+ 
+ border: 1px;
+ border-radius: 6px;
+ padding-left 10px;
+}
+
+h1{
+ background-color: #D9E3DA;
+ color: black;
+ border: 1px;
+ border-radius: 6px;
+}
+
+.tocify-item{
+  background-color: #D9E3DA
+}
+
+.list-group-item.active{
+  background-color: #D1CFC0;
+  color: black
 }
 ```
 Abstract: To find spatial correlations between catcalling hot-spots and public-utility and attempt to affect public policy by running a pro-policing campaign with this tool
@@ -113,19 +134,32 @@ map
 
 ## Usage  {.tabset}
 
-Use the selection tool on the right to shift between viewing a heat map and precise incidents.
+Use the selection tool on the right to shift between viewing a heat map and viewing precise incidents. Click on the circles while viewing precise incidents to read about it. 
 
-## Infrastructure mapping 
+## Viewing status of infrastructure
 
 You can use the checkboxes to enable and disable seeing the status of infrastructure around Yelahanka. Ill lit streets and parks are some of the infrastructure that would be mapped (InProgress)
 
+
+
 # Concerns to focus on
+
+## Categorising incidents
+How do we define and mark incidents as harassment, catcalling, sexual harassment?
+
+## Putting the map out, what happens?
+How would it help with a campaign targeted at bringing policy changing attitudes from the police? 
 
 # Affecting policy
 
+## How do we get it to the right people?
+Do social media campaigns help? Will the Srishti community be open to supporting this?
+
 # Telling your story
 
+If you would to have your incident listed on this map, you can reach out to us to record your story. The map will be updated periodically.
+
 # Creators, contributors
-Adhavan Mohana Sivaraj
-Shashank C
-Shresth Meharia
+Adhavan Mohana Sivaraj,
+Shashank C,
+Shresth Meharia,
