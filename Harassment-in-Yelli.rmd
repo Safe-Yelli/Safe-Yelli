@@ -12,28 +12,29 @@ output:
 ---
 ```{css, echo = F}
 .title{
- font-size: 80px;
- background-color: #D1CFC0;
- color: black;
+  font-size: 80px;
+  background-color: #dbbcbce3;
+  color: black;
  
- border: 1px;
- border-radius: 6px;
- padding-left 10px;
+  border: 1px;
+  border-radius: 6px;
+  padding-left 10px;
 }
 
 h1{
- background-color: #D9E3DA;
- color: black;
- border: 1px;
- border-radius: 6px;
+  background-color:#e7f1ebe3;
+  color: black;
+  border: 1px;
+  border-radius: 6px;
+  padding: 2px 0 2px 5px;
 }
 
 .tocify-item{
-  background-color: #D9E3DA
+  background-color: #d1cfc034
 }
 
 .list-group-item.active{
-  background-color: #D1CFC0;
+  background-color: #e7f1ebe3;
   color: black
 }
 ```
