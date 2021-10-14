@@ -95,6 +95,7 @@ map<-leaflet(shared_data) %>%
                    group = "Incident markers"
                    ) %>%
   
+
   # Layers
   addPolygons(data = emptyPlot,
               color = 'grey',

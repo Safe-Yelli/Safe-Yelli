@@ -66,3 +66,6 @@ Consider porting to native js to have it pull data from google sheets directly. 
 Name the place rather than just fill location coordinates
 ## Turning this into a campaign
 - Interface with Wellness, get their thoughts and attempt to join hands with Safe space to handle outreach in campuses. Key Words: Social Media outreach, Quick action questionnaires on campuses
+###  Data Abstraction
+- The public version of this map cannot display specific locations of incidents, can it? Should it? Should it display just a heatmap?
+
