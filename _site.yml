@@ -1,0 +1,8 @@
+name: "safe-yelli"
+navbar:
+  title: "Safe Yelli"
+
+output:
+  html_document:
+    theme: paper
+    css: site.css
