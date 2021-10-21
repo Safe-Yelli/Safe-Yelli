@@ -8,21 +8,14 @@ output:
     toc_float: yes
     toc_depth: 2
     code_folding: hide
-    code_download: yes
-knit: (function(input, ...) {
-    rmarkdown::render(
-      input,
-      output_file = paste0(
-      'index.html'
-      ),
-      envir = globalenv()
-    )
-  })
+    code_download: no
+
 ---
 
-::: first-view
+<div class="first-view">
+
 A citizen centric tool to report harassment and assault inside Yelahanka. Visualise your community's citizen reported crime data on a map.
-:::
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -44,6 +37,7 @@ harassCoords <- harassData %>%
   st_as_sf(coords = c('lng', 'lat'),crs = 4326) 
 harassCoords
 ```
+
 
 # See crime reports on maps here {.tabset}
 
@@ -132,11 +126,12 @@ Use the selection tool on the right to shift between viewing a heat map and view
 
 You can use the checkboxes to enable and disable seeing the status of infrastructure around Yelahanka. Ill lit streets and parks are some of the infrastructure that would be mapped (InProgress)
 
+</div>
 # Why are we doing this?
 
-We would like to understand the dynamics of crime in Yelahanka. We need to delve into why certain crimes seem to happen in higher frequencies at certain areas in Yelahanka. What could be some causal factors for this? It is very likely that poorly maintained public infrastructure and inept policing strategies are the major causal factors for crime in our area.
+We live in a scary place in time to have normalised harassment and catcalling. There seem to be too many stories from victims who happen to be predominantly young students. What could be some causal factors for this?  It is very likely that poorly maintained public infrastructure and inept policing strategies are the major causal factors for crime in our area. But there are deeper roots, what social factors cause these?
 
-Situational crime prevention measures focus on the circumstances in which crime takes place, rather than on offenders. Keeping that in mind, strategies should be constructed limiting the opportunities for people to commit crime.
+Situational crime prevention measures focus on the circumstances in which crime takes place, rather than on offenders. Keeping that in mind, strategies should be constructed limiting the opportunities for people to commit crime. 
 
 **Of the many types of crime that are perpetrated, sexual assault, harassment and catcalling are more pronounced and have impacted a relatively larger demographic of our community.** Fortunately, adopting a proper crime prevention strategy can help curb the intensity and frequency of these crimes. Our objective is to gather enough data to present a credible case and influence effective prevention strategies on the basis of hard numbers.
 
@@ -156,7 +151,7 @@ There is a significant difference in the number of crimes reported in police sta
 
 3.  Sometimes, a family member might be the perpetrator.
 
-Some studies by academics in India estimate the dark figure to be about 50 times higher than the official crime rates. It is only prudent to infer that the dark figure in the case of sexual assault and harassement is higher. The only way that we can paint a complete picture is to have multiple, credible and independent surveys that deal with the same specific problem(crime).
+Some studies by academics in India estimate the dark figure to be about 50 times higher than the official crime rates. It is only prudent to infer that the dark figure in the case of sexual assault and harassment is higher. The only way that we can paint a complete picture is to have multiple, credible and independent surveys that deal with the same specific problem(crime).
 
 Essentially, if you want to feel safer and make your immediate living environment feel comfortable and secure, then the least you can do is report.
 
@@ -168,7 +163,7 @@ Essentially, if you want to feel safer and make your immediate living environmen
 
 2.  Harassment:  Sexual harassment is unwanted behaviour of a sexual nature which: violates your dignity. makes you feel intimidated, degraded or humiliated. creates a hostile or offensive environment.
 
-Section 506 IPC - criminal intimidation. (Reverse the gender roles and it still constitutes harassment. Women can also be reported under 506 - Criminal intimidation) \
+Section 506 IPC - criminal intimidation. (Reverse the gender roles and it still constitutes harassment. Women can also be reported under 506 - Criminal intimidation)\
 
 Even though there is no 'catcalling' or 'eve teasing' law in India. People often use Sec 294 IPC in cases relating to such offences
 
@@ -180,21 +175,25 @@ Even though there is no 'catcalling' or 'eve teasing' law in India. People often
 
 # Telling your story
 
+## Your reports are anonymous.
+
+At no point are you asked for personally identifiable information.
+
 ## Why should you report?
 
-**"Because it's on you to always do the right thing"**
+> "Because it's on you to always do the right thing"
 
 If you are being harassed, there are certain steps you can take to stop them. If you don't report it, they're just going to keep doing it. You now have the power to do something about it. Every report helps us paint a more comprehensive picture, essentially mapping these crimes in order to influence policing and public policy. 
 
 ## How can you help? 
 
-**"If you see something, do something"**
+> **"If you see something, do something"**
 
 If you see sexual assault, harassment or catcalling happen to someone else or if something happens to you, go to the police and file a report. Additionally, take 5 minutes and fill out this form so that you can contribute to a larger cause with your story.
 
 ## Why does it matter? 
 
-**"Because If you don't do anything about it, you become complicit"**
+> **"Because If you don't do anything about it, you become complicit"**
 
 As socially responsible human beings, it is our duty to do everything we can to make sure that the world is a safer place today than it was yesterday. Seems far fetched? Well, Let's start with making our immediate surroundings safe. Let's strive towards a society where a woman can walk down the street without fear of harassment!
 
@@ -206,8 +205,4 @@ If you would to have your incident listed on this map, you can reach out to us t
 
 </iframe>
 
-# Creators, contributors
-
-Adhavan Mohana Sivaraj, Shashank C, Shresth Meharia
-
-Abishay Nithin Kumar
+# 
