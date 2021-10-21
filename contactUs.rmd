@@ -1,0 +1,35 @@
+---
+title: "Contact Us"
+output: html_document
+---
+Please write in your Name, Email ID, and what you would like to talk to us about and we shall write back to you.
+
+<div class="form">
+  <form name="contact" method="POST" netlify-honeypot="bot-field"     data-netlify="true">
+    <p class="hidden">
+      <label>
+        Don’t fill this out if you’re human: 
+        <input name="bot-field" />
+      </label>
+    </p>
+    <p>
+      <label>
+        Name: <input type="text" name="name" style="float:right"/>
+      </label>
+    </p>
+    <p>
+      <label>
+        Email: <input type="text" name="email" style="float:right" />
+      </label>
+    </p>
+    <p>
+      <label>
+        Message: 
+        <textarea name="message" style="float:right"></textarea>
+      </label>
+    </p>
+    <p>
+      <button type="submit">Send</button>
+    </p>
+  </form>
+</div>
