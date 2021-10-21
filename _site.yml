@@ -1,8 +1,12 @@
 name: "safe-yelli"
 navbar:
   title: "Safe Yelli"
-
+  right:
+  - text: "Reach us"
+    href: contactUs.html
 output:
   html_document:
     theme: paper
     css: site.css
+    includes:
+      after_body: footer.html
