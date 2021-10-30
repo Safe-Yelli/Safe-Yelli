@@ -11,12 +11,6 @@ output:
     code_download: no
 
 ---
-
-<div class="first-view">
-
-A citizen centric tool to report harassment and assault inside Yelahanka. Visualise your community's citizen reported crime data on a map.
-
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 
@@ -25,9 +19,30 @@ library(sf)
 library(leaflet)
 library(leaflet.providers)
 library(leaflet.extras)
+library(metathis)
 library(rgdal)
-library(crosstalk)
 ```
+
+```{r}
+meta() %>%
+  meta_description(
+    "Report harassment, assault and catcalling in Yelahanka anonymously"
+  ) %>% 
+  meta_name("github-repo" = "rungdung/Harassment-in-Yelli") %>% 
+  meta_viewport() %>% 
+  meta_social(
+    title = "Report harassment in Yelahanka anonymously",
+    url = "https://safeyelli.netlify.app",
+    og_type = "website",
+    twitter_card_type = "summary",
+    twitter_creator = ""
+  )
+```
+<div class="first-view">
+
+A citizen centric tool to report harassment and assault inside Yelahanka. Visualise your community's citizen reported crime data on a map.
+
+
 
 ```{r reading data, include=FALSE}
 harassData <- read_csv('assets/formResponses.csv')
@@ -52,8 +67,8 @@ infrasPlot = readOGR("assets/hotspots.kml", layer="Dilipated public infrastructu
 
 # Convert year to field
 #harassCoords <- harassCoords %>% mutate(`Year of Occurence`=as.Date(`Year of Occurence`))
-shared_data <- SharedData$new(harassCoords)
-filter_slider("date", "Date", shared_data, ~`Year of Occurence`) # not working yet 
+#shared_data <- SharedData$new(harassCoords)
+#filter_slider("date", "Date", shared_data, ~`Year of Occurence`) # not working yet 
 # https://stackoverflow.com/questions/62849300/r-leaflet-add-a-range-slider-to-filter-markers-without-shiny
 
 ```
@@ -68,7 +83,7 @@ filter_slider("date", "Date", shared_data, ~`Year of Occurence`) # not working y
 
 ```{r Mappinnng!, echo=FALSE, out.width='100%'}
 #addProviderTiles(providers$CartoDB.Positron) not working
-map<-leaflet(shared_data) %>% 
+map<-leaflet(harassCoords) %>% 
   addTiles(urlTemplate = mapUrl) %>% 
   fitBounds(77.554808,13.087922,77.608495,13.114213) %>% 
   setMaxBounds(77.554808,13.087922,77.608495,13.114213) %>% 
@@ -204,5 +219,3 @@ If you would to have your incident listed on this map, you can reach out to us t
 <iframe width="100%" height="600" src="https://safeyelli.ushahidi.io/posts/create/1" frameborder="0" allowfullscreen data-external="1">
 
 </iframe>
-
-# 
