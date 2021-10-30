@@ -1,4 +1,4 @@
-name: "safe-yelli"
+name: "Safe Yelli"
 navbar:
   title: "Safe Yelli"
   right:
@@ -9,4 +9,5 @@ output:
     theme: paper
     css: site.css
     includes:
+      in_header: header.html
       after_body: footer.html
