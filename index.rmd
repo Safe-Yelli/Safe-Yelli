@@ -21,8 +21,6 @@ library(leaflet.providers)
 library(leaflet.extras)
 library(metathis)
 library(rgdal)
-library(sp)
-library(htmltools)
 ```
 
 ```{r}
@@ -47,18 +45,19 @@ A citizen centric tool to report harassment and assault inside Yelahanka. Visual
 
 
 ```{r reading data, include=FALSE}
-oldHarassData <- read_csv('assets/formResponses2.csv')
-#oldHarassData <- oldHarassData %>% separate(., col = `What are the exact coordinates of the incident?`, into = c("Location.lat", "Location.lon"), sep = "\\,")
-
-newHarassData <-read_csv('assets/ushahidiResponses2.csv')
-
-mapUrl="https://api.mapbox.com/styles/v1/rungdung/cku6gh76r1dvh17o3zkfllvjz/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicnVuZ2R1bmciLCJhIjoiY2tqeWh6cXF4MDgzMjJvbWVmbGQzYjAwMyJ9.U-aJyoqyKvTXlhVk43jV1A"
+harassData <- read_csv('assets/formResponses.csv')
+harassData <- harassData %>% separate(., col = `What are the exact coordinates of the incident?`, into = c("lat", "lng"), sep = "\\,")
+# Attach a coordinate reference 
+harassCoords <- harassData %>%
+  st_as_sf(coords = c('lng', 'lat'),crs = 4326) 
+harassCoords
 ```
 
 
 # See crime reports on maps here {.tabset}
 
-```{r reading other stuff, include=FALSE}
+```{r reading files and other stuff, include=FALSE}
+mapUrl="https://api.mapbox.com/styles/v1/rungdung/cku6gh76r1dvh17o3zkfllvjz/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicnVuZ2R1bmciLCJhIjoiY2tqeWh6cXF4MDgzMjJvbWVmbGQzYjAwMyJ9.U-aJyoqyKvTXlhVk43jV1A"
 
 # Read KML file's layers into separate objects
 st_layers("assets/hotspots.kml")
@@ -81,80 +80,55 @@ infrasPlot = readOGR("assets/hotspots.kml", layer="Dilipated public infrastructu
 </iframe>
 
 ## Heatmap
-Updated on 2/11/2021 7:17AM
-```{r merging dataframes and creating sf frames}
-allData <- rbind(oldHarassData,newHarassData)
-allData <- rename(allData, lat=Location.lat, lng = Location.lon)
-
-# Attach a coordinate reference 
-allCoords <- allData %>%
-  st_as_sf(coords = c('lng', 'lat'),crs = 4326)
-
-
-
-```
-
 
 ```{r Mappinnng!, echo=FALSE, out.width='100%'}
 #addProviderTiles(providers$CartoDB.Positron) not working
-map <- leaflet(allCoords) %>%
-  addTiles(urlTemplate = mapUrl) %>%
-  fitBounds(77.554808, 13.087922, 77.608495, 13.114213) %>%
-  setMaxBounds(77.554808, 13.087922, 77.608495, 13.114213) %>%
+map<-leaflet(harassCoords) %>% 
+  addTiles(urlTemplate = mapUrl) %>% 
+  fitBounds(77.554808,13.087922,77.608495,13.114213) %>% 
+  setMaxBounds(77.554808,13.087922,77.608495,13.114213) %>% 
+  addCircleMarkers(#label = harassCoords$Misc,
+                   opacity=0.09,
+                   #fillColor = ~pal(`Year of Occurence`),
+                   clusterOptions = markerClusterOptions(),
+                   group = "Incident markers"
+                   ) %>%
+
+
+  # Layers
+  addPolygons(data = emptyPlot,
+              color = 'grey',
+              stroke=FALSE,
+              label = emptyPlot$Name,
+              group="Empty Plots") %>% 
+  addPolygons(data = infrasPlot,
+              color = 'red',
+              stroke=FALSE,
+              label = infrasPlot$Name,
+              group="Dilipated infrastructure") %>% 
+  addPolygons(data = shopPlot,
+              color = 'green',
+              stroke=FALSE,
+              label = shopPlot$Name,
+              group="Shops") %>%
   
-  addScaleBar() %>%
+  
+  addHeatmap(radius =18, 
+             blur =15, 
+             intensity = 0.7, 
+             cellSize = 0.1, 
+             minOpacity = 0.1,
+             group = "Heat Map") %>% 
+  
+  # UI controls
+  # addLegend(pal=pal,
+  #          title="what is this",
+  #          values= ~`Year of Occurence`) %>% 
+  addScaleBar() %>% 
   addLayersControl(
-    baseGroups = c("Heat Map", "Incident markers"),
-    #overlayGroups = c("Empty Plots", "Dilipated infrastructure", "Shops"),
-    options = layersControlOptions(collapsed = FALSE)
-  ) %>%
-  
-  addMarkers(
-    #label = allCoords$`Describe the incident in detail`,
-    #labelOptions = labelOptions(textsize = "10px", width),
-    popup = htmlEscape(allCoords$`Describe the incident in detail`),
-    popupOptions = popupOptions(maxWidth = 400),
-    #opacity=0.09,
-    #fillColor = ~pal(`Year of Occurence`),
-    clusterOptions = markerClusterOptions(),
-    group = "Incident markers"
-  ) %>%
-  
-  addHeatmap(
-    radius = 20,
-    blur = 20,
-    intensity = 0.7,
-    cellSize = 0.1,
-    minOpacity = 0.8,
-    max = 0.9,
-    group = "Heat Map"
-  )
-# Layers
-# addPolygons(data = emptyPlot,
-#             color = 'grey',
-#             stroke=FALSE,
-#             label = emptyPlot$Name,
-#             group="Empty Plots") %>%
-# addPolygons(data = infrasPlot,
-#             color = 'red',
-#             stroke=FALSE,
-#             label = infrasPlot$Name,
-#             group="Dilipated infrastructure") %>%
-# addPolygons(data = shopPlot,
-#             color = 'green',
-#             stroke=FALSE,
-#             label = shopPlot$Name,
-#             group="Shops")
-
-
-
-
-# UI controls
-# addLegend(pal=pal,
-#          title="what is this",
-#          values= ~`Year of Occurence`) %>%
-
-
+    baseGroups = c("Heat Map","Incident markers"),
+    overlayGroups = c("Empty Plots", "Dilipated infrastructure", "Shops"),
+    options = layersControlOptions(collapsed = FALSE))
 
 map
 ```
