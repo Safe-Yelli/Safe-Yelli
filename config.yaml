@@ -1,0 +1,67 @@
+
+baseurl: /
+languageCode: en-us
+title: Safe Yelli
+theme: "bigspring-light"
+googleAnalytics: 'G-SC10M5SL96'
+disqusShortname: ''
+ignoreFiles:
+  - \.Rmd$
+  - \.Rmarkdown$
+  - _cache$
+  - \.knit\.md$
+  - \.utf8\.md$
+  
+permalinks:
+  post: /:year/:month/:day/:slug/
+
+menu:
+  main:
+    - name: Why?
+      url: /why
+      weight: 1
+    - name: Why should you report?
+      url: /why_report/
+      weight: 2
+    - name: Contact Us
+      url: /contact/
+      weight: 3
+    
+
+  footer_left: 
+      - name: Built on Ushahidi
+        url: https://ushahidi.com   
+        
+  footer_middle:
+      - name: Contact Us
+        url: /contact/
+      - name: GitHub
+        url: https://github.com/rungdung/harassment-in-yelli
+      - name: Instagram
+        url: https://instagram.com/safeyelli
+    
+  
+params:
+  MathJaxCDN: //cdnjs.cloudflare.com/ajax/libs
+  MathJaxVersion: 2.7.5
+  description: Mapping Harassment in Yelahanka
+  favicon: "/images/faviconLogo.ico"
+  highlightjsCDN: //cdnjs.cloudflare.com/ajax/libs
+  highlightjsLang:
+    - r
+    - yaml
+  highlightjsTheme: github
+  highlightjsVersion: 9.12.0
+  logo: "images/logo.png"
+  logo_width: "150px"
+  navigation_button:
+      enable: true
+      label: "Report an Incident"
+      link: "/report"
+
+
+markup:
+  defaultMarkdownHandler: goldmark
+  goldmark:
+    renderer:
+      unsafe: yes

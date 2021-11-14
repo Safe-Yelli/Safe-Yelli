@@ -1,0 +1,15 @@
+--- 
+title: "Contact Us"
+subtitle: "Send us a message here and we will get back to you"
+description: "Contact Us"
+output: html_document
+--- 
+
+<form name="contact" method="POST">
+    <input type="text" class="form-control mb-3" id="name" name="name" placeholder="Your Name">
+    <input type="email" class="form-control mb-3" id="mail" name="mail" placeholder="Your Email">
+    <input type="text" class="form-control mb-3" id="subject" name="subject" placeholder="Subject">
+          <textarea name="message" id="message" class="form-control mb-3" placeholder="yourmessage"></textarea>
+    <button type="submit" value="send" class="btn btn-primary">Send</button>
+</form>
+     
