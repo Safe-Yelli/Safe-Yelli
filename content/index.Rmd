@@ -1,9 +1,8 @@
 ---
 title: "Mapping harassment in Yelahanka"
 subtitle: "A citizen centric tool to report harassment and assault inside Yelahanka. Visualise your community's citizen reported crime data on a map."
-
-
 description: "A citizen centric tool to report harassment and assault inside Yelahanka. Visualise your community's citizen reported crime data on a map."
+draft: false
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
