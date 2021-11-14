@@ -1,6 +1,7 @@
 ---
 title: "Mapping harassment in Yelahanka"
 subtitle: "A citizen centric tool to report harassment and assault inside Yelahanka. Visualise your community's citizen reported crime data on a map."
+
 description: "A citizen centric tool to report harassment and assault inside Yelahanka. Visualise your community's citizen reported crime data on a map."
 draft: false
 ---
@@ -92,13 +93,13 @@ map
 
 # Report an incident 
 
-If you would to have your incident listed on this map, you can reach out to us to record your story. The map will be updated periodically.
+If you would to have your incident listed on this map, you can reach out to us to record your story. The map will be updat ed periodically.
  
-<a href="report" class="btn btn-primary">Report an Incident</a> 
+<a href="report" class="btn btn-primary">Report an Incident</a>  
 
 # Defining harassment and other terms 
-
-(The law provides a clear enough definition of assault) 
+ 
+(The law provides a clear enough definition of assault)
 
 1.  Assault: Whoever assaults or uses criminal force to any woman(or man\*), intending to outrage or knowing it to be likely that he will thereby outrage her modesty (Sec 354 IPC).
 
