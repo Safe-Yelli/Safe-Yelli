@@ -60,7 +60,7 @@ map <- leaflet(allCoords) %>%
   
   addScaleBar() %>%
   addLayersControl(
-    baseGroups = c("Heat Map", "Incident markers"),
+    baseGroups = c("Incident markers", "Heat Map"),
     #overlayGroups = c("Empty Plots", "Dilipated infrastructure", "Shops"),
     options = layersControlOptions(collapsed = FALSE)
   ) %>%
@@ -72,7 +72,7 @@ map <- leaflet(allCoords) %>%
     popupOptions = popupOptions(maxWidth = 400), 
     #opacity=0.09,
     #fillColor = ~pal(`Year of Occurence`),
-    clusterOptions = markerClusterOptions(),
+    
     group = "Incident markers"
   ) %>%
   
