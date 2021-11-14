@@ -57,9 +57,8 @@ params:
       enable: true
       label: "Report an Incident"
       link: "/report"
-  
   variables:
-    primary_color: "#0AA8A7"
+    primary_color: "#FFD815"
 
 markup:
   defaultMarkdownHandler: goldmark

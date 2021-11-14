@@ -90,6 +90,11 @@ map <- leaflet(allCoords) %>%
 map
 ```
 
+# Report an incident 
+
+If you would to have your incident listed on this map, you can reach out to us to record your story. The map will be updated periodically.
+ 
+<a href="report" class="btn btn-primary">Report an Incident</a> 
 
 # Defining harassment and other terms 
 
@@ -107,13 +112,8 @@ Even though there is no 'catcalling' or 'eve teasing' law in India. People often
  
     (a) does any obscene act in any public place, or
 
-    (b) sings, recites or utters any obscene song, ballad or words, in or near any public place \
+    (b) sings, recites or utters any obscene song, ballad or words, in or near any public place 
 
  
-# Report an incident 
 
-If you would to have your incident listed on this map, you can reach out to us to record your story. The map will be updated periodically.
- 
-<a href="report" class="btn btn-primary">Report an Incident</a>
 
-</iframe>
