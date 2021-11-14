@@ -56,7 +56,7 @@ map <- leaflet(allCoords) %>%
     #label = allCoords$`Describe the incident in detail`,
     #labelOptions = labelOptions(textsize = "10px", width),
     popup = htmlEscape(allCoords$`Describe the incident in detail`),
-    popupOptions = popupOptions(maxWidth = 400),
+    popupOptions = popupOptions(maxWidth = 400), 
     #opacity=0.09,
     #fillColor = ~pal(`Year of Occurence`),
     clusterOptions = markerClusterOptions(),
