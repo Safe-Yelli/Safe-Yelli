@@ -16,3 +16,10 @@ command = 'hugo -F -b $DEPLOY_PRIME_URL'
 [context.production.environment]
 HUGO_VERSION = "0.89.2"
 HUGO_ENV = 'production'
+
+
+[[redirects]]
+  from = "https://safeyelli.netlify.app/*"
+  to = "https://safeyelli.in/"
+  status = 301
+  force = true
