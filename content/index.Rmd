@@ -4,16 +4,6 @@ subtitle: "A citizen centric tool to report harassment and assault inside Yelaha
 
 
 description: "A citizen centric tool to report harassment and assault inside Yelahanka. Visualise your community's citizen reported crime data on a map."
-
-####################### Banner #########################
-banner:
-  title : "Let us solve your critical website <br> development challenges"
-  image : "images/banner-art.svg"
-  content : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam nihil enim maxime corporis cumque <br> totam aliquid nam sint inventore optio modi neque laborum officiis necessitatibus"
-  button:
-    enable : true
-    label : "Contact Us"
-    link : "contact"
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
