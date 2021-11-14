@@ -4,6 +4,8 @@ subtitle: "A citizen centric tool to report harassment and assault inside Yelaha
 
 description: "A citizen centric tool to report harassment and assault inside Yelahanka. Visualise your community's citizen reported crime data on a map."
 draft: false
+
+url: /
 ---
 ```{r setup, include=FALSE} 
 knitr::opts_chunk$set(echo = TRUE) 
@@ -34,7 +36,7 @@ allData <- rename(allData, lat=Location.lat, lng = Location.lon)
 
 # Attach a coordinate reference 
 allCoords <- allData %>%
-  st_as_sf(coords = c('lng', 'lat'),crs = 4326)
+  st_as_sf(coords = c('lng', 'lat'),crs = 4326) 
 ```
 
 
