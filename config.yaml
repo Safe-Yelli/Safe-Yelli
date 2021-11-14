@@ -1,5 +1,5 @@
 
-baseurl: /
+baseurl: 
 languageCode: en-us
 title: Safe Yelli
 theme: "bigspring-light"
@@ -57,7 +57,9 @@ params:
       enable: true
       label: "Report an Incident"
       link: "/report"
-
+  
+  variables:
+    primary_color: "#0AA8A7"
 
 markup:
   defaultMarkdownHandler: goldmark

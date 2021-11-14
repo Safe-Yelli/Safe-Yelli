@@ -5,7 +5,7 @@ description: "A citizen centric tool to report harassment and assault inside Yel
 draft: false
 ---
 ```{r setup, include=FALSE} 
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE) 
 
 library(tidyverse) 
 library(sf)
