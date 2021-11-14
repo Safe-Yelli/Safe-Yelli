@@ -38,7 +38,7 @@ allCoords <- allData %>%
 ```
 
 
-```{r Mappinnng!, echo=FALSE, out.width='100%'}
+```{r Mappinnng!, echo=FALSE, out.width='100%'} 
 #addProviderTiles(providers$CartoDB.Positron) not working
 map <- leaflet(allCoords) %>%
   addTiles(urlTemplate = mapUrl) %>%
