@@ -4,6 +4,7 @@ subtitle: "A citizen centric tool to report harassment and assault inside Yelaha
 
 
 description: "A citizen centric tool to report harassment and assault inside Yelahanka. Visualise your community's citizen reported crime data on a map."
+draft: false
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -110,7 +111,7 @@ Even though there is no 'catcalling' or 'eve teasing' law in India. People often
 
     (b) sings, recites or utters any obscene song, ballad or words, in or near any public place \
 
-
+ 
 # Report an incident 
 
 If you would to have your incident listed on this map, you can reach out to us to record your story. The map will be updated periodically.
