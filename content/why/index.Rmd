@@ -1,7 +1,7 @@
 ---
 title: "Why are we doing this?"
 //date: "19/10/2021"
-
+draft: false
 ---
  
 We live in a scary place in time to have normalised harassment and catcalling. There seem to be too many stories from victims who happen to be predominantly young students. What could be some causal factors for this?  It is very likely that poorly maintained public infrastructure and inept policing strategies are the major causal factors for crime in our area. But there are deeper roots, what social factors cause these?

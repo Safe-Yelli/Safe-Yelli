@@ -1,5 +1,6 @@
 --- 
 title: "Report an Incident"
 output: html_document
+draft: false
 ---
 <iframe width="100%" height="3000px" src="https://safeyelli.ushahidi.io/posts/create/1" frameborder="0" allowfullscreen data-external="1"> 
