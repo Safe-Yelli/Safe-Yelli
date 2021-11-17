@@ -2,15 +2,15 @@
 title: "Mapping harassment in Yelahanka"
 subtitle: "A citizen centric tool to report harassment and assault inside Yelahanka. Visualise your community's citizen reported crime data on a map."
 
-description: "A citizen centric tool to report harassment and assault inside Yelahanka. Visualise your community's citizen reported crime data on a map."
+description: "A citizen centric tool to report harassment and assault inside Yelahanka. Visualise our community's citizen reported crime data on a map."
 draft: false
 
-url: /index
+
 
 ####################### Banner #########################
 banner:
   title : "Mapping harassment in Yelahanka"
-  content : "A citizen centric tool to report harassment and assault inside Yelahanka. Visualise your community's citizen reported crime data on a map."
+  content : "A citizen centric tool to report harassment and assault inside Yelahanka. Visualise our community's citizen reported crime data on a map."
   button:
     enable : true
     label : "Report"
@@ -51,6 +51,20 @@ allCoords <- allData %>%
 ```
 
 
+```{r Formatting popup text, include=FALSE}
+allData$popupText <- 
+  paste0('<strong>', allData$`Describe the incident in one line`, '</strong>',
+         '<br/> <br/>',
+         format(
+           as.Date(allData$`When and at what time this happen?`,format='%y/%m/%d'),
+           format='%B %d, %Y'),
+         '<br/> <br/>',
+         allData$`Describe the incident in detail`, ' ') %>% 
+  lapply(htmltools::HTML)
+
+```
+
+
 ```{r Mappinnng!, echo=FALSE, out.width='100%'} 
 #addProviderTiles(providers$CartoDB.Positron) not working
 map <- leaflet(allCoords) %>%
@@ -68,7 +82,7 @@ map <- leaflet(allCoords) %>%
   addMarkers(
     #label = allCoords$`Describe the incident in detail`,
     #labelOptions = labelOptions(textsize = "10px", width),
-    popup = htmlEscape(allCoords$`Describe the incident in detail`),
+    popup = paste(allData$popupText),
     popupOptions = popupOptions(maxWidth = 400), 
     #opacity=0.09,
     #fillColor = ~pal(`Year of Occurence`),
