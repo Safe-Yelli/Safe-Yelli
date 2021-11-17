@@ -71,7 +71,7 @@ map <- leaflet(allCoords) %>%
   addTiles(urlTemplate = mapUrl) %>%
   fitBounds(77.554808, 13.087922, 77.608495, 13.114213) %>%
   setMaxBounds(77.554808, 13.087922, 77.608495, 13.114213) %>%
-  
+   
   addScaleBar() %>%
   addLayersControl(
     baseGroups = c("Incident markers", "Heat Map"),
