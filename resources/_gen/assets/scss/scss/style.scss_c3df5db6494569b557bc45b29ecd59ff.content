@@ -551,3 +551,6 @@ a.post-title {
 .price {
   font-size: 50px;
   color: #222; }
+
+.leaflet-heatmap-layer {
+  opacity: .3; }
