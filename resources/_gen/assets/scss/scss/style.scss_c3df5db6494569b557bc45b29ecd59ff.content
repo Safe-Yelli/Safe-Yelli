@@ -554,3 +554,9 @@ a.post-title {
 
 .leaflet-heatmap-layer {
   opacity: .3; }
+
+body {
+  background-image: url(/images/bg.svg);
+  background-repeat: repeat;
+  background-position: 24% 0;
+  background-size: auto; }
