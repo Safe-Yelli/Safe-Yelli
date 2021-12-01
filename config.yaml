@@ -52,7 +52,7 @@ params:
   highlightjsTheme: github
   highlightjsVersion: 9.12.0
   logo: "images/logo.svg"
-  logo_width: "150px"
+  logo_width: "70px"
   navigation_button:
       enable: true
       label: "Report an Incident"
