@@ -53,9 +53,9 @@ allData$popupText <-
   paste0('<strong>', allData$`Describe the incident in one line`, '</strong>',
          '<br/> <br/>',
          format(
-           as.Date(allData$`When and at what time this happen?`,format='%y/%m/%d'),
-           format='%B %d, %Y'),
-         '<br/> <br/>',
+           as.POSIXct(allData$`When and at what time this happen?`,format="%d-%m-%Y %H:%M"),
+           format='%B %d %Y, Time: %H %M'),
+         '<br/> <br/>', 
          allData$`Describe the incident in detail`, ' ') %>% 
   lapply(htmltools::HTML)
 
@@ -66,7 +66,7 @@ allData$popupText <-
 #addProviderTiles(providers$CartoDB.Positron) not working
 map <- leaflet(allCoords) %>%
   addTiles(urlTemplate = mapUrl) %>%
-  fitBounds(77.554808, 13.087922, 77.608495, 13.114213) %>%
+  fitBounds(77.564292,13.096725,77.591393,13.109996) %>%
   setMaxBounds(77.554808, 13.087922, 77.608495, 13.114213) %>%
    
   addScaleBar() %>%
@@ -75,15 +75,10 @@ map <- leaflet(allCoords) %>%
     overlayGroups = c("Heat Map","Incidents"),
     options = layersControlOptions(collapsed = FALSE)
   ) %>%
-  
   addMarkers(
-    #label = allCoords$`Describe the incident in detail`,
-    #labelOptions = labelOptions(textsize = "10px", width),
     popup = paste(allData$popupText),
     popupOptions = popupOptions(maxWidth = 400), 
     #clusterOptions = clusterOptions(),
-    #fillColor = ~pal(`Year of Occurence`),
-    
     group = "Incidents"
   ) %>%
   
@@ -114,7 +109,7 @@ map <- leaflet(allCoords) %>%
 #             group="Shops")
 map
 ```
-
+# How does this help?
 
 # Defining harassment and other terms
  
