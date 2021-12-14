@@ -25,6 +25,11 @@ library(leaflet.providers)
 library(leaflet.extras)
 library(rgdal)
 library(htmltools)
+library(crosstalk)
+
+library(lubridate)
+library(DT)
+library(widgetframe)
 ```
 
 ```{r reading data, include=FALSE}
@@ -47,6 +52,11 @@ allCoords <- allData %>%
   st_as_sf(coords = c('lng', 'lat'),crs = 4326) 
 ```
 
+```{r operations on data, echo=FALSE}
+# allData$`What kind of incident was this?` <- as.vector(str_split(allData$`What kind of incident was this?`,","))
+
+
+```
 
 ```{r Formatting popup text, include=FALSE}
 allData$popupText <- 
@@ -59,37 +69,47 @@ allData$popupText <-
          allData$`Describe the incident in detail`, ' ') %>% 
   lapply(htmltools::HTML)
 
+allData <- allData %>% 
+  mutate(date = as.Date(`When and at what time this happen?`, '%d/%m/%Y'),
+         year = as.character(year(date)))
 ```
 
+```{r Creating Filters, echo=FALSE, message=FALSE, warning=FALSE}
 
-```{r Mappinnng!, echo=FALSE, out.width='100%'} 
+sharedD <- SharedData$new(allData)
+
+
+```
+
+```{r Mappinnng!, echo=FALSE, message=FALSE, warning=FALSE}
 #addProviderTiles(providers$CartoDB.Positron) not working
-map <- leaflet(allCoords) %>%
+map <- leaflet(sharedD) %>%
   addTiles(urlTemplate = mapUrl) %>%
-  fitBounds(77.564292,13.096725,77.591393,13.109996) %>%
+  fitBounds(77.564292, 13.096725, 77.591393, 13.109996) %>%
   setMaxBounds(77.554808, 13.087922, 77.608495, 13.114213) %>%
-   
   addScaleBar() %>%
   addLayersControl(
     #baseGroups = c("Incidents"),
-    overlayGroups = c("Heat Map","Incidents"),
+    overlayGroups = c("Heat Map", "Incidents"),
     options = layersControlOptions(collapsed = FALSE)
   ) %>%
-  addMarkers(
+  
+   addMarkers(
     popup = paste(allData$popupText),
-    popupOptions = popupOptions(maxWidth = 400), 
+    popupOptions = popupOptions(maxWidth = 400),
     #clusterOptions = clusterOptions(),
-    group = "Incidents"
+    group = "Incidents",
   ) %>%
+
   
   addHeatmap(
     radius = 20,
     blur = 20,
     intensity = 0.7,
     cellSize = 0.1,
-    minOpacity = 0.4, 
+    minOpacity = 0.4,
     max = 0.9,
-    group = "Heat Map"  
+    group = "Heat Map"
   )
 # Layers
 # addPolygons(data = emptyPlot,
@@ -107,7 +127,43 @@ map <- leaflet(allCoords) %>%
 #             stroke=FALSE,
 #             label = shopPlot$Name,
 #             group="Shops")
-map
+```
+```{r formatting output,echo=FALSE, message=FALSE, warning=FALSE, out.width='100%'}
+
+#dateFilter <- filter_slider("date", "", sharedD, column= ~date, step=3, width=800)
+typeFilter <- filter_checkbox("Incident type", "Type", sharedD, group= ~`What kind of incident was this?`, inline = FALSE )
+yearFilter <- filter_checkbox("Year", "Year", sharedD, group= ~year, inline = FALSE )
+
+
+displayData <- allData %>%
+  select(date,
+         `Describe the incident in one line`,
+         `Describe the incident in detail`) %>%
+  datatable(
+  extensions = "Scroller",
+  style = "bootstrap",
+  class = "compact",
+  width = "100%",
+  options = list(
+    deferRender = TRUE,
+    scrollY = 300,
+    scroller = TRUE
+  )
+)
+
+# map  
+tags$div(class = "crosstalk-filters",
+         tagList(#tags$h2(''),)
+           #dateFilter,
+           map,
+           tags$div(class ="col md-6",
+                    yearFilter),
+           tags$div(class ="col md-6",
+                    typeFilter)
+           )
+)
+
+#widgetframe::frameWidget(displayData)
 ```
 
 
