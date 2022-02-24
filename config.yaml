@@ -28,8 +28,8 @@ menu:
     
 
   footer_left: 
-      - name: Built on Ushahidi
-        url: https://ushahidi.com   
+      - name: This site has been built on top of Ushahidi
+        url: https://ushahidi.com    
         
   footer_middle:
       - name: Contact Us
