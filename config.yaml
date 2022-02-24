@@ -59,6 +59,7 @@ params:
       link: "/report"
   variables:
     primary_color: "#FFD815"
+    text_color: "#555"
 
 markup:
   defaultMarkdownHandler: goldmark
