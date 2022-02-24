@@ -12,6 +12,30 @@ body {
   background-size: cover;
 }
 
-.crosstalk-filters{
+.map-section{
+  display: -ms-flexbox;
+    display: -webkit-flex;
   display: flex;
+  flex-wrap: wrap;
+
+  width:100%;
+}
+
+.crosstalk-map{
+ flex: 0 0 70%;
+
+  
+}
+
+.crosstalk-filters{
+
+padding-left: 1em;
+ flex: 0 0 30%;
+}
+
+@media (max-width: 800px) {
+  .crosstalk-map, .crosstalk-filters {
+    min-width:100%;
+    flex:1;
+  }
 }

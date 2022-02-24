@@ -12,7 +12,7 @@ banner:
     enable : true
     label : "Report / ಘಟನೆಯನ್ನು ರಿಪೋರ್ಟ್ ಮಾಡಿ"
     link : "report"
-
+ 
 ##################### Feature #######################
 ---
 ```{r setup, include=FALSE} 
@@ -52,33 +52,30 @@ allCoords <- allData %>%
   st_as_sf(coords = c('lng', 'lat'),crs = 4326) 
 ```
 
-```{r operations on data, echo=FALSE}
-# allData$`What kind of incident was this?` <- as.vector(str_split(allData$`What kind of incident was this?`,","))
-
-
+```{r operations on data, echo=FALSE, message=FALSE, warning=FALSE}
+allData <- allData %>% 
+  mutate(date = as.Date(`When and at what time this happen?`, '%d/%m/%Y'),
+         year = as.character(year(date)),
+         month = as.character(month(date)),
+         hour = as.integer(format(as.POSIXct(`When and at what time this happen?`, tz="Mumbai"), 
+                           format="%H"))
+         )
 ```
 
-```{r Formatting popup text, include=FALSE}
+```{r Formatting popup text, message=FALSE, warning=FALSE, include=FALSE}
 allData$popupText <- 
   paste0('<strong>', allData$`Describe the incident in one line`, '</strong>',
          '<br/> <br/>',
          format(
-           as.POSIXct(allData$`When and at what time this happen?`,format="%d-%m-%Y %H:%M"),
+           as.POSIXct(allData$`When and at what time this happen?`, format="%d-%m-%Y %H:%M", tz="Mumbai"),
            format='%B %d %Y, Time: %H %M'),
          '<br/> <br/>', 
          allData$`Describe the incident in detail`, ' ') %>% 
   lapply(htmltools::HTML)
-
-allData <- allData %>% 
-  mutate(date = as.Date(`When and at what time this happen?`, '%d/%m/%Y'),
-         year = as.character(year(date)))
 ```
 
-```{r Creating Filters, echo=FALSE, message=FALSE, warning=FALSE}
-
+```{r Creating shared data frame for crosstalk, echo=FALSE, message=FALSE, warning=FALSE}
 sharedD <- SharedData$new(allData)
-
-
 ```
 
 ```{r Mappinnng!, echo=FALSE, message=FALSE, warning=FALSE}
@@ -128,12 +125,13 @@ map <- leaflet(sharedD) %>%
 #             label = shopPlot$Name,
 #             group="Shops")
 ```
+
 ```{r formatting output,echo=FALSE, message=FALSE, warning=FALSE, out.width='100%'}
 
 #dateFilter <- filter_slider("date", "", sharedD, column= ~date, step=3, width=800)
 typeFilter <- filter_checkbox("Incident type", "Type", sharedD, group= ~`What kind of incident was this?`, inline = FALSE )
 yearFilter <- filter_checkbox("Year", "Year", sharedD, group= ~year, inline = FALSE )
-
+timeOfDayFilter <- filter_slider("Hour","", sharedD,  column=~"Hour", step=1, width=200, min=0, max=24)
 
 displayData <- allData %>%
   select(date,
@@ -152,16 +150,16 @@ displayData <- allData %>%
 )
 
 # map  
-tags$div(class = "crosstalk-filters",
-         tagList(#tags$h2(''),)
+
+
+tags$div(class = "map-section",
            #dateFilter,
-           map,
-           tags$div(class ="col md-6",
-                    yearFilter),
-           tags$div(class ="col md-6",
-                    typeFilter)
-           )
-)
+           tags$div(class = "crosstalk-map",
+                    map),
+          
+           tags$div(class = "crosstalk-filters", tags$h4('Map filters:'), yearFilter, typeFilter)
+                    
+         )
 
 #widgetframe::frameWidget(displayData)
 ```
