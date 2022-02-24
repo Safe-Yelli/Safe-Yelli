@@ -4,12 +4,12 @@ body {
   font-family: "Lato", sans-serif;
   -webkit-font-smoothing: antialiased;
   font-size: 16px;
-  color: #777; }
+  color: #555; }
 
 p,
 .paragraph {
   font-weight: 400;
-  color: #777;
+  color: #555;
   font-size: 16px;
   line-height: 1.7;
   font-family: "Lato", sans-serif; }
@@ -241,7 +241,7 @@ a:hover {
   box-shadow: none; }
 
 .form-control::placeholder {
-  color: #777; }
+  color: #555; }
 
 textarea.form-control {
   height: 100px !important; }
@@ -305,7 +305,7 @@ textarea.form-control {
   display: block;
   padding: 5px 0;
   font-size: 16px;
-  color: #777;
+  color: #555;
   margin: 8px 0; }
   .footer-list a:hover {
     color: #FFD815; }
@@ -354,7 +354,7 @@ a.post-title {
   font-weight: 600; }
 
 .content a {
-  color: #777;
+  color: #555;
   border-bottom: 1px dotted #ECECEC; }
   .content a:hover {
     color: #FFD815; }
@@ -476,7 +476,7 @@ a.post-title {
 
 .content blockquote {
   font-size: 20px !important;
-  color: #777;
+  color: #555;
   padding: 20px 40px;
   border-left: 2px solid #FFD815;
   margin: 40px 0;
@@ -509,7 +509,7 @@ a.post-title {
     padding: 0;
     margin-right: 10px;
     border: 0;
-    color: #777; }
+    color: #555; }
     .pagination .page-item .page-link:hover {
       background: #FFD815;
       color: #fff; }
@@ -561,5 +561,21 @@ body {
   background-position: 0 90%;
   background-size: cover; }
 
+.map-section {
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%; }
+
+.crosstalk-map {
+  flex: 0 0 70%; }
+
 .crosstalk-filters {
-  display: flex; }
+  padding-left: 1em;
+  flex: 0 0 30%; }
+
+@media (max-width: 800px) {
+  .crosstalk-map, .crosstalk-filters {
+    min-width: 100%;
+    flex: 1; } }
