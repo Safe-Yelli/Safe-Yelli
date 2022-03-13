@@ -1,0 +1,107 @@
+{{ define "main" }}
+
+
+<link rel="stylesheet" href="/rmarkdown-libs/leaflet/leaflet.css" > </link>
+
+
+<link rel="stylesheet" href="/node_modules/leaflet-locationpicker/dist/leaflet-locationpicker.src.css"></link>
+
+{{ partial "page-header.html" . }}
+<section class="section">
+  <div class="col-lg-8 mx-auto content">
+        {{ .Content }}
+  </div>
+</section>
+
+<section class="section bg-white">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mb-12 mb-lg-0 mx-auto">
+        
+        <form 
+          name="report" 
+          method="POST" 
+          data-netlify="true"
+          data-netlify-recaptcha="true" >
+          
+          <input id="geoloc5" type="text" value="" size="20" />
+<div id="fixedMapCont" style="border: 1px solid black; height: 300px;min-width: 200;"></div>
+
+          {{ range .Params.Questions}}
+            <div class="question row">
+              {{ if .markUp }}
+                <div class="formMarkUp text-left">
+                  {{ .markUp}}
+                </div>
+              {{ end }}
+            <input type="{{ .fieldType }}" class="form-control mb-3" id="{{ .id }}" name="{{ .name }}" placeholder="{{ .name }}">
+            
+            {{ if eq .Params.type "radio"}}
+              {{ range .Params.items }}
+                <input type="{{ .fieldType }}" class="form-control mb-3" id="{{ .id }}" name="{{ .name }}" placeholder="{{ .name }}">
+              {{ end }}
+            {{ end }}
+            </div>
+          {{ end }}
+          <div data-netlify-recaptcha="true"></div>
+          <button type="submit" value="send" class="btn btn-primary  mx-auto">Report Incident</button>
+        </form>
+      </div>
+      
+      
+    </div>
+  </div>
+</section>
+
+
+
+<script src="/rmarkdown-libs/leaflet/leaflet.js" > </script>
+<script src="/rmarkdown-libs/jquery/jquery.min.js" > </script>
+<script src="/node_modules/leaflet-locationpicker/dist/leaflet-locationpicker.min.js"></script>
+<script>
+
+//multiple istances
+$('.geolocs').leafletLocationPicker();
+
+//custom location format
+$('#geoloc2').leafletLocationPicker({
+	locationFormat: '{lat}@{lng}#WGS84',
+	position: 'bottomleft'
+});
+
+//events
+$('#geoloc3').leafletLocationPicker({
+		locationSep: ' - '
+	})
+	.on('show', function(e) {
+		$(this).siblings('em').text('click on map for insert the location');
+	})
+	.on('hide', function(e) {
+		$(this).siblings('em').text('');
+	})
+	.on('changeLocation', function(e) {
+		$(this)
+		.siblings('#geolat').val( e.latlng.lat )
+		.siblings('#geolng').val( e.latlng.lng )
+		.siblings('i').text('"'+e.location+'"');
+	});
+
+//callback
+$('#geoloc4').leafletLocationPicker(function(e) {
+	$(this).siblings('em').text(e.location);
+});
+
+//fix n alwaysOpen
+$('#geoloc5').leafletLocationPicker(
+  defaults={
+		alwaysOpen: true,
+		mapContainer: "#fixedMapCont",
+		height: 300,
+	
+  });
+
+
+
+</script>
+
+{{ end }}
