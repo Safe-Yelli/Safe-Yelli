@@ -3,4 +3,18 @@ title: "Report an Incident"
 output: html_document
 draft: false 
 ---
-<iframe width="100%" height="3000px" src="https://safeyelli.ushahidi.io/posts/create/1" frameborder="0" allowfullscreen data-external="1"> 
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+
+
+<form 
+  method="POST" 
+  action="https://script.google.com/macros/s/AKfycbwI9bkY9PPwIXU04B3tclJJpmR2zEipujxV9E0yy4Ez1jnY23_30b4Mw3PYFoNDxuQT/exec"
+>
+  <input name="Email" type="email" placeholder="Email" required>
+  <input name="Name" type="text" placeholder="Name" required>
+ <div class="g-recaptcha" data-sitekey="6LflAdQeAAAAAFUQPY80nsqzFjwZT3Jv4YN5sgo1"></div>
+
+    <button name="submit" type="submit" value="Submit" placeholder="submit" />
+
+</form>
