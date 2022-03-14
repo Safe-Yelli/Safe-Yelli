@@ -36,7 +36,7 @@ library(widgetframe)
 oldHarassData <- read_csv('../resources/assets/formResponses2.csv') 
 #oldHarassData <- oldHarassData %>% separate(., col = `What are the exact coordinates of the incident?`, into = c("Location.lat", "Location.lon"), sep = "\\,")
 
-newHarassData <-read_csv('../resources/assets/ushahidiResponses2.csv')
+newHarassData <-read_csv('../resources/assets/ushahidiResponses3.csv')
 
 mapUrl="https://api.mapbox.com/styles/v1/rungdung/cku6gh76r1dvh17o3zkfllvjz/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicnVuZ2R1bmciLCJhIjoiY2tqeWh6cXF4MDgzMjJvbWVmbGQzYjAwMyJ9.U-aJyoqyKvTXlhVk43jV1A"
 ```
