@@ -16,7 +16,7 @@
 <section class="section bg-white">
   <div class="container">
     <div class="row">
-      <div class="col-lg-8 mb-12 mb-lg-0 mx-auto">
+      <div class="col-lg-10 mb-12 mb-lg-0 mx-auto">
         
         <form 
           name="report" 
@@ -24,22 +24,32 @@
           data-netlify="true"
           data-netlify-recaptcha="true" >
           
-          <input id="geoloc5" type="text" value="" size="20" />
+          <input id="geoloc5" class="hiddenForm" type="text" value="" size="20" />
 <div id="fixedMapCont" style="border: 1px solid black; height: 300px;min-width: 200;"></div>
 
           {{ range .Params.Questions}}
             <div class="question row">
               {{ if .markUp }}
-                <div class="formMarkUp text-left">
-                  {{ .markUp}}
+                <div class="formMarkUp d-block text-left">
+                  <h3>{{ .markUp}}</h3>
                 </div>
               {{ end }}
-            <input type="{{ .fieldType }}" class="form-control mb-3" id="{{ .id }}" name="{{ .name }}" placeholder="{{ .name }}">
             
-            {{ if eq .Params.type "radio"}}
-              {{ range .Params.items }}
-                <input type="{{ .fieldType }}" class="form-control mb-3" id="{{ .id }}" name="{{ .name }}" placeholder="{{ .name }}">
+            {{ if eq .fieldType "radio"}}
+              {{ $name := .name }}
+              {{ $fieldType := .fieldType}}
+              {{ range .items }}
+              <div class="form-control mb-2">
+                <input type="{{ $fieldType }}"  id="{{ .id }}" name="{{ $name }}" value="{{ .value }}">
+                <label for="{{ .id }}"> {{ .value }}</label>
+              </div>
               {{ end }}
+              
+              
+            {{ else }}
+            
+              <input type="{{ .fieldType }}" class="form-control mb-3" id="{{ .id }}" name="{{ .name }}" placeholder="{{ .name }}">
+            
             {{ end }}
             </div>
           {{ end }}
