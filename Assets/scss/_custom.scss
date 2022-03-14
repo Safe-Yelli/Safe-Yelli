@@ -1,0 +1,56 @@
+// This file is empty within the template
+// You can use it to override CSS from within your project
+
+.leaflet-heatmap-layer {
+opacity: .3;
+}
+
+body {
+  background-image: url(/images/bg.svg);
+  background-repeat: no-repeat;
+  background-position: 0 90%;
+  background-size: cover;
+}
+
+.map-section{
+  display: -ms-flexbox;
+    display: -webkit-flex;
+  display: flex;
+  flex-wrap: wrap;
+
+  width:100%;
+}
+
+.crosstalk-map{
+ flex: 0 0 70%;
+
+  
+}
+
+.crosstalk-filters{
+
+padding-left: 1em;
+ flex: 0 0 30%;
+}
+
+@media (max-width: 800px) {
+  .crosstalk-map, .crosstalk-filters {
+    min-width:100%;
+    flex:1;
+  }
+}
+
+.question{
+  margin: 40px;
+}
+
+.formMarkUp{
+  margin: 20px  10px ;
+  text-align: left;
+  align-items: left;
+}
+
+.hiddenForm{
+  display: none;
+  visibility: hidden;
+}
