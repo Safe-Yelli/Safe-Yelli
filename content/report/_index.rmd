@@ -2,15 +2,13 @@
 title: "Report an Incident"
 output: html_document
 draft: false 
-Questions: 
-  - fieldType: text
-    name: short description
-    id: descript
-    markUp: what is this?
+RequiredQuestions: 
   - fieldType: text
     name: long description
     id: descript
-  - fieldType: radio
+    markUp: What did you experience?
+    
+  - fieldType: checkbox
     name: category
     markUp: What kind of incident was this?
     items:
@@ -19,10 +17,80 @@ Questions:
         value: Harassment
       - 
         id: category2
-        value: Sexual harassment
+        value: Rape/Assault
       - 
         id: category3 
-        value: I don't know
+        value: Stalking
+      - 
+        id: category4 
+        value: Catcalling
+      - 
+        id: category4
+        value: Groping
+      -
+        id: category5
+        value: Indecent exposure
+  
+  - fieldType: date
+    name: date
+    markUp: On what date did this happen?
+    id: date
+  
+  - fieldType: time
+    name: time
+    markUp: At what time did this happen?
+    id: time
+  
+  - fieldType: radio
+    name: gender
+    markUp: What is your gender?
+    items: 
+      -
+        id: gender1
+        value: I prefer not to say
+      -
+        id: gender2
+        value: Female
+      -
+        id: gender3
+        value: Male
+      -
+        id: gender
+        value: Other
+
+  
+notRequired:
+  - fieldType: checkbox
+    name: afd
+    markUp: Did this incident take place on a  University Campus?
+    items: 
+      - 
+        id: yes
+        value: "Yes"
+      - 
+        id: no
+        value: "No"
+ 
+  
+  - fieldType: number
+    name: number
+    id: accompaniedby
+    markUp: How many people were you accompanied by?
+  
+  - fieldType: checkbox
+    name: what was wrong with the environment
+    id: what was wrong with the environment
+    markUp:  What was wrong with the space and environment? Please select all the options you think are relevant
+    items: 
+      - id: 1
+        value: The street lights were not functioning
+      - id: 2
+        value: It was secluded
+      - id: 3
+        value: Lots of abandoned buildings around
+      - id: 4
+        value: Cannot say definitively
+  
 ---
 
 

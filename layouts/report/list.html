@@ -2,8 +2,6 @@
 
 
 <link rel="stylesheet" href="/rmarkdown-libs/leaflet/leaflet.css" > </link>
-
-
 <link rel="stylesheet" href="/node_modules/leaflet-locationpicker/dist/leaflet-locationpicker.src.css"></link>
 
 {{ partial "page-header.html" . }}
@@ -17,101 +15,171 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-10 mb-12 mb-lg-0 mx-auto">
-        
+        {{"<!-- Form start -->"  | safeHTML}}
         <form 
           name="report" 
           method="POST" 
           data-netlify="true"
           data-netlify-recaptcha="true" >
           
+          {{"<!-- Map start -->"  | safeHTML}}
+          <h2> Where did this incident happen?</h2>
           <input id="geoloc5" class="hiddenForm" type="text" value="" size="20" />
-<div id="fixedMapCont" style="border: 1px solid black; height: 300px;min-width: 200;"></div>
-
-          {{ range .Params.Questions}}
+        <div id="fixedMapCont" style="border: 1px solid black; height: 300px;min-width: 200;"></div>
+          
+          {{"<!-- Required question start -->"  | safeHTML}}
+          {{ range .Params.RequiredQuestions}}
+            {{"<!-- Required Question -->"  | safeHTML}}
             <div class="question row">
               {{ if .markUp }}
                 <div class="formMarkUp d-block text-left">
                   <h3>{{ .markUp}}</h3>
                 </div>
               {{ end }}
-            
-            {{ if eq .fieldType "radio"}}
+          
+            <!-- if radio, iterate through options -->
+            {{ if (or (eq .fieldType "radio") (eq .fieldType "checkbox")) }}
               {{ $name := .name }}
               {{ $fieldType := .fieldType}}
               {{ range .items }}
               <div class="form-control mb-2">
-                <input type="{{ $fieldType }}"  id="{{ .id }}" name="{{ $name }}" value="{{ .value }}">
+                <input type="{{ $fieldType }}"  id="{{ .id }}" name="{{ $name }}" value="{{ .value }}" required>
                 <label for="{{ .id }}"> {{ .value }}</label>
               </div>
               {{ end }}
-              
-              
+          
+            <!-- if date or time, give min/max -->
+            {{ else if (or (eq .fieldType "date") (eq .fieldType "time")) }}
+              <div class="form-control mb-2">
+                <input type="{{ .fieldType }}"  id="{{ .id }}" name="{{ .name }}" value="{{ .value }}" required>
+              </div>
+
             {{ else }}
-            
-              <input type="{{ .fieldType }}" class="form-control mb-3" id="{{ .id }}" name="{{ .name }}" placeholder="{{ .name }}">
-            
+            <!-- any other form type -->
+              <input type="{{ .fieldType }}" class="form-control mb-3" id="{{ .id }}" name="{{ .name }}" placeholder="{{ .name }}" required>
             {{ end }}
             </div>
           {{ end }}
-          <div data-netlify-recaptcha="true"></div>
-          <button type="submit" value="send" class="btn btn-primary  mx-auto">Report Incident</button>
+          
+          {{"<!-- Not required questions -->"  | safeHTML}}
+          {{"<!-- ---------------------- -->"  | safeHTML}}
+          <div class=" mb-2">
+            <button type="button" class="collapsible btn btn-primary mx-auto">Answer optional questions</button>
+            <div class="question row content">
+            {{ range .Params.notRequired}}
+              {{"<!-- Not Required Question -->"  | safeHTML}}
+              
+                {{ if .markUp }}
+                  <div class="formMarkUp d-block text-left">
+                    <h3>{{ .markUp}}</h3>
+                  </div>
+                {{ end }}
+            
+              <!-- if radio, iterate through options -->
+              {{ if (or (eq .fieldType "radio") (eq .fieldType "checkbox")) }}
+                {{ $name := .name }}
+                {{ $fieldType := .fieldType}}
+                {{ range .items }}
+                <div class="form-control mb-2">
+                  <input type="{{ $fieldType }}"  id="{{ .id }}" name="{{ $name }}" value="{{ .value }}" >
+                  <label for="{{ .id }}"> {{ .value }}</label>
+                </div>
+                {{ end }}
+            
+              <!-- if date or time, give min/max -->
+              {{ else if (or (eq .fieldType "date") (eq .fieldType "time")) }}
+                <div class="form-control mb-2">
+                  <input type="{{ .fieldType }}"  id="{{ .id }}" name="{{ .name }}" value="{{ .value }}" >
+                </div>
+
+              {{ else }}
+              <!-- any other form type -->
+                <input type="{{ .fieldType }}" class="form-control mb-3" id="{{ .id }}" name="{{ .name }}" placeholder="{{ .name }}" >
+              {{ end }}
+              
+            {{ end }}
+          </div>
+          <div  data-netlify-recaptcha="true"></div>
+          <button type="submit" value="send" class="btn btn-primary  my-4 mx-auto">Report Incident</button>
+          </div>
+        </div>
+          </div>      
+          
+          
         </form>
       </div>
-      
-      
     </div>
   </div>
 </section>
 
 
+<!-- scripts for location picker -->
 
 <script src="/rmarkdown-libs/leaflet/leaflet.js" > </script>
 <script src="/rmarkdown-libs/jquery/jquery.min.js" > </script>
 <script src="/node_modules/leaflet-locationpicker/dist/leaflet-locationpicker.min.js"></script>
+
 <script>
-
-//multiple istances
-$('.geolocs').leafletLocationPicker();
-
-//custom location format
-$('#geoloc2').leafletLocationPicker({
-	locationFormat: '{lat}@{lng}#WGS84',
-	position: 'bottomleft'
-});
-
-//events
-$('#geoloc3').leafletLocationPicker({
-		locationSep: ' - '
-	})
-	.on('show', function(e) {
-		$(this).siblings('em').text('click on map for insert the location');
-	})
-	.on('hide', function(e) {
-		$(this).siblings('em').text('');
-	})
-	.on('changeLocation', function(e) {
-		$(this)
-		.siblings('#geolat').val( e.latlng.lat )
-		.siblings('#geolng').val( e.latlng.lng )
-		.siblings('i').text('"'+e.location+'"');
-	});
-
-//callback
-$('#geoloc4').leafletLocationPicker(function(e) {
-	$(this).siblings('em').text(e.location);
-});
+//script for leaflet location picker library to activate
 
 //fix n alwaysOpen
 $('#geoloc5').leafletLocationPicker(
+ 
   defaults={
 		alwaysOpen: true,
 		mapContainer: "#fixedMapCont",
-		height: 300,
-	
-  });
-
-
-
+		height: 500,
+		location: L.latLng([13.1025,77.5844]),
+		map: {
+		  zoom:14,
+		  zoomControl: true
+		}
+		});
 </script>
 
+
+<script>
+//script to open collapsibles
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+</script>
+
+<style>
+// style for collapsibles
+.collapsible {
+  background-color: #777;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color: #555;
+}
+
+.content {
+  padding: 0 12px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+  border-radius: 3%;
+}
+</style>
 {{ end }}
