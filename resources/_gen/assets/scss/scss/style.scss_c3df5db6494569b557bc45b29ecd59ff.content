@@ -579,3 +579,15 @@ body {
   .crosstalk-map, .crosstalk-filters {
     min-width: 100%;
     flex: 1; } }
+
+.question {
+  margin: 40px; }
+
+.formMarkUp {
+  margin: 20px  10px;
+  text-align: left;
+  align-items: left; }
+
+.hiddenForm {
+  display: none;
+  visibility: hidden; }
