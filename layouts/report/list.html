@@ -228,7 +228,7 @@ $('#geoloc5').leafletLocationPicker(
     }
     else {
       if (grecaptcha.getResponse().length > 0) { //grecaptcha returns whether the captcha box is ticked or not
-        return true;
+        form.submit()
       } else { // reject the submission show an error, but don't call form.reset(), so the data stays as it is
       alert( 'Please tick the captcha field' );
         return false;
