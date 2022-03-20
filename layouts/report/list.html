@@ -225,7 +225,7 @@ $('#geoloc5').leafletLocationPicker(
     if ( !isChecked ) {
         alert( 'Please select atleast one category' );
         return false;
-    }   
+    }
     else {
       if (grecaptcha.getResponse().length > 0) { //grecaptcha returns whether the captcha box is ticked or not
         return true;
