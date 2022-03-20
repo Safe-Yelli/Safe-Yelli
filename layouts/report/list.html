@@ -219,6 +219,7 @@ if(form.addEventListener){
     form.addEventListener("submit", validate, false);  
 }
 function validate(){
+  var isValid = false;
   document.querySelector("#report").addEventListener("submit", function(e){
     if(!isValid){
         e.preventDefault();    //stop form from submitting
@@ -233,6 +234,9 @@ function validate(){
   if ( !isChecked ) {
       alert( 'Please select atleast one category' );
   }   
+  else if( ischecked) {
+    isValid=true;
+  }
 }
 </script>
 
