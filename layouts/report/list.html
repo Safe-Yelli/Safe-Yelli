@@ -226,12 +226,12 @@ $('#geoloc5').leafletLocationPicker(
         alert( 'Please select atleast one category' );
         return false;
     }   
-    else if( ischecked) {
+    else {
       if (grecaptcha.getResponse().length > 0) { //grecaptcha returns whether the captcha box is ticked or not
-      return true;
+        return true;
       } else { // reject the submission show an error, but don't call form.reset(), so the data stays as it is
       alert( 'Please tick the captcha field' );
-      return false;
+        return false;
       }
       
     }
