@@ -1,0 +1,272 @@
+{{ define "main" }}
+
+
+<link rel="stylesheet" href="/rmarkdown-libs/leaflet/leaflet.css" > </link>
+<link rel="stylesheet" href="/node_modules/leaflet-locationpicker/dist/leaflet-locationpicker.src.css"></link>
+
+{{ partial "page-header.html" . }}
+<section class="section">
+  <div class="col-lg-8 mx-auto content">
+        {{ .Content }}
+  </div>
+</section>
+
+<section class="section bg-white">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 mb-12 mb-lg-0 mx-auto">
+        {{"<!-- Form start -->"  | safeHTML}}
+        <form 
+          name="report" 
+          id="report"
+          method="POST" 
+          data-netlify="true"
+          data-netlify-recaptcha="true" >
+          
+          {{"<!-- Map start -->"  | safeHTML}}
+          <h2> Where did this incident happen?</h2>
+          <p> Please move the map around and click to pick the aproximate location of incident</p>
+          <input id="geoloc5" class="hiddenForm" type="text" value="" size="20" />
+        <div id="fixedMapCont" style="border: 1px solid black; height: 500px;min-width: 200;"></div>
+          
+          {{"<!-- Required question start -->"  | safeHTML}}
+          {{ range .Params.RequiredQuestions}}
+            {{"<!--  Question -->"  | safeHTML}}
+            <div class="question row">
+              {{ if .markUp }}
+                <div class="formMarkUp ">
+                  <h3>{{ .markUp}}</h3>
+                  {{"<!--  Question description -->"  | safeHTML}}
+                  {{ if .markUpP }}
+                    <div class="formMarkUp  ">
+                      <p>{{ .markUpP}}</p>
+                    </div>
+                  {{ end }}
+                </div>
+              {{ end }}
+              
+            
+          
+            <!-- if radio, iterate through options -->
+              {{ if  (eq .fieldType "radio")  }}
+                {{ $name := .name }}
+                {{ $fieldType := .fieldType}}
+                {{ range .items }}
+                  <div class="form-control mb-2">
+                    <input type="{{ $fieldType }}"  id="{{ .id }}" name="{{ $name }}" value="{{ .value }}" required>
+                    <label for="{{ .id }}"> {{ .value }}</label>
+                  </div>
+                {{ end }}
+              
+              <!-- if checkbox, iterate through options -->
+              {{ else if (eq .fieldType "checkbox") }}
+                {{ $name := .name }}
+                {{ $fieldType := .fieldType}}
+                {{ range .items }}
+                  <div class="form-control mb-2">
+                    <input type="{{ $fieldType }}"  id="{{ .id }}" name="{{ $name }}" value="{{ .value }}" >
+                    <label for="{{ .id }}"> {{ .value }}</label>
+                  </div>
+                {{ end }}
+          
+            <!-- if date or time, give min/max -->
+            {{ else if (or (eq .fieldType "date") (eq .fieldType "time")) }}
+              <div class="form-control mb-2">
+                <input type="{{ .fieldType }}"  id="{{ .id }}" name="{{ .name }}" value="{{ .value }}" min="" max="" required>
+              </div>
+
+            {{ else }}
+            <!-- any other form type -->
+              <input type="{{ .fieldType }}" class="form-control mb-3" id="{{ .id }}" name="{{ .name }}" placeholder="{{ .name }}" required>
+            {{ end }}
+            </div>
+          {{ end }}
+          
+          {{"<!-- Not required questions -->"  | safeHTML}}
+          {{"<!-- ---------------------- -->"  | safeHTML}}
+          <div class=" mb-2">
+            <button type="button" class="collapsible btn btn-primary mx-auto">Answer optional questions</button>
+            <div class="question row content">
+            {{ range .Params.notRequired}}
+              {{"<!-- Not Required Question -->"  | safeHTML}}
+              
+                {{ if .markUp }}
+                  <div class="formMarkUp d-block text-left">
+                    <h3>{{ .markUp}}</h3>
+                  </div>
+                {{ end }}
+            
+              <!-- if radio, iterate through options -->
+              {{ if  (eq .fieldType "radio")  }}
+                {{ $name := .name }}
+                {{ $fieldType := .fieldType}}
+                {{ range .items }}
+                  <div class="form-control mb-2">
+                    <input type="{{ $fieldType }}"  id="{{ .id }}" name="{{ $name }}" value="{{ .value }}" >
+                    <label for="{{ .id }}"> {{ .value }}</label>
+                  </div>
+                {{ end }}
+              
+              <!-- if checkbox, iterate through options -->
+              {{ else if (eq .fieldType "checkbox") }}
+                {{ $name := .name }}
+                {{ $fieldType := .fieldType}}
+                {{ range .items }}
+                  <div class="form-control mb-2">
+                    <input type="{{ $fieldType }}"  id="{{ .id }}" name="{{ $name }}" value="{{ .value }}" >
+                    <label for="{{ .id }}"> {{ .value }}</label>
+                  </div>
+                {{ end }}
+                
+              <!-- if date or time, give min/max -->
+              {{ else if (or (eq .fieldType "date") (eq .fieldType "time")) }}
+                <div class="form-control mb-2">
+                  <input type="{{ .fieldType }}"  id="{{ .id }}" name="{{ .name }}" value="{{ .value }}" >
+                </div>
+
+              {{ else }}
+              <!-- any other form type -->
+                <input type="{{ .fieldType }}" class="form-control mb-3" id="{{ .id }}" name="{{ .name }}" placeholder="{{ .name }}" >
+              {{ end }}
+              
+            {{ end }}
+          </div>
+          <div data-netlify-recaptcha="true"></div>
+          <button type="submit" onclick="validate();" value="send" class="btn btn-primary  my-4 mx-auto">Report Incident</button>
+          </div>
+        </div>
+          </div>      
+          
+          
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- scripts for location picker -->
+
+<script src="/rmarkdown-libs/leaflet/leaflet.js" > </script>
+<script src="/rmarkdown-libs/jquery/jquery.min.js" > </script>
+<script src="/node_modules/leaflet-locationpicker/dist/leaflet-locationpicker.min.js"></script>
+
+<script>
+//script for leaflet location picker library to activate
+
+//fix n alwaysOpen
+$('#geoloc5').leafletLocationPicker(
+ 
+  defaults={
+		alwaysOpen: true,
+		mapContainer: "#fixedMapCont",
+		height: 500,
+		location: L.latLng([13.1025,77.5844]),
+		map: {
+		  zoom:14,
+		  zoomControl: true
+		},
+		cursorSize: '20px'
+		});
+</script>
+
+
+<script>
+  //script to open collapsibles
+  var coll = document.getElementsByClassName("collapsible");
+  var i;
+  
+  for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+      var content = this.nextElementSibling;
+      if (content.style.display === "block") {
+        content.style.display = "none";
+      } else {
+        content.style.display = "block";
+      }
+    });
+  }
+</script>
+
+
+<script>
+  //date script
+  var today = new Date();
+  var dd = today.getDate();
+  var mm = today.getMonth() + 1; //January is 0!
+  var yyyy = today.getFullYear();
+  
+  if (dd < 10) {
+     dd = '0' + dd;
+  }
+  
+  if (mm < 10) {
+     mm = '0' + mm;
+  } 
+      
+  today = yyyy + '-' + mm + '-' + dd; //Max date reportable is today
+  threeYearsAgo = yyyy-3 + '-' + mm + '-' + dd; //statue of limitations in India is 3 years
+  document.getElementById("date").setAttribute("max", today);
+  document.getElementById("date").setAttribute("min", threeYearsAgo);
+</script>
+
+<script>
+  var checkBoxes = document.getElementsByName( 'category' );
+  var form = document.getElementById('report')
+
+  function validate(){
+    var isChecked = false;
+    for (var i = 0; i < checkBoxes.length; i++) {
+      if ( checkBoxes[i].checked ) {
+        isChecked = true;
+      };
+    };
+    if ( !isChecked ) {
+        alert( 'Please select atleast one category' );
+        return false;
+    }
+    else {
+      if (grecaptcha.getResponse().length > 0) { //grecaptcha returns whether the captcha box is ticked or not
+        form.submit()
+      } else { // reject the submission show an error, but don't call form.reset(), so the data stays as it is
+      alert( 'Please tick the captcha field' );
+        return false;
+      }
+      
+    }
+  }
+</script> 
+
+<script>
+
+</script>
+<style>
+// style for collapsibles
+.collapsible {
+  background-color: #777;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color: #555;
+}
+
+.content {
+  padding: 0 12px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+  border-radius: 3%;
+}
+</style>
+
+
+{{ end }}
