@@ -132,7 +132,7 @@
             {{ end }}
           </div>
           <div data-netlify-recaptcha="true"></div>
-          <button type="submit" onclick="validate();" value="send" class="btn btn-primary  my-4 mx-auto">Report Incident</button>
+          <button type="submit" onclick="return validate(event);" value="send" class="btn btn-primary  my-4 mx-auto">Report Incident</button>
           </div>
         </div>
           </div>      
@@ -215,7 +215,7 @@ $('#geoloc5').leafletLocationPicker(
   var checkBoxes = document.getElementsByName( 'kind of incident' );
   var form = document.getElementById('report')
 
-  function validate(){
+  function validate(e){
     var isChecked = false;
     for (var i = 0; i < checkBoxes.length; i++) {
       if ( checkBoxes[i].checked ) {
@@ -223,6 +223,7 @@ $('#geoloc5').leafletLocationPicker(
       };
     };
     if ( !isChecked ) {
+        e.preventDefault();
         alert( 'Please select atleast one category' );
         return false;
     }
@@ -230,7 +231,8 @@ $('#geoloc5').leafletLocationPicker(
       if (grecaptcha.getResponse().length > 0) { //grecaptcha returns whether the captcha box is ticked or not
         form.submit()
       } else { // reject the submission show an error, but don't call form.reset(), so the data stays as it is
-      alert( 'Please tick the captcha field' );
+        e.preventDefault();
+        alert( 'Please tick the captcha field' );
         return false;
       }
       
