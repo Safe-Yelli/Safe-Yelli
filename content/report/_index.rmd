@@ -9,7 +9,7 @@ RequiredQuestions:
     markUp: What did you experience?
     
   - fieldType: checkbox
-    name: category
+    name: kind of incident
     markUp: What kind of incident was this?
     markUpP: For legal definitions of some of these terms, visit our home page. 
     id: category 
@@ -34,12 +34,12 @@ RequiredQuestions:
         value: Indecent exposure
   
   - fieldType: date
-    name: date
+    name: date of incident
     markUp: On what date did this happen?
     id: date
   
   - fieldType: time
-    name: time
+    name: time of incident
     markUp: At what time did this happen?
     id: time
   
@@ -63,7 +63,7 @@ RequiredQuestions:
   
 notRequired:
   - fieldType: checkbox
-    name: afd
+    name: university campus?
     markUp: Did this incident take place on a  University Campus?
     items: 
       - 
@@ -75,12 +75,12 @@ notRequired:
  
   
   - fieldType: number
-    name: number
+    name: number of companions
     id: accompaniedby
     markUp: How many people were you accompanied by?
   
   - fieldType: checkbox
-    name: what was wrong with the environment
+    name: environmental factor
     id: what was wrong with the environment
     markUp:  What was wrong with the space and environment? Please select all the options you think are relevant
     items: 
