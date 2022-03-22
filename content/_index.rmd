@@ -23,7 +23,7 @@ library(sf)
 library(leaflet)
 library(leaflet.providers) 
 library(leaflet.extras)
-library(rgdal)
+
 library(htmltools)
 library(crosstalk)
 
