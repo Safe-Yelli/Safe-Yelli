@@ -26,11 +26,11 @@
           {{"<!-- Map start -->"  | safeHTML}}
           <h2> Where did this incident happen?</h2>
           <p> Please move the map around and click to pick the aproximate location of incident</p>
-          <input id="geoloc5" class="hiddenForm" type="text" value="" size="20" />
           
+          <input id="geoloc5" class="form-control mb-2" type="text" value="" name="coordinates" size="20" required>
         <div id="fixedMapCont" style="border: 1px solid black; height: 500px;min-width: 200;"></div>
         
-        <input id="geoloc5" class="form-control mb-2" type="text" value="click on the map to get coordinates" name="coordinates" size="20" required>
+        
           
           {{"<!-- Required question start -->"  | safeHTML}}
           {{ range .Params.RequiredQuestions}}
