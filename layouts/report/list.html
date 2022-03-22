@@ -25,9 +25,12 @@
           
           {{"<!-- Map start -->"  | safeHTML}}
           <h2> Where did this incident happen?</h2>
-          <p> Please move the map around and click to pick the aproximate location of the incident</p>
-          <input id="geoloc5" class="hiddenForm" type="text" value="" size="20" />
+          <p> Please move the map around and click to pick the aproximate location of incident</p>
+          
+          <input id="geoloc5" class="form-control mb-2" type="text" value="" name="coordinates" size="20" required>
         <div id="fixedMapCont" style="border: 1px solid black; height: 500px;min-width: 200;"></div>
+        
+        
           
           {{"<!-- Required question start -->"  | safeHTML}}
           {{ range .Params.RequiredQuestions}}
@@ -36,8 +39,8 @@
               {{ if .markUp }}
                 <div class="formMarkUp ">
                   <h3>{{ .markUp}}</h3>
-                  {{ if .markUpP }}
                   {{"<!--  Question description -->"  | safeHTML}}
+                  {{ if .markUpP }}
                     <div class="formMarkUp  ">
                       <p>{{ .markUpP}}</p>
                     </div>
@@ -132,7 +135,7 @@
             {{ end }}
           </div>
           <div data-netlify-recaptcha="true"></div>
-          <button type="submit" onclick="validate();" value="send" class="btn btn-primary  my-4 mx-auto">Report Incident</button>
+          <button type="submit" onclick="return validate(event);" value="send" class="btn btn-primary  my-4 mx-auto">Report Incident</button>
           </div>
         </div>
           </div>      
@@ -200,6 +203,7 @@ $('#geoloc5').leafletLocationPicker(
   if (dd < 10) {
      dd = '0' + dd;
   }
+  
   if (mm < 10) {
      mm = '0' + mm;
   } 
@@ -211,12 +215,10 @@ $('#geoloc5').leafletLocationPicker(
 </script>
 
 <script>
-  var checkBoxes = document.getElementsByName( 'category' );
+  var checkBoxes = document.getElementsByName( 'kind of incident' );
   var form = document.getElementById('report')
 
-  function validate(){
-    
-    //ensures atleast one category is selected
+  function validate(e){
     var isChecked = false;
     for (var i = 0; i < checkBoxes.length; i++) {
       if ( checkBoxes[i].checked ) {
@@ -224,14 +226,16 @@ $('#geoloc5').leafletLocationPicker(
       };
     };
     if ( !isChecked ) {
+        e.preventDefault();
         alert( 'Please select atleast one category' );
         return false;
     }
     else {
       if (grecaptcha.getResponse().length > 0) { //grecaptcha returns whether the captcha box is ticked or not
-        return true;
+        form.submit()
       } else { // reject the submission show an error, but don't call form.reset(), so the data stays as it is
-      alert( 'Please tick the captcha field' );
+        e.preventDefault();
+        alert( 'Please tick the captcha field' );
         return false;
       }
       
