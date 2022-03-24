@@ -25,7 +25,7 @@
           
           {{"<!-- Map start -->"  | safeHTML}}
           <h2> Where did this incident happen?</h2>
-          <p> Please move the map around and click to pick the aproximate location of incident</p>
+          <p> Please move the map around and click to pick the aproximate location of incident <span style="color: red">*</span></p>
           
           <input id="geoloc5" class="form-control mb-2" type="text" value="" name="coordinates" size="20" required>
         <div id="fixedMapCont" style="border: 1px solid black; height: 500px;min-width: 200;"></div>
@@ -38,7 +38,7 @@
             <div class="question row">
               {{ if .markUp }}
                 <div class="formMarkUp ">
-                  <h3>{{ .markUp}}</h3>
+                  <h3>{{ .markUp}}<span style="color: red">*</span></h3>
                   {{"<!--  Question description -->"  | safeHTML}}
                   {{ if .markUpP }}
                     <div class="formMarkUp  ">
@@ -213,23 +213,36 @@ $('#geoloc5').leafletLocationPicker(
   document.getElementById("date").setAttribute("max", today);
   document.getElementById("date").setAttribute("min", threeYearsAgo);
 </script>
-
 <script>
+  
   var checkBoxes = document.getElementsByName( 'kind of incident' );
-  var form = document.getElementById('report')
+  var form = document.getElementById('report');
+  var loc = document.getElementById('geoloc5')
 
   function validate(e){
+    //checkboxes loaded
     var isChecked = false;
     for (var i = 0; i < checkBoxes.length; i++) {
       if ( checkBoxes[i].checked ) {
         isChecked = true;
       };
     };
-    if ( !isChecked ) {
+    
+    //check location field
+    if(loc.value.length==0){
+      e.preventDefault();
+      alert('Please select a location on the map');
+    }
+    
+    //check checkboxes
+    else if ( !isChecked ) {
         e.preventDefault();
         alert( 'Please select atleast one category' );
+   
         return false;
     }
+    
+    //recaptcha checking
     else {
       if (grecaptcha.getResponse().length > 0) { //grecaptcha returns whether the captcha box is ticked or not
         form.submit()
@@ -241,7 +254,8 @@ $('#geoloc5').leafletLocationPicker(
       
     }
   }
-</script> 
+</script>
+ 
 
 <script>
 
