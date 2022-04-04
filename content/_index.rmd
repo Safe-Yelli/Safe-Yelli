@@ -19,6 +19,8 @@ banner:
 knitr::opts_chunk$set(echo = TRUE) 
 
 library(tidyverse) 
+library(dplyr)
+
 library(sf)
 library(leaflet)
 library(leaflet.providers) 
@@ -33,18 +35,47 @@ library(widgetframe)
 ```
 
 ```{r reading data, include=FALSE}
-oldHarassData <- read_csv('../resources/assets/formResponses2.csv') 
-#oldHarassData <- oldHarassData %>% separate(., col = `What are the exact coordinates of the incident?`, into = c("Location.lat", "Location.lon"), sep = "\\,")
+#imports data from multiple spreadsheets and performs operations to uniformize field names
+oldData <- read_csv('../resources/assets/allUshahidiResponses.csv') 
+newData <- read_csv('../resources/assets/latestReports.csv') 
 
-newHarassData <-read_csv('../resources/assets/ushahidiResponses3.csv')
+# post verification
+#if human verified is 'yes'
+newData <- newData %>% filter(`human verified`== 'yes')
 
+#if published on Ushahidi (safeyelli.ushahidi.io)
+oldData <- oldData %>% filter(`Post Status` == 'published')
+
+
+#match field names in the old sheet to new
+oldData <-oldData %>% rename( description = `Describe the incident in detail`,
+                   `kind of incident` = `What kind of incident was this?`,
+                   `date and time` = `When and at what time this happen?`,
+                   `gender of victim` = `What is your gender?`,
+                   `environmental factors` = `What was wrong with the space?` 
+                   )
+
+#combine data and time in the new sheet
+newData$`time of incident` <- paste(format(as.POSIXct(newData$`time of incident`), format = "%H:%M"))
+newData$`date and time` <- paste(newData$`date of incident`, newData$`time of incident`) %>% as.POSIXct()
+
+#split the location field into lat and lng
+newData <- newData %>% separate( col = `location`, into = c("Location.lat", "Location.lon"), sep = "\\,") 
+
+#old data coords into chr
+newData <- newData %>% 
+  mutate(Location.lat = as.double(Location.lat),
+         Location.lon = as.double(Location.lon))
+
+# map tiles from mapbox
 mapUrl="https://api.mapbox.com/styles/v1/rungdung/cku6gh76r1dvh17o3zkfllvjz/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicnVuZ2R1bmciLCJhIjoiY2tqeWh6cXF4MDgzMjJvbWVmbGQzYjAwMyJ9.U-aJyoqyKvTXlhVk43jV1A"
 ```
 
 
 
 ```{r merging dataframes and creating sf frames, include=FALSE}
-allData <- rbind(oldHarassData,newHarassData)
+# combine dataframes for leaflet 
+allData <- bind_rows(oldData, newData)
 allData <- rename(allData, lat=Location.lat, lng = Location.lon)
 
 # Attach a coordinate reference 
@@ -53,32 +84,37 @@ allCoords <- allData %>%
 ```
 
 ```{r operations on data, echo=FALSE, message=FALSE, warning=FALSE}
+# create unique date and time fields to simplify leaflet
 allData <- allData %>% 
-  mutate(date = as.Date(`When and at what time this happen?`, '%d/%m/%Y'),
+  mutate(date = as.Date(`date and time`, '%d/%m/%Y'),
          year = as.character(year(date)),
          month = as.character(month(date)),
-         hour = as.integer(format(as.POSIXct(`When and at what time this happen?`, tz="Mumbai"), 
+         hour = as.integer(format(as.POSIXct(`date and time`, tz="Mumbai"), 
                            format="%H"))
          )
 ```
 
 ```{r Formatting popup text, message=FALSE, warning=FALSE, include=FALSE}
+# create popup text for the leaflet map, all formatting is done in html
 allData$popupText <- 
-  paste0('<strong>', allData$`Describe the incident in one line`, '</strong>',
-         '<br/> <br/>',
+  paste0('<strong>', allData$`kind of incident`, '</strong> <br/> <br/>',
          format(
-           as.POSIXct(allData$`When and at what time this happen?`, format="%d-%m-%Y %H:%M", tz="Mumbai"),
-           format='%B %d %Y, Time: %H %M'),
+           as.POSIXct(allData$`date and time`, format="%d-%m-%Y %H:%M", tz="Mumbai"),
+           format='%B %d %Y, Time: %H %M'
+           ),
          '<br/> <br/>', 
-         allData$`Describe the incident in detail`, ' ') %>% 
+         allData$`description`, ' ') %>% 
   lapply(htmltools::HTML)
 ```
 
 ```{r Creating shared data frame for crosstalk, echo=FALSE, message=FALSE, warning=FALSE}
+# sharedData is the format for crosstalk. Crosstalk enables filters by sharing dataframes on a static site.
 sharedD <- SharedData$new(allData)
 ```
 
 ```{r Mappinnng!, echo=FALSE, message=FALSE, warning=FALSE}
+
+#leaflet object
 #addProviderTiles(providers$CartoDB.Positron) not working
 map <- leaflet(sharedD) %>%
   addTiles(urlTemplate = mapUrl) %>%
@@ -108,6 +144,8 @@ map <- leaflet(sharedD) %>%
     max = 0.9,
     group = "Heat Map"
   )
+
+# OSM data overlay on map
 # Layers
 # addPolygons(data = emptyPlot,
 #             color = 'grey',
@@ -128,36 +166,22 @@ map <- leaflet(sharedD) %>%
 
 ```{r formatting output,echo=FALSE, message=FALSE, warning=FALSE, out.width='100%'}
 
+# filters
 #dateFilter <- filter_slider("date", "", sharedD, column= ~date, step=3, width=800)
-typeFilter <- filter_checkbox("Incident type", "Type", sharedD, group= ~`What kind of incident was this?`, inline = FALSE )
+typeFilter <- filter_checkbox("Incident type", "Type", sharedD, group= ~`kind of incident`, inline = FALSE )
 yearFilter <- filter_checkbox("Year", "Year", sharedD, group= ~year, inline = FALSE )
 timeOfDayFilter <- filter_slider("Hour","", sharedD,  column=~"Hour", step=1, width=200, min=0, max=24)
 
-displayData <- allData %>%
-  select(date,
-         `Describe the incident in one line`,
-         `Describe the incident in detail`) %>%
-  datatable(
-  extensions = "Scroller",
-  style = "bootstrap",
-  class = "compact",
-  width = "100%",
-  options = list(
-    deferRender = TRUE,
-    scrollY = 300,
-    scroller = TRUE
-  )
-)
-
-# map  
 
 
+# map display
 tags$div(class = "map-section",
            #dateFilter,
            tags$div(class = "crosstalk-map",
                     map),
-          
-           tags$div(class = "crosstalk-filters", tags$h4('Map filters:'), yearFilter, typeFilter)
+           tags$div(class = "crosstalk-filters", tags$h4('Map filters:'), yearFilter, typeFilter),
+           #tags$div(class = "crosstalk-map",
+                    #displayData),
                     
          )
 
