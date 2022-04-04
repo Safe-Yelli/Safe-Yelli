@@ -13,7 +13,7 @@ ignoreFiles:
   - \.utf8\.md$
   
 
-
+ 
 menu:
   main:
     - name: Why?
@@ -27,10 +27,8 @@ menu:
       weight: 3
     
 
-  footer_left: 
-      - name: This site has been built on top of Ushahidi
-        url: https://ushahidi.com    
-        
+
+      
   footer_middle:
       - name: Contact Us
         url: /contact/
