@@ -57,12 +57,19 @@ oldData <-oldData %>% rename( description = `Describe the incident in detail`,
 
 #combine data and time in the new sheet
 newData$`time of incident` <- paste(format(as.POSIXct(newData$`time of incident`), format = "%H:%M"))
-newData$`date and time` <- paste(newData$`date of incident`, newData$`time of incident`) %>% as.POSIXct()
+                                    
+
+# Force IST time to UTC time for storage and operations. 
+# UTC is recommended, all time must be stored as UTC, need to modify google sheets?
+# lubridate as_datetime returns nothing here
+newData$`date and time` <- paste(newData$`date of incident`, newData$`time of incident`) %>% 
+  as.POSIXct() %>%  force_tzs(tzones = "Asia/Kolkata", tzone_out = "UTC")
+
 
 #split the location field into lat and lng
 newData <- newData %>% separate( col = `location`, into = c("Location.lat", "Location.lon"), sep = "\\,") 
 
-#old data coords into chr
+#old data coords into chr for compatibility
 newData <- newData %>% 
   mutate(Location.lat = as.double(Location.lat),
          Location.lon = as.double(Location.lon))
@@ -79,7 +86,7 @@ allData <- bind_rows(oldData, newData)
 allData <- rename(allData, lat=Location.lat, lng = Location.lon)
 
 # Attach a coordinate reference 
-allCoords <- allData %>%
+allData <- allData %>%
   st_as_sf(coords = c('lng', 'lat'),crs = 4326) 
 ```
 
@@ -89,7 +96,7 @@ allData <- allData %>%
   mutate(date = as.Date(`date and time`, '%d/%m/%Y'),
          year = as.character(year(date)),
          month = as.character(month(date)),
-         hour = as.integer(format(as.POSIXct(`date and time`, tz="Mumbai"), 
+         hour = as.integer(format(as_datetime(allData$`date and time`, tz="Asia/Kolkata"), 
                            format="%H"))
          )
 ```
@@ -99,7 +106,7 @@ allData <- allData %>%
 allData$popupText <- 
   paste0('<strong>', allData$`kind of incident`, '</strong> <br/> <br/>',
          format(
-           as.POSIXct(allData$`date and time`, format="%d-%m-%Y %H:%M", tz="Mumbai"),
+           as_datetime(allData$`date and time`, tz="Asia/Kolkata"),
            format='%B %d %Y, Time: %H %M'
            ),
          '<br/> <br/>', 
