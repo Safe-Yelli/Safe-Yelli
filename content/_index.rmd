@@ -6,12 +6,12 @@ draft: false
 
 ####################### Banner #########################
 banner:
-  title : "Mapping harassment in Yelahanka"
-  content : "A citizen centric tool to report harassment and assault inside Yelahanka. Visualise our community's citizen reported crime data on a map. \n \n ಯಲಹಂಕದ  ನಗರವಾಸಿಗಳಿಗೆ  ಇಲ್ಲಿ ನಡೆಯುವ ದೌರ್ಜನ್ಯ ಮತ್ತು ಕಿರುಕುಳವನ್ನು ರಿಪೋರ್ಟ್ ಮಾಡುವ ಉಪಕರಣ. ಇಲ್ಲಿ ಸಂಗ್ರಹವಾದ ಅಪರಾಧ ವರದಿಗಳನ್ನು ನಕ್ಷೆಯ ಮೇಲೆ ಕಾಣಬಹುದು "
+  title : "Documenting harassment in Yelahanka"
+  content : "_**A citizen centric tool to report harassment and assault inside Yelahanka. Visualise our community's citizen reported crime data on a map.**_ \n \n ಯಲಹಂಕದ  ನಗರವಾಸಿಗಳಿಗೆ  ಇಲ್ಲಿ ನಡೆಯುವ ದೌರ್ಜನ್ಯ ಮತ್ತು ಕಿರುಕುಳವನ್ನು ರಿಪೋರ್ಟ್ ಮಾಡುವ ಉಪಕರಣ. ಇಲ್ಲಿ ಸಂಗ್ರಹವಾದ ಅಪರಾಧ ವರದಿಗಳನ್ನು ನಕ್ಷೆಯ ಮೇಲೆ ಕಾಣಬಹುದು "
   button:
     enable : true
     label : "Report / ಘಟನೆಯನ್ನು ರಿಪೋರ್ಟ್ ಮಾಡಿ"
-    link : "report"
+    link : "report" 
  
 ##################### Feature #######################
 ---
@@ -177,7 +177,7 @@ map <- leaflet(sharedD) %>%
 #dateFilter <- filter_slider("date", "", sharedD, column= ~date, step=3, width=800)
 typeFilter <- filter_checkbox("Incident type", "Type", sharedD, group= ~`kind of incident`, inline = FALSE )
 yearFilter <- filter_checkbox("Year", "Year", sharedD, group= ~year, inline = FALSE )
-timeOfDayFilter <- filter_slider("Hour","", sharedD,  column=~"Hour", step=1, width=200, min=0, max=24)
+timeOfDayFilter <- filter_slider("Hour","Time of Day (24H format)", sharedD,  column=~hour, step=1, width=200, min=0, max=24)
 
 
 
@@ -186,7 +186,7 @@ tags$div(class = "map-section",
            #dateFilter,
            tags$div(class = "crosstalk-map",
                     map),
-           tags$div(class = "crosstalk-filters", tags$h4('Map filters:'), yearFilter, typeFilter),
+           tags$div(class = "crosstalk-filters", tags$h4('Map filters:'), yearFilter, typeFilter, timeOfDayFilter),
            #tags$div(class = "crosstalk-map",
                     #displayData),
                     
