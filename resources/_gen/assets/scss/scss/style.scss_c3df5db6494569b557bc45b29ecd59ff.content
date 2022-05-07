@@ -561,6 +561,10 @@ body {
   background-position: 0 90%;
   background-size: cover; }
 
+.crosstalk-map {
+  width: 100%;
+  height: 600px; }
+
 .map-section {
   display: -ms-flexbox;
   display: -webkit-flex;
@@ -568,12 +572,9 @@ body {
   flex-wrap: wrap;
   width: 100%; }
 
-.crosstalk-map {
-  flex: 0 0 70%; }
-
 .crosstalk-filters {
   padding-left: 1em;
-  flex: 0 0 30%; }
+  flex: 0 0 100%; }
 
 @media (max-width: 800px) {
   .crosstalk-map, .crosstalk-filters {
