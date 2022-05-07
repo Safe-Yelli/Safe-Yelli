@@ -12,10 +12,10 @@ banner:
     enable : true
     label : "Report / ಘಟನೆಯನ್ನು ರಿಪೋರ್ಟ್ ಮಾಡಿ"
     link : "report" 
- 
+
 ##################### Feature #######################
 ---
-```{r setup, include=FALSE} 
+```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE) 
 
 library(tidyverse) 
@@ -87,7 +87,7 @@ allData <- rename(allData, lat=Location.lat, lng = Location.lon)
 
 # Attach a coordinate reference 
 allData <- allData %>%
-  st_as_sf(coords = c('lng', 'lat'),crs = 4326) 
+  st_as_sf(coords = c('lng', 'lat'),crs = 4326)
 ```
 
 ```{r operations on data, echo=FALSE, message=FALSE, warning=FALSE}
@@ -123,7 +123,7 @@ sharedD <- SharedData$new(allData)
 
 #leaflet object
 #addProviderTiles(providers$CartoDB.Positron) not working
-map <- leaflet(sharedD) %>%
+map <- leaflet(sharedD, height=600) %>%
   addTiles(urlTemplate = mapUrl) %>%
   fitBounds(77.564292, 13.096725, 77.591393, 13.109996) %>%
   setMaxBounds(77.554808, 13.087922, 77.608495, 13.114213) %>%
@@ -175,8 +175,8 @@ map <- leaflet(sharedD) %>%
 
 # filters
 #dateFilter <- filter_slider("date", "", sharedD, column= ~date, step=3, width=800)
-typeFilter <- filter_checkbox("Incident type", "Type", sharedD, group= ~`kind of incident`, inline = FALSE )
-yearFilter <- filter_checkbox("Year", "Year", sharedD, group= ~year, inline = FALSE )
+typeFilter <- filter_checkbox("Incident type", "Type", sharedD, group= ~`kind of incident`, inline = TRUE )
+yearFilter <- filter_checkbox("Year", "Year", sharedD, group= ~year, inline = TRUE )
 timeOfDayFilter <- filter_slider("Hour","Time of Day (24H format)", sharedD,  column=~hour, step=1, width=200, min=0, max=24)
 
 
