@@ -5,9 +5,9 @@
 <section class="banner">
   <div class="container">
     <div class="row">
-      <div class="col-lg-10 mx-auto text-center">
-        <h1 class="mb-3">{{ .title | markdownify }}</h1>
-        <p class="mb-4">{{ .content | markdownify }}</p>
+      <div class="col-lg-4 col-md-4 mx-auto text-left">
+        <h1 class="mb-2">{{ .title | markdownify }}</h1>
+        <h2 >{{ .content | markdownify }}</h2>
         {{ if .button.enable }}
         {{ with .button }}
         <div><a href="{{ .link | safeURL }}" title="{{ .label }}" class="btn btn-primary">{{ .label }}</a></div>
@@ -16,10 +16,14 @@
 
         {{with .image}}<img src="{{ . | relURL }}" alt="" class="img-fluid mt-5" width="750px">{{end}}
       </div>
+{{ end }}
+      <div class="col-lg-8 col-md-8 mx-auto">
+        {{ .Content }}
+      </div>
     </div>
   </div>
 </section>
-{{ end }}
+
 <!-- /banner -->
 
 <!-- feature -->
@@ -144,14 +148,16 @@
 {{ end }}
 {{ end }}
 <!-- /call to action -->
+{{range .Params.text}}
 <section class="section">
    <div class="container">
     <div class="row">
       <div class="col-lg-10 mx-auto">
-        {{ .Content }}
+        <h2>{{ .title }} </h2>
+        {{  .content | markdownify }}
       </div>
     </div>
     </div>
-
-</section>
+</section> 
+{{ end }}
 {{ end }}
