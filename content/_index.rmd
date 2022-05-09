@@ -158,7 +158,8 @@ sharedD <- SharedData$new(allData)
 #leaflet object
 #addProviderTiles(providers$CartoDB.Positron) not working
 map <- leaflet(sharedD, height=600) %>%
-  addTiles(urlTemplate = mapUrl) %>%
+  addTiles(urlTemplate = mapUrl,
+           attribution = "© OpenStreetMap contributors") %>%
   fitBounds(77.564292, 13.096725, 77.591393, 13.109996) %>%
   setMaxBounds(77.554808, 13.087922, 77.608495, 13.114213) %>%
   addScaleBar() %>%
@@ -212,7 +213,7 @@ map <- leaflet(sharedD, height=600) %>%
 # filters
 #dateFilter <- filter_slider("date", "", sharedD, column= ~date, step=3, width=800)
 typeFilter <- filter_checkbox("Incident type", "Type", sharedD, group= ~`kind of incident`, inline = TRUE )
-yearFilter <- filter_checkbox("Year", "Year", sharedD, group= ~year, inline = TRUE )
+yearFilter <- filter_checkbox("Year", "Year", sharedD, group= ~year, inline = TRUE)
 timeOfDayFilter <- filter_slider("Hour","Time of Day (24H format)", sharedD,  column=~hour, step=1, width=200, min=0, max=24)
 
 
