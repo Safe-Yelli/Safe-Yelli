@@ -1,11 +1,13 @@
 ---
-title: A draft look into Safe Yelli
-subtitle: Work in progress readme
-abstract: A community project to involve the resident community of Yelahanka in mapping harassment. Residents can report on a form on the website and it will be added to the map on the site. Understand the dynamics of crime in Yelahanka, read about our community's pitfalls.
-date: 2021-12-17
-email: safeyelli@gmail.com
+# A draft look into Safe Yelli
+Work in progress readme
+
+## A community project to involve the resident community of Yelahanka in mapping harassment. Residents can report on a form on the website and it will be added to the map on the site. Understand the dynamics of crime in Yelahanka, read about our community's pitfalls.
+
+---
+Date modified 2022-05-17 | 
+email: safeyelli@gmail.com | 
 url: safeyelli.in
-fontsize: 12 
 ---
 
 Safe Yelli is a website that allows for victims of catcalling, assault and other forms of harassment to directly report an incident. These incidents are then marked on an interactive map that serves as a visual diary of incidents for the residents of Yelahanka. This is a public map that everybody can see.
@@ -32,22 +34,12 @@ As a group that began with three men, we had to understand the context a lot bet
  Some questions that came up repeatedly in the thread and in person when interacting with representatives of institutions when we talk to them about sharing Safe Yelli on their campuses are that of misuse. What stops a shop owner from false reporting on places near their competitors? 
  
  ## Making this duplicatable
- The technological framworks used to create Safe Yelli are simple, fully featured services that can be easily adapted. [Ushahidi](https://www.ushahidi.com/) is the tool that is used to collect and categorise reports. 
+ The technological framworks used to create Safe Yelli are simple, fully featured services that can be easily adapted. A static form powered by [Netlify.com](netlify.com) is used to collect and categorise reports. 
  The data is drawn into a map using the R programming language and then generated into a website using [Hugo](https://gohugo.io/), a static site generator. It is a few lines of easily explainable code that when combined with a simple website generator like Hugo make it a very easily duplicatable template.
  Work is on for a guide and a duplicatable template.
  
  ## Mapping infrastructure in Yelahanka
  
- There is work going on to map infrastructure like street lights, shops, park maintanence conditions and timings on [Open Street Maps](openstreetmap.org/). It is a open-source, crowd sourced mapping tools that allows us to contribute to mapping Yelahnka. This data can then be overlayed and used to view possible correlations between crime density and the status of infrastructure. 
+ There is work going on to map infrastructure like street lights, shops, park maintanence conditions and timings on [Open Street Maps](openstreetmap.org/). It is an open-source, crowd sourced mapping tool that allows us to contribute to mapping Yelahanka. This data can then be overlayed and used to view possible correlations between crime density and the status of infrastructure. 
  
- ![[Projects/SafeYelli/A2 Harassment in Yelli/Assets/Pasted image 20211217123457.png]]
- 
- The circles in this image are street lights that have been mapped on Open Street Maps as part of Safe Yelli's initiatives. 
- 
-
- 
- 
-	
-  
-
-
+ [View our updates on twitter here](https://twitter.com/SafeYelli/status/1517395594452828160?) 
