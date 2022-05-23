@@ -1,0 +1,70 @@
+---
+title: "Why do we map infrastructure?"
+//date: "19/10/2021"
+draft: false
+---
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+
+library(osmdata)
+library(osmplotr)
+library(leaflet)
+library(leaflet.extras)
+library(htmltools)
+# the Bounding Box of Ylk New Town that we have mapped streetlights, shops in.
+bboxC <- c(77.557125,13.095279,77.589719,13.110556)
+
+bbox <- osmplotr::get_bbox(bboxC)
+
+# Data from OSM
+# streetlights from OSM
+dat_streetLamps <- extract_osm_objects (key = "highway", value="street_lamp", return_type = 'point', bbox = bbox) 
+
+# shops from OSM 
+dat_shops <- extract_osm_objects (key = 'shop', return_type = 'point', bbox = bbox)
+
+# map tiles from mapbox
+mapUrl="https://api.mapbox.com/styles/v1/rungdung/cku6gh76r1dvh17o3zkfllvjz/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicnVuZ2R1bmciLCJhIjoiY2tqeWh6cXF4MDgzMjJvbWVmbGQzYjAwMyJ9.U-aJyoqyKvTXlhVk43jV1A"
+```
+
+## Map of Streetlights mapped so far
+
+Hover to see the status of each streetlight. Mapping of status in progress
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+streetLights <- leaflet(dat_streetLamps,
+        width="100%") %>%
+  addTiles(urlTemplate = mapUrl,
+           attribution =  'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>') %>%
+  fitBounds(77.567232,13.097142,77.579978,13.109009) %>%
+  setMaxBounds(77.554808, 13.087922, 77.608495, 13.114213) %>% 
+  addCircleMarkers(opacity=0.5, 
+                   color="blue", 
+                   radius=2, 
+                   label = ~htmlEscape(status), 
+                   # labelOptions = labelOptions(noHide = TRUE, 
+                   #                             direction="bottom", 
+                   #                             textOnly = TRUE, 
+                   #                             style=list(
+                   #                               "font-size"= "14px"
+                   #                               )
+                   #                             )
+                   ) 
+  # addHeatmap(
+  #   radius = 10,
+  #   blur = 14,
+  #   intensity = 0.7,
+  #   cellSize = 0.1,
+  #   minOpacity = 0.4,
+  #   max = 0.9,
+  #   group = "Heat Map"
+  # ) 
+
+streetLights
+```
+
+Safe Yelli? has been conducting expeditions around Yelahanka to map public infrastructure in the area. We call it ***"Community Mapping"*** and *have been focused on mapping shops, street vendors, parks, conditions of street lights etc.* The idea behind this is to **encourage accountability in public policies** by curating **data about our infrastructural conditions and making it publicly available.**
+
+From 11th April '22, we opened this up as a volunteer based community exercise by organizing small walks in the neighbourhood on pleasant summer evenings. We would go around SFS mapping things like local landmarks, conditions of street lights, popular food joints etc. We encouraged everyone to bring a friend along to make it an even more fun experience.
+
+These evening walks have been quiet fruitful. In just 4-5 days we had mapped 30+ streets. We hope to spread across Bengaluru and make a detailed map of spaces beyond SFS colony and contribute to making Bengaluru safer for everyone.

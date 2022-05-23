@@ -19,8 +19,8 @@ menu:
     - name: Why?
       url: /why
       weight: 1
-    - name: Why should you report?
-      url: /why_report/
+    - name: Community Mapping
+      url: /community-mapping/
       weight: 2
     - name: Contact Us
       url: /contact/
