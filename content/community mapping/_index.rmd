@@ -25,6 +25,8 @@ dat_shops <- extract_osm_objects (key = 'shop', return_type = 'point', bbox = bb
 
 # map tiles from mapbox
 mapUrl="https://api.mapbox.com/styles/v1/rungdung/cku6gh76r1dvh17o3zkfllvjz/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicnVuZ2R1bmciLCJhIjoiY2tqeWh6cXF4MDgzMjJvbWVmbGQzYjAwMyJ9.U-aJyoqyKvTXlhVk43jV1A"
+
+darkMapUrl= "https://api.mapbox.com/styles/v1/rungdung/cl3jusid0001g15odcz3f1dcb/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicnVuZ2R1bmciLCJhIjoiY2tqeWh6cXF4MDgzMjJvbWVmbGQzYjAwMyJ9.U-aJyoqyKvTXlhVk43jV1A"
 ```
 
 ## Map of Streetlights mapped so far
@@ -32,15 +34,19 @@ mapUrl="https://api.mapbox.com/styles/v1/rungdung/cku6gh76r1dvh17o3zkfllvjz/tile
 Hover to see the status of each streetlight. Mapping of status in progress
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-streetLights <- leaflet(dat_streetLamps,
-        width="100%") %>%
-  addTiles(urlTemplate = mapUrl,
-           attribution =  'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>') %>%
+library(viridis)
+
+colourLeg <- colorFactor(viridis(8), dat_streetLamps$status)
+
+streetLights <- leaflet(dat_streetLamps, width="100%") %>%
+  addTiles(urlTemplate = darkMapUrl,
+           attribution =  'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+           ) %>%
   fitBounds(77.567232,13.097142,77.579978,13.109009) %>%
   setMaxBounds(77.554808, 13.087922, 77.608495, 13.114213) %>% 
   addCircleMarkers(opacity=0.5, 
-                   color="blue", 
-                   radius=2, 
+                   color = ~colourLeg(status), 
+                   radius= 2, 
                    label = ~htmlEscape(status), 
                    # labelOptions = labelOptions(noHide = TRUE, 
                    #                             direction="bottom", 
@@ -49,7 +55,12 @@ streetLights <- leaflet(dat_streetLamps,
                    #                               "font-size"= "14px"
                    #                               )
                    #                             )
-                   ) 
+                   ) %>% 
+  addLegend(position="bottomright",
+            pal = colourLeg,
+            values = ~status,
+            title="Status of mapped streetlights")
+  
   # addHeatmap(
   #   radius = 10,
   #   blur = 14,
