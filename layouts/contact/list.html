@@ -1,10 +1,44 @@
 {{ define "main" }}
+<!-- contact page -->
+<!-- banner -->
 
-{{ partial "page-header.html" . }}
-<section class="section bg-white">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-7 mb-4 mb-lg-0">
+<section class="row" id="container">
+
+  {{ with .Params.banner}}
+  
+  <div class="col-lg-3 col-md-3 mx-auto text-left " >
+    {{ partial "header.html"}}
+    <div class="container">
+      <div id="header">
+        <h1 class="mb-2">{{ .title | markdownify }}</h1>
+        <p>{{ .content | markdownify }}</p>
+        {{ if .button.enable }}
+        {{ with .button }}
+        <div>
+          <a href="{{ .link | safeURL }}" title="{{ .label }}" class="btn btn-primary">{{ .label }}</a>
+        </div>
+        {{ end }}
+        {{ end }}  
+      {{ end }}
+      </div>
+      <!-- text -->
+      {{range .Params.text}}
+  
+          <div class=" col-lg-10 mx-auto float-left" id="text" >
+            <p>{{ .title }} </p>
+            {{ .content | markdownify }}
+          </div>
+     
+      {{ end }}
+      <!-- /text -->
+    </div>
+  </div>
+<!-- /banner -->
+<!-- form -->
+ 
+  
+       <div class="contact col-lg-8 col-md-8 mr-1">
+         <div class="col-md-5">
         <form name="contact" method="POST" data-netlify="true">
           <input type="text" class="form-control mb-3" id="name" name="name" placeholder="{{ i18n `yourname` }}">
           <input type="email" class="form-control mb-3" id="mail" name="mail" placeholder="{{ i18n `youremail` }}">
@@ -12,13 +46,34 @@
           <textarea name="message" id="message" class="form-control mb-3" placeholder="{{ i18n `yourmessage` }}"></textarea>
           <button type="submit" value="send" class="btn btn-primary">{{ i18n `sendnow` }}</button>
         </form>
+        </div>
       </div>
       
       <div class="col-lg-5 content">
         {{ .Content }}
       </div>
     </div>
+
+<!-- /form -->
+
+{{range .Params.text}}
+  
+  <div class=" col-lg-10 mx-auto" id="text-mobile" >
+    <h2>{{ .title }} </h2>
+        {{ .content | markdownify }}
   </div>
+     
+{{ end }}    
+   
+
+
+
 </section>
 
 {{ end }}
+
+  
+
+    
+
+

@@ -66,6 +66,7 @@ library(crosstalk)
 library(lubridate)
 library(DT)
 library(widgetframe)
+
 ```
 
 ```{r reading data, include=FALSE}
@@ -128,7 +129,7 @@ allData <- allData %>%
 # create unique date and time fields to simplify leaflet
 allData <- allData %>% 
   mutate(date = as.Date(`date and time`, '%d/%m/%Y'),
-         year = as.character(year(date)),
+         year = as.integer(year(date)),
          month = as.character(month(date)),
          hour = as.integer(format(as_datetime(allData$`date and time`, tz="Asia/Kolkata"), 
                            format="%H"))
@@ -157,25 +158,20 @@ sharedD <- SharedData$new(allData)
 
 #leaflet object
 #addProviderTiles(providers$CartoDB.Positron) not working
-map <- leaflet(sharedD, height=600) %>%
+map <- leaflet(sharedD, height = "100vh") %>%
   addTiles(urlTemplate = mapUrl,
-           attribution = "© OpenStreetMap contributors") %>%
+           attribution =  'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>') %>%
   fitBounds(77.564292, 13.096725, 77.591393, 13.109996) %>%
   setMaxBounds(77.554808, 13.087922, 77.608495, 13.114213) %>%
   addScaleBar() %>%
-  addLayersControl(
-    #baseGroups = c("Incidents"),
-    overlayGroups = c("Heat Map", "Incidents"),
-    options = layersControlOptions(collapsed = FALSE)
-  ) %>%
   
-   addMarkers(
+  addMarkers(
     popup = paste(allData$popupText),
     popupOptions = popupOptions(maxWidth = 400),
     #clusterOptions = clusterOptions(),
     group = "Incidents",
   ) %>%
-
+  
   
   addHeatmap(
     radius = 20,
@@ -185,9 +181,15 @@ map <- leaflet(sharedD, height=600) %>%
     minOpacity = 0.4,
     max = 0.9,
     group = "Heat Map"
+  ) %>% 
+  
+  addLayersControl(
+    #baseGroups = c("Incidents"),
+    overlayGroups = c("Heat Map", "Incidents"),
+    options = layersControlOptions(collapsed = FALSE)
   ) 
-  
-  
+
+
 
 # OSM data overlay on map
 # Layers
@@ -206,6 +208,7 @@ map <- leaflet(sharedD, height=600) %>%
 #             stroke=FALSE,
 #             label = shopPlot$Name,
 #             group="Shops")
+
 ```
 
 ```{r formatting output,echo=FALSE, message=FALSE, warning=FALSE, out.width='100%'}
@@ -213,30 +216,36 @@ map <- leaflet(sharedD, height=600) %>%
 # filters
 #dateFilter <- filter_slider("date", "", sharedD, column= ~date, step=3, width=800)
 typeFilter <- filter_checkbox("Incident type", "Type", sharedD, group= ~`kind of incident`, inline = TRUE )
-yearFilter <- filter_checkbox("Year", "Year", sharedD, group= ~year, inline = TRUE)
-timeOfDayFilter <- filter_slider("Hour","Time of Day (24H format)", sharedD,  column=~hour, step=1, width=200, min=0, max=24)
+yearFilter <- filter_slider("Year", "Year", sharedD, column= ~year, step=1, width="100%")
+timeOfDayFilter <- filter_slider("Hour","Time of Day (24H format)", sharedD,  column=~hour, step=1, width="100%")
 
 
 
 # map display
-tags$div(class = "map-section",
-           #dateFilter,
-           tags$div(class = "crosstalk-map",
-                    map),
-           tags$div(class = "crosstalk-filters", tags$h4('Map filters:'), yearFilter, typeFilter, timeOfDayFilter),
-           #tags$div(class = "crosstalk-map",
-                    #displayData),
-                    
-         )
+tags$div(
+  class = "map-section",
+  #dateFilter,
+  tags$div(class = "crosstalk-map",
+           map),
+  tags$div(class = "crosstalk-filters pr-3 px-3 col-md-10 col-xs-6",
+           tags$h4('Map filters:'),
+           list(
+             tags$div(
+               class = "row",
+               tags$div(class = "col-md-5",
+                        yearFilter, timeOfDayFilter),
+               tags$div(class = "col-md-5",
+                        typeFilter)
+             )
+           )
+  ),
+  
+)
 
 #widgetframe::frameWidget(displayData)
 ```
 
 
-
-
-#
- 
 
     
 

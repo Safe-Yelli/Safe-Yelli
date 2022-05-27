@@ -1,61 +1,75 @@
 ---
 title: "Why should you report?"
-subtitle: ""
-# meta description
-description: "Why should you report?"
+description: ""
 draft: false
+
+####################### Banner #########################
+banner:
+  title : "Why should you report?"
+  content : 
+
+  button:
+    enable : false
+    label : "Report / ಘಟನೆಯನ್ನು ರಿಪೋರ್ಟ್ ಮಾಡಿ"
+    link : "report" 
+
+##################### Text-after #######################
+map: false
+
+text:
+  -
+    title:
+    content: 
+    
+textRight:
+  -
+    title: 
+    content: |
+      We live in a scary place in time to have normalised harassment and catcalling. There seem to be too many stories from victims who happen to be predominantly young students. What could be some causal factors for this?  It is very likely that poorly maintained public infrastructure and inept policing strategies are the major causal factors for crime in our area. But there are deeper roots, what social factors cause these?
+
+      Situational crime prevention measures focus on the circumstances in which crime takes place, rather than on offenders. Keeping that in mind, strategies should be constructed limiting the opportunities for people to commit crime. 
+      
+      Of the many types of crime that are perpetrated, sexual assault, harassment and catcalling are more pronounced and have impacted a relatively larger demographic of our community. Fortunately, adopting a proper crime prevention strategy can help curb the intensity and frequency of these crimes. Our objective is to gather enough data to present a credible case and influence effective prevention strategies on the basis of hard numbers.
+      
+      Individuals with a higher propensity to commit crime might not be pushed over the edge, if we're able to successfully deny them the 'opportunity to commit crime.'
+      
+      ## What is the Dark Figure of crime?
+      
+      The Dark Figure of crime is defined as the number of crimes not known or recorded by the police.
+      
+      ### How do we know this?
+      
+      There is a significant difference in the number of crimes reported in police statistics and victim surveys. Victim surveys tend to be a lot more open and don't require prolonged participation. More often than not, people don't report less serious offences, like catcalling, to the police because:
+      
+      They don't know that a particular type of behaviour or action is a crime.
+      
+      They might be apprehensive of the protracted legal battle that will ensue.
+      
+      Sometimes, a family member might be the perpetrator.
+      
+      Some studies by academics in India estimate the dark figure to be about 50 times higher than the official crime rates. It is only prudent to infer that the dark figure in the case of sexual assault and harassment is higher. The only way that we can paint a complete picture is to have multiple, credible and independent surveys that deal with the same specific problem(crime).
+      
+      Essentially, if you want to feel safer and make your immediate living environment feel comfortable and secure, then the least you can do is report.
+      
+      ## Your reports are anonymous
+      
+      At no point are you asked for personally identifiable information.
+      
+      ## Why should you report?"
+      
+      "Because it's on you to always do the right thing"
+      
+      If you are being harassed, there are certain steps you can take to stop them. If you don't report it, they're just going to keep doing it. You now have the power to do something about it. Every report helps us paint a more comprehensive picture, essentially mapping these crimes in order to influence policing and public policy. 
+      
+      ## How can you help?"
+      
+      "If you see something, do something"
+       
+      If you see sexual assault, harassment or catcalling happen to someone else or if something happens to you, go to the police and file a report. Additionally, take 5 minutes and fill out this form so that you can contribute to a larger cause with your story.
+      
+      ## Why does it matter?
+      
+      "Because If you don't do anything about it, you become complicit"
+      
+      As socially responsible human beings, it is our duty to do everything we can to make sure that the world is a safer place today than it was yesterday. Seems far fetched? Well, Let's start with making our immediate surroundings safe. Let's strive towards a society where a woman can walk down the street without fear of harassment!
 ---
-
-We live in a scary place in time to have normalised harassment and catcalling. There seem to be too many stories from victims who happen to be predominantly young students. What could be some causal factors for this?  It is very likely that poorly maintained public infrastructure and inept policing strategies are the major causal factors for crime in our area. But there are deeper roots, what social factors cause these?
-
-Situational crime prevention measures focus on the circumstances in which crime takes place, rather than on offenders. Keeping that in mind, strategies should be constructed limiting the opportunities for people to commit crime. 
-
-**Of the many types of crime that are perpetrated, sexual assault, harassment and catcalling are more pronounced and have impacted a relatively larger demographic of our community.** Fortunately, adopting a proper crime prevention strategy can help curb the intensity and frequency of these crimes. Our objective is to gather enough data to present a credible case and influence effective prevention strategies on the basis of hard numbers.
-
-Individuals with a higher propensity to commit crime might not be pushed over the edge, if we're able to successfully deny them the 'opportunity to commit crime.'
-
-## What is the Dark Figure of crime?
-
-The Dark Figure of crime is defined as the number of crimes not known or recorded by the police.
-
-### How do we know this?
-
-There is a significant difference in the number of crimes reported in police statistics and victim surveys. **Victim surveys tend to be a lot more open and don't require prolonged participation. More often than not, people don't report less serious offences, like catcalling, to the police because:**
-
-1.  They don't know that a particular type of behaviour or action is a crime.
-
-2.  They might be apprehensive of the protracted legal battle that will ensue.
-
-3.  Sometimes, a family member might be the perpetrator.
-
-Some studies by academics in India estimate the dark figure to be about 50 times higher than the official crime rates. It is only prudent to infer that the dark figure in the case of sexual assault and harassment is higher. The only way that we can paint a complete picture is to have multiple, credible and independent surveys that deal with the same specific problem(crime).
-
-Essentially, if you want to feel safer and make your immediate living environment feel comfortable and secure, then the least you can do is report.
-
-`r blogdown::shortcode_open("faq", "Your reports are anonymous")`
- 
-At no point are you asked for personally identifiable information.
-
-`r blogdown::shortcode_close("faq")`
-
-
-`r blogdown::shortcode_open("faq", "Why should you report?")`
-
-> "Because it's on you to always do the right thing"
-
-If you are being harassed, there are certain steps you can take to stop them. If you don't report it, they're just going to keep doing it. You now have the power to do something about it. Every report helps us paint a more comprehensive picture, essentially mapping these crimes in order to influence policing and public policy. 
-`r blogdown::shortcode_close("faq")`
-
-`r blogdown::shortcode_open("faq", "How can you help?")`
-
-> **"If you see something, do something"**
-
-If you see sexual assault, harassment or catcalling happen to someone else or if something happens to you, go to the police and file a report. Additionally, take 5 minutes and fill out this form so that you can contribute to a larger cause with your story.
-`r blogdown::shortcode_close("faq")`
-
-`r blogdown::shortcode_open("faq", "Why does it matter?")`
-
-> **"Because If you don't do anything about it, you become complicit"**
-
-As socially responsible human beings, it is our duty to do everything we can to make sure that the world is a safer place today than it was yesterday. Seems far fetched? Well, Let's start with making our immediate surroundings safe. Let's strive towards a society where a woman can walk down the street without fear of harassment!
-`r blogdown::shortcode_close("faq")`
