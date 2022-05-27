@@ -27,12 +27,13 @@ menu:
       weight: 3
     
 
-
-      
-  footer_middle:
+  footer_left:
       - name: Contact Us
         url: /contact/
-      - name: GitHub
+  footer_middle:
+      - name: Follow our Twitter
+        url: https://twitter.com/SafeYelli
+      - name: Read the work in progress documentation at our Github
         url: https://github.com/rungdung/harassment-in-yelli
       - name: Instagram
         url: https://instagram.com/safeyelli
@@ -58,7 +59,6 @@ params:
   variables:
     primary_color: "#FFD815"
     text_color: "#555"
-
 markup:
   defaultMarkdownHandler: goldmark
   goldmark:
