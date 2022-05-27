@@ -1,5 +1,6 @@
 {{ define "main" }}
 
+<!-- report page -->
 
 <link rel="stylesheet" href="/rmarkdown-libs/leaflet/leaflet.css" > </link>
 <link rel="stylesheet" href="/node_modules/leaflet-locationpicker/dist/leaflet-locationpicker.src.css"></link>
@@ -8,13 +9,11 @@
 
 
 <section class="row" id="container">
-  <div class="col-md-3 d-flex">
-    {{ partial "header.html"}}
-  </div>
- 
-  <div class="col-lg-3 col-md-3 mx-auto text-left d-flex" >
-    
 
+ 
+  <div class="col-lg-3 col-md-3 mx-auto text-left" >
+    
+{{ partial "header.html"}}
       
         {{"<!-- Form start -->"  | safeHTML}}
         <form 
