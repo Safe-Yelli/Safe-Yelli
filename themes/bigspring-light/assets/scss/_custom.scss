@@ -3,7 +3,7 @@
 
 $btn-white-space: wrap;
 .leaflet-heatmap-layer {
-opacity: .3;
+  opacity: 0.3;
 }
 
 body {
@@ -13,142 +13,133 @@ body {
   background-size: cover;
 }
 
-.btn{
-  text-size-adjust: wrap;
+.crosstalk-map {
+  width: 100%;
+  padding: 0;
+  margin: 0;
 }
 
-.crosstalk-map{
- width: 100%;
- padding: 0;
- margin: 0;
-  
+label {
+  display: inline;
 }
-
-.map-section{
+.map-section {
   display: -ms-flexbox;
   display: -webkit-flex;
-  display: flex;
+  display: flex !important;
   flex-wrap: wrap;
-  
-  
- 
-  
 }
 
-
-
-.sliders{
-  
+.sliders {
 }
-.RHS{
-  height:100vh;
-  margin:0;
-  padding:0;
-  top:0;
+
+.RHS {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  top: 0;
 }
-.question{
+
+.question {
   margin: 40px;
 }
 
-.formMarkUp{
-  margin: 20px  10px ;
+.formMarkUp {
+  margin: 20px 10px;
   text-align: left;
   align-items: left;
 }
 
-.text{
-  margin-top:2em;
+.text {
+  margin-top: 2em;
 }
-.hiddenForm{
+
+.hiddenForm {
   display: none;
   visibility: hidden;
 }
 
-#logo{
-  width:500px;
+#logo {
+  width: 500px;
   display: flex;
-  min-width:100%;
+  min-width: 100%;
 }
 
-
-#text{
+#text {
   padding: 2em 0;
 }
 
-.navigation{
+.navigation {
   padding: 2em 0;
 }
-#text-mobile{
+
+#text-mobile {
   display: none;
 }
+
 // mobile features
-@media (max-width: 800px) { 
-  .crosstalk-map{
+@media (max-width: 800px) {
+  .crosstalk-map {
     padding: 1em 2em;
   }
-  .crosstalk-map, .crosstalk-filters {
-    min-width:100%;
-    flex:1;
+  .crosstalk-map,
+  .crosstalk-filters {
+    min-width: 100%;
+    flex: 1;
   }
-  
-  .crosstalk-filters{
 
+  .crosstalk-filters {
     max-width: 80%;
     margin-right: 5em;
     padding: 0;
     background-color: white;
     border-radius: 10px;
+  }
 
+  #logo {
+    min-width: 50%;
   }
-  
-  #logo{
-    min-width:50%;
+
+  .textRight,
+  .contact,
+  #text-mobile {
+    margin-top: 2em;
+    padding: 0 3em;
   }
-  
- .textRight, .contact, #text-mobile{
-  margin-top: 2em;
-  padding: 0 3em;
-}
-  #text{
-   
+  #text {
     display: none;
   }
-  
-  #text-mobile{
-  display: block;
-}
-  #map{
+
+  #text-mobile {
+    display: block;
+  }
+  #map {
     padding: 0 2em;
   }
- 
 }
 // desktop font-feature-settings
 @media (min-width: 800px) {
-  .map-section{
+  .map-section {
     position: -webkit-sticky; /* Safari */
-    position: sticky;
+    position: sticky !important;
     top: 0;
-    
-    
+
     width: 100%;
     height: 100vh;
   }
-  
 
-  .textRight, .contact{
-  margin-top: 14em;
-  padding-right: 20em;
-}
+  .textRight,
+  .contact {
+    margin-top: 15em;
+    padding-right: 20em;
+  }
 
-  .crosstalk-filters{
-  
-  position: absolute;
-  bottom: 10px;
-  
-  margin: 3em;
-  padding: 0.5em 2em;
-  background-color: white;
-  border-radius: 20px;
-}
-};
+  .crosstalk-filters {
+    position: absolute;
+    bottom: 10px;
 
+    margin: 3em;
+    padding: 0.5em 2em;
+    background-color: white;
+    border-radius: 20px;
+  }
+} ;
