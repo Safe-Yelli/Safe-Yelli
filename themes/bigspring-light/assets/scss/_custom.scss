@@ -1,6 +1,7 @@
 // This file is empty within the template
 // You can use it to override CSS from within your project
 
+$btn-white-space: wrap;
 .leaflet-heatmap-layer {
 opacity: .3;
 }
@@ -12,11 +13,15 @@ body {
   background-size: cover;
 }
 
-
+.btn{
+  text-size-adjust: wrap;
+}
 
 .crosstalk-map{
  width: 100%;
- height: 600px;
+ padding: 0;
+ margin: 0;
+  
 }
 
 .map-section{
@@ -24,22 +29,23 @@ body {
   display: -webkit-flex;
   display: flex;
   flex-wrap: wrap;
-
-  width: 100%;
-}
-.crosstalk-filters{
-
- padding-left: 1em;
- flex: 0 0 100%;
+  
+  
+ 
+  
 }
 
-@media (max-width: 800px) {
-  .crosstalk-map, .crosstalk-filters {
-    min-width:100%;
-    flex:1;
-  }
-}
 
+
+.sliders{
+  
+}
+.RHS{
+  height:100vh;
+  margin:0;
+  padding:0;
+  top:0;
+}
 .question{
   margin: 40px;
 }
@@ -50,7 +56,99 @@ body {
   align-items: left;
 }
 
+.text{
+  margin-top:2em;
+}
 .hiddenForm{
   display: none;
   visibility: hidden;
 }
+
+#logo{
+  width:500px;
+  display: flex;
+  min-width:100%;
+}
+
+
+#text{
+  padding: 2em 0;
+}
+
+.navigation{
+  padding: 2em 0;
+}
+#text-mobile{
+  display: none;
+}
+// mobile features
+@media (max-width: 800px) { 
+  .crosstalk-map{
+    padding: 1em 2em;
+  }
+  .crosstalk-map, .crosstalk-filters {
+    min-width:100%;
+    flex:1;
+  }
+  
+  .crosstalk-filters{
+
+    max-width: 80%;
+    margin-right: 5em;
+    padding: 0;
+    background-color: white;
+    border-radius: 10px;
+
+  }
+  
+  #logo{
+    min-width:50%;
+  }
+  
+ .textRight, .contact, #text-mobile{
+  margin-top: 2em;
+  padding: 0 3em;
+}
+  #text{
+   
+    display: none;
+  }
+  
+  #text-mobile{
+  display: block;
+}
+  #map{
+    padding: 0 2em;
+  }
+ 
+}
+// desktop font-feature-settings
+@media (min-width: 800px) {
+  .map-section{
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0;
+    
+    
+    width: 100%;
+    height: 100vh;
+  }
+  
+
+  .textRight, .contact{
+  margin-top: 14em;
+  padding-right: 20em;
+}
+
+  .crosstalk-filters{
+  
+  position: absolute;
+  bottom: 10px;
+  
+  margin: 3em;
+  padding: 0.5em 2em;
+  background-color: white;
+  border-radius: 20px;
+}
+};
+
