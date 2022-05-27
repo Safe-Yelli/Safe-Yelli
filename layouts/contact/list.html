@@ -2,7 +2,7 @@
 <!-- contact page -->
 <!-- banner -->
 
-<section class="row" id="container">
+<section class="row py-5" id="container">
 
   {{ with .Params.banner}}
   
@@ -39,34 +39,22 @@
   
        <div class="contact col-lg-8 col-md-8 mr-1">
          <div class="col-md-5">
-        <form name="contact" method="POST" data-netlify="true">
-          <input type="text" class="form-control mb-3" id="name" name="name" placeholder="{{ i18n `yourname` }}">
-          <input type="email" class="form-control mb-3" id="mail" name="mail" placeholder="{{ i18n `youremail` }}">
-          <input type="text" class="form-control mb-3" id="subject" name="subject" placeholder="{{ i18n `subject` }}">
-          <textarea name="message" id="message" class="form-control mb-3" placeholder="{{ i18n `yourmessage` }}"></textarea>
-          <button type="submit" value="send" class="btn btn-primary">{{ i18n `sendnow` }}</button>
-        </form>
+            <form name="contact" method="POST" data-netlify="true">
+              <input type="text" class="form-control mb-3" id="name" name="name" placeholder="{{ i18n `yourname` }}">
+              <input type="email" class="form-control mb-3" id="mail" name="mail" placeholder="{{ i18n `youremail` }}">
+              <input type="text" class="form-control mb-3" id="subject" name="subject" placeholder="{{ i18n `subject` }}">
+              <textarea name="message" id="message" class="form-control mb-3" placeholder="{{ i18n `yourmessage` }}"></textarea>
+              <button type="submit" value="send" class="btn btn-primary">{{ i18n `sendnow` }}</button>
+            </form>
         </div>
       </div>
       
       <div class="col-lg-5 content">
         {{ .Content }}
       </div>
-    </div>
+
 
 <!-- /form -->
-
-{{range .Params.text}}
-  
-  <div class=" col-lg-10 mx-auto" id="text-mobile" >
-    <h2>{{ .title }} </h2>
-        {{ .content | markdownify }}
-  </div>
-     
-{{ end }}    
-   
-
-
 
 </section>
 
