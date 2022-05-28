@@ -2,12 +2,13 @@
 <!-- contact page -->
 <!-- banner -->
 
-<section class="row py-5" id="container">
+<section class="row pb-5" id="container">
 
   {{ with .Params.banner}}
   
   <div class="col-lg-3 col-md-3 mx-auto text-left " >
     {{ partial "header.html"}}
+    <div class="row">
     <div class="container">
       <div id="header">
         <h1 class="mb-2">{{ .title | markdownify }}</h1>
@@ -32,6 +33,7 @@
       {{ end }}
       <!-- /text -->
     </div>
+    </div>
   </div>
 <!-- /banner -->
 <!-- form -->
@@ -53,7 +55,7 @@
         {{ .Content }}
       </div>
 
-
+  </div>
 <!-- /form -->
 
 </section>

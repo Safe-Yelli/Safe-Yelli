@@ -53,8 +53,8 @@ params:
   logo: "images/logo.svg"
   logo_width: "100px"
   navigation_button:
-      enable: false
-      label: "Report an Incident"
+      enable: true
+      label: "Report Incident"
       link: "/report"
   variables:
     primary_color: "#FFD815"

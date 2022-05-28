@@ -12,9 +12,21 @@
 
  
   <div class="col-lg-3 col-md-3 mx-auto text-left" >
-    
-{{ partial "header.html"}}
-      
+    <div class="container"  id="single-col">
+  {{ partial "header.html"}}
+      {{ with .Params.banner}}
+        <div id="header">
+          <h1 class="mb-2">{{ .title | markdownify }}</h1>
+          <p>{{ .content | markdownify }}</p>
+          {{ if .button.enable }}
+          {{ with .button }}
+          <div>
+            <a href="{{ .link | safeURL }}" title="{{ .label }}" class="btn btn-primary">{{ .label }}</a>
+          </div>
+          {{ end }}
+          {{ end }}  
+        {{ end }}
+        </div>
         {{"<!-- Form start -->"  | safeHTML}}
         <form 
           name="report" 
@@ -24,10 +36,11 @@
           data-netlify-recaptcha="true" >
           
           {{"<!-- Map start -->"  | safeHTML}}
-          <h2> Where did this incident happen?</h2>
-          <p> Please move the map around and click to pick the aproximate location of incident <span style="color: red">*</span></p>
+          
           
           {{"<!-- Required question start -->"  | safeHTML}}
+          
+          <input id="geoloc5" class="form-control mb-2" type="text" value="" name="coordinates" size="20" required>
           {{ range .Params.RequiredQuestions}}
             {{"<!--  Question -->"  | safeHTML}}
             <div class="question row">
@@ -136,9 +149,9 @@
           </div>      
           
           <div class="col-lg-8 col-md-8 mr-1" id="map">
-           <input id="geoloc5" class="form-control mb-2" type="text" value="" name="coordinates" size="20" required>
+           
           <div id="map-section" class="map-section" ></div>
-          
+          </div>
           </div>
         </form>
   </div>
@@ -255,34 +268,22 @@ $('#geoloc5').leafletLocationPicker(
  
 
 <script>
-
+//if mobile
+//https://stackoverflow.com/a/14301832/15299576
+  var form = document.getElementById('report'); 
+  var parent = document.getElementById('single-col');
+  var map = document.getElementById('map-section');
+  var mapParent = document.getElementById('map');
+  
+  
+  if (window.screen.width < 800) {  
+    parent.insertBefore(map, form)
+  }
+  else {
+    mapParent.appendChild(map) 
+  }
 </script>
-<style>
-// style for collapsibles
-.collapsible {
-  background-color: #777;
-  color: white;
-  cursor: pointer;
-  padding: 18px;
-  width: 100%;
-  border: none;
-  text-align: left;
-  outline: none;
-  font-size: 15px;
-}
 
-.active, .collapsible:hover {
-  background-color: #555;
-}
-
-.content {
-  padding: 0 12px;
-  display: none;
-  overflow: hidden;
-  background-color: #f1f1f1;
-  border-radius: 3%;
-}
-</style>
 
 
 {{ end }}

@@ -6,6 +6,16 @@ $btn-white-space: wrap;
   opacity: 0.3;
 }
 
+header{
+  padding: 3em 0;
+  margin-left: -3em;  
+}
+
+.navbar-expand-lg{
+  flex-flow: row wrap;
+  overflow: wrap;
+
+}
 body {
   background-image: url(/images/bg.svg);
   background-repeat: no-repeat;
@@ -76,8 +86,47 @@ label {
   display: none;
 }
 
+// report page 
+
+.collapsible {
+  background-color: #777;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color: #555;
+}
+
+.content {
+  padding: 0 12px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+  border-radius: 3%;
+}
+
+//-----------------------
 // mobile features
 @media (max-width: 800px) {
+  
+  //navigation 
+  header{
+    padding: 3em 0;
+    margin-left: 0em;  
+  }
+  
+  .navbar-expand-lg .navbar-nav .nav-link {
+  padding: 15px;
+  }
+  
+  // map
   .crosstalk-map {
     padding: 1em 2em;
   }
