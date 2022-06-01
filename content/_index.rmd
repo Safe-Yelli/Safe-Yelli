@@ -57,7 +57,6 @@ library(dplyr)
 
 library(sf)
 library(leaflet)
-library(leaflet.providers) 
 library(leaflet.extras)
 
 library(htmltools)
@@ -65,7 +64,10 @@ library(crosstalk)
 
 library(lubridate)
 library(DT)
-library(widgetframe)
+
+library(osmdata)
+library(osmplotr)
+library(viridis)
 
 ```
 
@@ -111,6 +113,8 @@ newData <- newData %>%
 
 # map tiles from mapbox
 mapUrl="https://api.mapbox.com/styles/v1/rungdung/cku6gh76r1dvh17o3zkfllvjz/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicnVuZ2R1bmciLCJhIjoiY2tqeWh6cXF4MDgzMjJvbWVmbGQzYjAwMyJ9.U-aJyoqyKvTXlhVk43jV1A"
+
+darkMapUrl= "https://api.mapbox.com/styles/v1/rungdung/cl3jusid0001g15odcz3f1dcb/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicnVuZ2R1bmciLCJhIjoiY2tqeWh6cXF4MDgzMjJvbWVmbGQzYjAwMyJ9.U-aJyoqyKvTXlhVk43jV1A"
 ```
 
 
@@ -138,14 +142,19 @@ allData <- allData %>%
 
 ```{r Formatting popup text, message=FALSE, warning=FALSE, include=FALSE}
 # create popup text for the leaflet map, all formatting is done in html
-allData$popupText <- 
-  paste0('<strong>', allData$`kind of incident`, '</strong> <br/> <br/>',
-         format(
-           as_datetime(allData$`date and time`, tz="Asia/Kolkata"),
-           format='%B %d %Y, Time: %H %M'
-           ),
-         '<br/> <br/>', 
-         allData$`description`, ' ') %>% 
+allData$popupText <-
+  paste0(
+    '<strong>',
+    allData$`kind of incident`,
+    '</strong> <br/> <br/>',
+    format(
+      as_datetime(allData$`date and time`, tz = "Asia/Kolkata"),
+      format = '%B %d %Y, Time: %H %M'
+    ),
+    '<br/> <br/>',
+    allData$`description`,
+    ' '
+  ) %>%
   lapply(htmltools::HTML)
 ```
 
@@ -154,13 +163,36 @@ allData$popupText <-
 sharedD <- SharedData$new(allData)
 ```
 
+```{r get Street Lamp Data, echo=FALSE, message=FALSE, warning=FALSE}
+bboxC <- c(77.557125, 13.095279, 77.589719, 13.110556)
+
+bbox <- osmplotr::get_bbox(bboxC)
+
+# Data from OSM
+# streetlights from OSM
+dat_streetLamps <-
+  extract_osm_objects (
+    key = "highway",
+    value = "street_lamp",
+    return_type = 'point',
+    bbox = bbox
+  )
+
+colourLeg <- colorFactor(viridis(8), dat_streetLamps$status)
+```
+
 ```{r Mappinnng!, echo=FALSE, message=FALSE, warning=FALSE}
 
 #leaflet object
 #addProviderTiles(providers$CartoDB.Positron) not working
 map <- leaflet(sharedD, height = "100vh") %>%
+  addTiles(urlTemplate = darkMapUrl,
+           attribution =  'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+           group = "Street Lamps") %>%
   addTiles(urlTemplate = mapUrl,
-           attribution =  'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>') %>%
+           attribution =  'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+           group = "Default") %>%
+  
   fitBounds(77.564292, 13.096725, 77.591393, 13.109996) %>%
   setMaxBounds(77.554808, 13.087922, 77.608495, 13.114213) %>%
   addScaleBar() %>%
@@ -172,10 +204,25 @@ map <- leaflet(sharedD, height = "100vh") %>%
     group = "Incidents",
   ) %>%
   
+  # OSM data on main map
+  addCircleMarkers(
+    data = dat_streetLamps,
+    opacity = 0.5,
+    color = ~ colourLeg(dat_streetLamps$status),
+    radius = 2,
+    label = ~ htmlEscape(dat_streetLamps$status),
+    group = "Street Lamps"
+  ) %>%
+  addLegend(
+    position = "bottomright",
+    pal = colourLeg,
+    values = ~ dat_streetLamps$status,
+    title = "Status of mapped streetlights",
+    group = "Street Lamps"
+  ) %>%
   
-  addHeatmap(
-    radius = 20,
-    blur = 20,
+  addHeatmap(radius = 20,
+             blur = 20, 
     intensity = 0.7,
     cellSize = 0.1,
     minOpacity = 0.4,
@@ -184,30 +231,13 @@ map <- leaflet(sharedD, height = "100vh") %>%
   ) %>% 
   
   addLayersControl(
-    #baseGroups = c("Incidents"),
-    overlayGroups = c("Heat Map", "Incidents"),
+    baseGroups = c("default"),
+    overlayGroups = c("Heat Map", "Incidents", "Street Lamps"),
     options = layersControlOptions(collapsed = FALSE)
-  ) 
+  ) %>% 
+  
+  hideGroup("Street Lamps")
 
-
-
-# OSM data overlay on map
-# Layers
-# addPolygons(data = emptyPlot,
-#             color = 'grey',
-#             stroke=FALSE,
-#             label = emptyPlot$Name,
-#             group="Empty Plots") %>%
-# addPolygons(data = infrasPlot,
-#             color = 'red',
-#             stroke=FALSE,
-#             label = infrasPlot$Name,
-#             group="Dilipated infrastructure") %>%
-# addPolygons(data = shopPlot,
-#             color = 'green',
-#             stroke=FALSE,
-#             label = shopPlot$Name,
-#             group="Shops")
 
 ```
 
@@ -227,22 +257,22 @@ tags$div(
   #dateFilter,
   tags$div(class = "crosstalk-map",
            map),
-  tags$div(class = "crosstalk-filters pr-3 px-3 col-md-10 col-xs-6",
+  tags$div(class = "crosstalk-filters  col-md-11",
            tags$h4('Map filters:'),
            list(
              tags$div(
                class = "row",
-               tags$div(class = "col-md-5",
-                        yearFilter, timeOfDayFilter),
-               tags$div(class = "col-md-5",
-                        typeFilter)
-             )
-           )
-  ),
+               tags$div(class = "col-md-6",
+                        yearFilter),
+               tags$div(class = "col-md-6",
+                        timeOfDayFilter)
+             ),
+             tags$div(class = "row",
+                      tags$div(class = "col-md-12",
+                               typeFilter))
+           )),
   
 )
-
-#widgetframe::frameWidget(displayData)
 ```
 
 
