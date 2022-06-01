@@ -27,6 +27,43 @@ text:
       From 11th April '22, we opened this up as a volunteer based community exercise by organizing small walks in the neighbourhood on pleasant summer evenings. We would go around SFS mapping things like local landmarks, conditions of street lights, popular food joints etc. We encouraged everyone to bring a friend along to make it an even more fun experience.
       
       These evening walks have been quiet fruitful. In just 4-5 days we had mapped 30+ streets. We hope to spread across Bengaluru and make a detailed map of spaces beyond SFS colony and contribute to making Bengaluru safer for everyone.
+  -
+    title: 
+    content: |
+      ## DIY mapping 
+      ### Create an Account
+      Go to [www.openstreetmap.org](https://www.openstreetmap.org) and create an account. 
+      
+      ### Download
+      
+      Download [OSM GO, interestingly named as 'Mapping less frustrating](https://play.google.com/store/apps/details?id=fr.dogeo.osmgo) because most other mobile mapping applications are complex to start off with. 
+      
+      Once downloaded, log in to Open Street Maps through the menu inside the app
+      
+      ### Walk around
+      - Make sure your GPS seems to be accurate. 
+      - Ensure callibration using relative measurements on the ground. Ask yourself if the road corner where you are standing is the same road corner according to the map. 
+      - After doing that. Add a street lamp using the application by searching for the 'street_lamp' tag. 
+      
+      And there you are, you've added a street lamp. Not to OSM yet, there are a few more steps for that. 
+      
+      ### Add additional tags
+      
+      What kind of a street lamp is it? Fill the 'type' field.
+      
+      Is it working? Is it not working? Does it need maintanance? All these information can be added through a custom tag.
+        - Click the add button. 
+        - Name the tag 'status'.
+          - Fill in with either working, not_working or needs_maintanence 
+          
+      
+      ### Upload data
+      After mapping a few of the street lamps nearby, click on the cloud upload icon on the home screen of the app.
+      - Fill in data such as the area you were mapping.
+        for example: One of our changeset comments is "Survey of Street Lamps in Yelahanka New Town as part of safeyelli.in's efforts"
+        
+      Upload! You have now contributed data to Open Street Maps.
+  
       
 ---
 ```{r include=FALSE}
