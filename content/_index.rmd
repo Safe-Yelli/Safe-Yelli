@@ -193,8 +193,8 @@ map <- leaflet(sharedD, height = "100vh") %>%
            attribution =  'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
            group = "Default") %>%
   
-  fitBounds(77.564292, 13.096725, 77.591393, 13.109996) %>%
-  setMaxBounds(77.554808, 13.087922, 77.608495, 13.114213) %>%
+  fitBounds(77.528629,13.048286,77.659006,13.113414) %>%
+  setMaxBounds(77.071139,12.707331,78.114153,13.228584) %>%
   addScaleBar() %>%
   
   addMarkers(
