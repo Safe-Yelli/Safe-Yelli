@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "leaflet-locationpicker": "^0.3.3",
-    "location-picker": "^1.1.1"
-  }
-}

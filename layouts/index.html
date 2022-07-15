@@ -4,50 +4,17 @@
 
 <section class="row" id="container">
 
-  {{ with .Params.banner}}
+  {{partial "banner.html" .}}
   
-  <div class="col-lg-3 col-md-3 mx-auto text-left" >
-    {{ partial "header.html"}}
-    <div class="container">
-      <div id="header">
-        <h1 class="mb-2">{{ .title | markdownify }}</h1>
-        <h2>{{ .content | markdownify }}</h2>
-        {{ if .button.enable }}
-        {{ with .button }}
-        <div>
-          <a href="{{ .link | safeURL }}" title="{{ .label }}" class="btn btn-primary">{{ .label }}</a>
-        </div>
-        {{ end }}
-        {{ end }}  
-      {{ end }}
-      </div>
-      <!-- text -->
-      {{range .Params.text}}
-  
-          <div class=" col-lg-10 mx-auto float-left" id="text" >
-            <h2>{{ .title }} </h2>
-            {{ .content | markdownify }}
-          </div>
-     
-      {{ end }}
-      <!-- /text -->
-    </div>
-  </div>
-<!-- /banner -->
-  
-
+<div class="blogHome col-lg-8">
     <!-- map -->
-    <div class="col-lg-8 col-md-8 mr-1 " id="map">
-      {{ .Content }}
-    </div>
-    
-    {{range .Params.text}}
-  
-          <div class=" col-lg-10 mx-auto" id="text-mobile" >
-            <h2>{{ .title }} </h2>
-            {{ .content | markdownify }}
+    {{ range where .Site.RegularPages "Type" "blog" }}
+      <a href="{{ .Permalink }}" class="a-block">
+          <div class="blog-item-wrapper">
+            <h2>{{.Title}}</h2>
+            <p>{{.Description}}</p>
           </div>
-  
-    <!-- /map -->
-       {{ end }}
-       {{end}}
+      </a>
+    {{ end }}
+</div>
+{{end}}

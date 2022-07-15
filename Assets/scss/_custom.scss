@@ -6,6 +6,9 @@ $btn-white-space: wrap;
   opacity: 0.3;
 }
 
+html{
+  min-height: 100%;
+}
 header{
   padding: 3em 0;
   margin-left: -3em;  
@@ -23,6 +26,9 @@ body {
   background-size: cover;
 }
 
+footer{
+
+}
 .crosstalk-map {
   width: 100%;
   padding: 0;
@@ -31,12 +37,6 @@ body {
 
 label {
   display: inline;
-}
-.map-section {
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex !important;
-  flex-wrap: wrap;
 }
 
 
@@ -52,20 +52,12 @@ label {
   margin: 40px;
 }
 
-.formMarkUp {
-  margin: 20px 10px;
-  text-align: left;
-  align-items: left;
-}
+
 
 .text {
   margin-top: 2em;
 }
 
-.hiddenForm {
-  display: none;
-  visibility: hidden;
-}
 
 #logo {
   width: 500px;
@@ -85,19 +77,15 @@ label {
   display: none;
 }
 
-// report page 
 
-.collapsible {
-  background-color: #777;
-  color: white;
-  cursor: pointer;
-  padding: 18px;
-  width: 100%;
-  border: none;
-  text-align: left;
-  outline: none;
-  font-size: 15px;
+
+.blog-item-wrapper{
+  background-color: white;
+  width:100%;
+  padding: 1em 1em;
+  border-radius: 1em;
 }
+
 
 .active, .collapsible:hover {
   background-color: #555;
@@ -111,6 +99,9 @@ label {
   border-radius: 3%;
 }
 
+.textRight{
+  min-height: 50vh;
+}
 //-----------------------
 // mobile features
 @media (max-width: 800px) {
@@ -125,24 +116,11 @@ label {
   padding: 15px;
   }
   
-  // map
-  .crosstalk-map {
-    padding: 1em 2em;
-  }
-  .crosstalk-map,
-  .crosstalk-filters {
-    min-width: 100%;
-    flex: 1;
-  }
-
-  .crosstalk-filters {
-    max-width: 80%;
-    margin-right: 5em;
-    padding: 0;
-    background-color: white;
-    border-radius: 10px;
-  }
-
+  .blogHome{
+  margin-top: 2em;
+  padding: 2em 3em;
+}
+ 
   #logo {
     min-width: 50%;
   }
@@ -160,9 +138,7 @@ label {
   #text-mobile {
     display: block;
   }
-  #map {
-    padding: 0 2em;
-  }
+
 }
 // desktop font-feature-settings
 @media (min-width: 800px) {
@@ -174,24 +150,16 @@ label {
     width: 100%;
     height: 100vh;
   }
-
+  
+  .blogHome{
+  margin-top: 15em;
+  padding-right: 5em;
+}
   .textRight,
   .contact {
     margin-top: 15em;
     padding-right: 20em;
   }
 
-  .crosstalk-filters {
-    position: absolute;
-    bottom: 10px;
 
-    margin: 2em !important;
-    padding: 0.5em 2em !important;
-    background-color: white;
-    border-radius: 20px;
-  }
-  
-  .crosstalk-input{
-    margin-bottom: 0.2em !important;
-  }
 } ;
