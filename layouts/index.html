@@ -7,10 +7,13 @@
   {{partial "banner.html" .}}
   
 <div class="blogHome col-lg-8">
-    <!-- map -->
-    {{ range where .Site.RegularPages "Type" "blog" }}
-      <a href="{{ .Permalink }}" class="a-block">
+  <!-- blog post single -->
+    {{ range where .Site.Pages "Type" "blog"}}
+      <a href="{{ .Permalink | safeURL }}" class="a-block">
           <div class="blog-item-wrapper">
+            {{ with .Params.coverImage }}
+              <img src=" {{ .url | safeURL }}" alt = " {{ .alt }}" class="blog-cover-image"> </img>
+            {{ end }}
             <h2>{{.Title}}</h2>
             <p>{{.Description}}</p>
           </div>

@@ -24,10 +24,12 @@ body {
   background-repeat: no-repeat;
   background-position: 0 90%;
   background-size: cover;
+  
+  min-height:100vh;
 }
 
 footer{
-
+  margin-bottom: -100vh;
 }
 .crosstalk-map {
   width: 100%;
@@ -84,8 +86,16 @@ label {
   width:100%;
   padding: 1em 1em;
   border-radius: 1em;
+  margin: 1em 1em;
 }
 
+.blog-cover-image{
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 1em;
+}
 
 .active, .collapsible:hover {
   background-color: #555;
@@ -116,6 +126,10 @@ label {
   padding: 15px;
   }
   
+  .home{
+    min-height: 100vh;
+  }
+  
   .blogHome{
   margin-top: 2em;
   padding: 2em 3em;
@@ -124,7 +138,10 @@ label {
   #logo {
     min-width: 50%;
   }
-
+  
+  #container {
+    min-height:100vh !important;
+  }
   .textRight,
   .contact,
   #text-mobile {

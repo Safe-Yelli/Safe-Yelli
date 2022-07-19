@@ -4,7 +4,10 @@
   
   {{partial "banner.html" .}}
   
-  <div class="textRight col-lg-8 col-md-8 mr-1">
+  <div class="textRight col-lg-8 col-md-10 ">
+    {{ with .Params.coverImage }}
+      <img src=" {{ .url | safeURL }}" alt = " {{ .alt }}" class="blog-cover-image"> </img>
+    {{ end }}
       <h2>{{ .Title }}</h2>
       <p>{{ .Content | markdownify }}</p>
   </div>
