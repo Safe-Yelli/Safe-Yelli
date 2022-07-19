@@ -37,9 +37,9 @@ AUTHOR WEBSITE: https://gethugothemes.com
 	{{ partialCached "footer.html" . }}
 	{{ partialCached "script.html" . }}
 	{{ else }}
-	
+	{{ partial "footer.html" . }}
 	{{ partial "script.html" . }}
 	{{ end }}
 </body>
-{{ partial "footer.html" . }}
+
 </html>
