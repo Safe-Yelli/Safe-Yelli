@@ -1,0 +1,29 @@
+---
+title: "Looking to interact with the college community in Bengaluru"
+
+description: "A release on how we are looking for college students to join hands with us"
+
+draft: false
+type: blog
+
+banner:
+  title: "We need your help in reaching your neighbours and communities"
+  content: "A release on how we are looking for college students to join hands with us in conducting outreach sessions"
+  
+coverImage:
+  alt: An image of safe yelli stickers
+  url: blogs/on-moving-bengaluru.jpeg
+
+---
+
+We've found it positively simpler and more intuitive to network through students since we are driven to empathize with each other because a majority of students stay away from their homes and loved ones. As a result of this realization, we've decided to encourage the reporting of incidents all over Bengaluru while we try and engage with students of colleges and institutions across the city. 
+
+With your help, we will be able to engage with residents of your communities, talk to them about how they face incidents and hear their woes.
+
+Every scheduled day, we will head out to talk to residents of a particular area or apartment. Introduce ourselves, inform them of our motives, assure anonymity and ask if they would like to report/document an incident with us. 
+
+We would like to leave a permanent mark in the institutions we visit and so we are planning what we call "Bottu boards" or "Bhindi Boards". On this board, will be a map of their surrounding area on which victims and friends can leave a mark wherever they have felt harassed, unsafe or violated. 
+
+If you and your college club or association is interested in getting us to your space, get in touch with us at safeyelli@gmail.com
+
+ 
