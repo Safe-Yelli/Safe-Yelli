@@ -72,19 +72,18 @@ library(viridis)
 ```
 
 ```{r reading data, include=FALSE}
-#imports data from multiple spreadsheets and performs operations to uniformize field names
+# Imports data from multiple spreadsheets and performs operations to uniformize field names
 oldData <- read_csv('../resources/assets/allUshahidiResponses.csv') 
 newData <- read_csv('../resources/assets/latestReports.csv') 
 
-# post verification
-#if human verified is 'yes'
+# Post verification
+# If human verified is 'yes'
 newData <- newData %>% filter(`human verified`== 'yes')
-
-#if published on Ushahidi (safeyelli.ushahidi.io)
+# If published on Ushahidi (safeyelli.ushahidi.io)
 oldData <- oldData %>% filter(`Post Status` == 'published')
 
 
-#match field names in the old sheet to new
+# Match field names in the old sheet to new
 oldData <-oldData %>% rename( description = `Describe the incident in detail`,
                    `kind of incident` = `What kind of incident was this?`,
                    `date and time` = `When and at what time this happen?`,
@@ -92,8 +91,10 @@ oldData <-oldData %>% rename( description = `Describe the incident in detail`,
                    `environmental factors` = `What was wrong with the space?` 
                    )
 
-#combine data and time in the new sheet
-newData$`time of incident` <- paste(format(as.POSIXct(newData$`time of incident`), format = "%H:%M"))
+# Combine data and time in the new sheet
+newData$`time of incident` <- format(as_datetime(newData$`time of incident`), format = "%H:%M") 
+
+# Combine data and time in the new sheet
                                     
 
 # Force IST time to UTC time for storage and operations. 
@@ -102,16 +103,17 @@ newData$`time of incident` <- paste(format(as.POSIXct(newData$`time of incident`
 newData$`date and time` <- paste(newData$`date of incident`, newData$`time of incident`) %>% 
   as.POSIXct() %>%  force_tzs(tzones = "Asia/Kolkata", tzone_out = "UTC")
 
+oldData$`date and time` <- oldData$`date and time` %>%force_tzs(tzones = "Asia/Kolkata", tzone_out = "UTC")
 
-#split the location field into lat and lng
+# Split the location field into lat and lng
 newData <- newData %>% separate( col = `location`, into = c("Location.lat", "Location.lon"), sep = "\\,") 
 
-#old data coords into chr for compatibility
+# Old data coords into chr for compatibility
 newData <- newData %>% 
   mutate(Location.lat = as.double(Location.lat),
          Location.lon = as.double(Location.lon))
 
-# map tiles from mapbox
+# Map tiles from mapbox
 mapUrl="https://api.mapbox.com/styles/v1/rungdung/cku6gh76r1dvh17o3zkfllvjz/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicnVuZ2R1bmciLCJhIjoiY2tqeWh6cXF4MDgzMjJvbWVmbGQzYjAwMyJ9.U-aJyoqyKvTXlhVk43jV1A"
 
 darkMapUrl= "https://api.mapbox.com/styles/v1/rungdung/cl3jusid0001g15odcz3f1dcb/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicnVuZ2R1bmciLCJhIjoiY2tqeWh6cXF4MDgzMjJvbWVmbGQzYjAwMyJ9.U-aJyoqyKvTXlhVk43jV1A"
