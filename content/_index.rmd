@@ -142,19 +142,31 @@ allData <- allData %>%
 
 ```{r Formatting popup text, message=FALSE, warning=FALSE, include=FALSE}
 # create popup text for the leaflet map, all formatting is done in html
-allData$popupText <-
+
+if(!is.na(allData$`time of incident`)){
+  allData$popupText <-
   paste0(
     '<strong>',
     allData$`kind of incident`,
     '</strong> <br/> <br/>',
-    format(
-      as_datetime(allData$`date and time`, tz = "Asia/Kolkata"),
-      format = '%B %d %Y, Time: %H %M'
-    ),
+    allData$`date of incident`, ',' , allData$`time of incident`,
     '<br/> <br/>',
     allData$`description`,
     ' '
-  ) %>%
+  )
+} else {
+  allData$popupText <-
+  paste0(
+    '<strong>',
+    allData$`kind of incident`,
+    '</strong> <br/> <br/>',
+    format(allData$`date and time`, tz="Asia/Kolkata"),
+    '<br/> <br/>',
+    allData$`description`,
+    ' '
+  )
+}
+ allData$popupText %>%
   lapply(htmltools::HTML)
 ```
 
