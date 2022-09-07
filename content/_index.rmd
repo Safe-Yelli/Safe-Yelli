@@ -250,7 +250,9 @@ map <- leaflet(sharedD, height = "100vh") %>%
     options = layersControlOptions(collapsed = FALSE)
   ) %>% 
   
-  hideGroup("Street Lamps")
+  hideGroup("Street Lamps") %>% 
+  
+  addSearchOSM()
 
 
 ```
