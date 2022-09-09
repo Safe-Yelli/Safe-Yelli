@@ -1,0 +1,47 @@
+---
+title: "Conversations on expanding"
+
+description: "Why should we focus on student communities? Why should we not focus on student communities? How are you going to fund yourself?"
+
+draft: false
+type: blog
+
+author: 
+  - Adhavan
+  
+banner:
+  title: "Conversations on SafeYelli, choosing demographics to focus on."
+  content: "Why should we focus on student communities? Why should we not focus on student communities? How are you going to fund yourself?"
+  
+coverImage:
+  alt: An image of safe yelli stickers
+  url: blogs/bdw-brainstorming.jpeg
+
+---
+Hello everybody! We've been making some good conversations over the past few weeks and thought we'd share them with you.
+
+# Focussing SafeYelli towards college communities
+
+What is home to a college student? Is it where their family lives or is it someplace that they are with their friends? What does it mean to move cities and face new cultures, languages and ways of life? It feels to me that we can be most malleable  when we are surrounded by comfort in all the pricklies of the strange new world. But these pricklies can't be masturbating men on the streets or bikers who happen to take a pleasure cruise groping women on the streets. 
+
+We'd never heard of cases like these from near our homes. We were also an all-male team who was talking to women in our college when we realised the scale of the problem. Cases had been happening for years, even decades. But nothing seemed to have been solved in it's entirety. It is a complex problem indeed, but how do we even begin to make policy and policing changes to effect change on the ground without knowing what happened? Everybody forgets.
+
+In little less than a year we've collected over 50 reports. It almost sounds small but its over 40 cases that did not get reported to the police.
+
+While we don't want data that is just composed of singularly similar communities, it is an easier effort to approach similar communities like ours in the hope that they will join us and help contribute to the goals of Safe Yelli. On [Community Mapping](https://safeyelli.in/community-mapping), or on Analogue Community Surveys. 
+
+
+## Blr Design Week
+
+We were invited to a [Bengaluru Design Week](https://bengalurudesignfestival.org/) brainstorming session in which students from 10 design schools in Bengaluru were partaking. [Art in Transit](https://www.instagram.com/artintransit_bangalore/?hl=en) was kind enough to make that introduction
+
+While talking to students from NID, Ramayyah, RV and so on, there are varying perspectives and experiences we anecdotally hear about. For some, SafeYelli presents itself as a diary of horrible incidents that they only hear about. Some are aware that some areas around their campuses are where 'incidents like these happen'. And to some, these are simply non-existent threats. 
+
+How do we design programmes that can be independently adopted by college communities on their own campuses? We've been busy designing multiple ways to engage with Bengaluru and college communities that we are excited to share here. More in the coming weeks.
+
+## Alternate views
+
+We've also heard alternate views on that topic. Why are we focussing only on college communities? There are various forms of harassment that gets hidden in the busy grey of Bengaluru. College communities are possibly the most vocal about it. Does focussing on college communities alone skew the data a certain way? It does indeed. How we include other communities in this cause is something to be thought out. For now, we want to start with colleges and a decentralised community that contributes to development at their own time. This is a model we are willing to try out. 
+
+## On organisational goals
+Some of my mentors have told me that I need to look at formalising the environment within SafeYelli. And to start looking towards collaborative ventures with NGOs already engaged in this context of women's safety, empowerment and so on. We have cultivated a relationship with a college rotaract club and are looking to create more such relationships. And to do so, we are looking at bringing in people who are interested in leadership roles. Write to us at safeyelli@gmail.com .
