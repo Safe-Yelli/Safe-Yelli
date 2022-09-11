@@ -4,12 +4,13 @@
   
   {{partial "banner.html" .}}
   
-  <div class="textRight col-lg-8 col-md-10 ">
+  <div class="textRight col-lg-8 col-md-8 col-sm-8 mx-auto">
     {{ with .Params.coverImage }}
       <img src=" {{ .url | safeURL }}" alt = " {{ .alt }}" class="blog-cover-image"> </img>
     {{ end }}
       <h2>{{ .Title }}</h2>
-      <p>{{ .Content | markdownify }}</p>
+      <h4>{{ .Params.author | markdownify }} </h4>
+      {{ .Content  }}
   </div>
 
 </section>
