@@ -114,7 +114,7 @@ label {
 }
 //-----------------------
 // mobile features
-@media (max-width: 800px) {
+@media (min-width: 585px) {
   
   //navigation 
   header{
@@ -177,6 +177,4 @@ label {
     margin-top: 15em;
     padding-right: 20em;
   }
-
-
 } ;
