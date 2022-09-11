@@ -10,8 +10,7 @@ author: Saee, Samar, Adhavan
   
 banner:
   title: "What does a Bottu mean to you?"
-  content: "Why should we focus on student communities? Why should we not focus on student communities? How are you going to fund yourself?"
-  
+  content: "Developing engagement tools for on-the-ground interactions"
 coverImage:
   alt: An image of safe yelli stickers
   url: blogs/stylised-workInProgress-bottu-board.jpeg
@@ -21,7 +20,7 @@ coverImage:
 
 SafeYelli has been rethinking and revisiting our motivations. When we look at what we've done so far, the same question surfaces: what tangible outcomes can we show people? Sure, we've delivered cumulative reports to the police. We've documented conditions of streetlights and are trying to actively encourage reporting. But the scale is too small. We are too small a community to represent the data accurately. We need other communities to report too. How do we engage with them?
 
-# Bottu as a metaphor
+## Bottu as a metaphor
 
 The Bottu (Pottu, or Bindi) Board is a physical and interactive map of Bangalore, made accessible to the general public. It will visit Cubbon Park Metro, bus stands, your local park and everywhere that is feasible. You can mark an area where you've been eve-teased, harassed or assaulted with a Bottu. This creates a qualitative map of unsafe regions in and around Bangalore.
 
