@@ -5,21 +5,7 @@
 <section class="row" id="container">
   {{ partial "banner.html" .}}
 
-  {{ if eq .Params.map true}}
-  <!-- map -->
-  <div class="col-lg-8 col-md-8 mr-1" id="map">{{ .Content }}</div>
 
-  {{range .Params.text}}
-
-  <div class="col-lg-10 mx-auto" id="text-mobile">
-    <h2>{{ .title }}</h2>
-    {{ .content | markdownify }}
-  </div>
-
-  {{ end }}
-  <!-- /map -->
-
-  {{ else }}
   <!-- text on the right -->
   {{range .Params.textRight}}
 
@@ -28,7 +14,7 @@
     <p>{{ .content | markdownify }}</p>
   </div>
   <!-- /text on the right -->
-  {{ end }} {{ end }}
+  {{ end }} 
 </section>
 
 {{ end }}
