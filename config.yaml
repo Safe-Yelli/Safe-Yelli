@@ -19,12 +19,10 @@ menu:
     - name: Why?
       url: /why
       weight: 1
-    - name: Visit the map or report
+    - name: SafeYelli.in
       url: https://safeyelli.in
       weight: 2
-    - name: Contact Us
-      url: /contact/
-      weight: 3
+
     
 
   footer_left:
