@@ -114,7 +114,7 @@ label {
 }
 //-----------------------
 // mobile features
-@media (min-width: 585px) {
+@media (max-width: 585px) {
   
   //navigation 
   header{
@@ -158,7 +158,7 @@ label {
 
 }
 // desktop font-feature-settings
-@media (min-width: 800px) {
+@media (min-width: 585px) {
   .map-section {
     position: -webkit-sticky; /* Safari */
     position: sticky !important;
