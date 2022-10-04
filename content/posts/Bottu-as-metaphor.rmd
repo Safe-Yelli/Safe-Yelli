@@ -22,7 +22,7 @@ SafeYelli has been rethinking and revisiting our motivations. When we look at wh
 
 ## Bottu as a metaphor
 
-The Bottu (Pottu, or Bindi) Board is a physical and interactive map of Bangalore, made accessible to the general public. It will visit Cubbon Park Metro, bus stands, your local park and everywhere that is feasible. You can mark an area where you've been eve-teased, harassed or assaulted with a Bottu. This creates a qualitative map of unsafe regions in and around Bangalore.
+The Bottu (Pottu, or Bindi) Map is a physical and interactive map of Bangalore, made accessible to the general public. It will visit Metro stations, bus stands, your local park and everywhere that is feasible. You can mark an area where you've been eve-teased, harassed or assaulted with a Bottu. This creates a qualitative map of unsafe regions in and around Bangalore.
 
 This installation **is a physical manifestation of the** SafeYelli website, to document the undocumented feelings, and to shed light on the dark figures of crime.
 
