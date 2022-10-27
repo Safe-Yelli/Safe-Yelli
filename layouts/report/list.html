@@ -12,8 +12,9 @@
 
  
   <div class="col-lg-3 col-md-3 mx-auto text-left" >
+    {{ partial "header.html"}}
     <div class="container"  id="single-col">
-  {{ partial "header.html"}}
+  
       {{ with .Params.banner}}
         <div id="header">
           <h1 class="mb-2">{{ .title | markdownify }}</h1>
