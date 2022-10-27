@@ -1,0 +1,31 @@
+{{ define "main" }}
+<section class="row" id="container">
+  <div class="col-lg-3 col-md-3 mx-auto text-left">
+    {{ partial "header.html"}}
+    <div class="container">
+      <div id="header">
+        <h1 class="mb-2">{{ .Title | markdownify }}</h1>
+        <p>{{ .Description | markdownify }}</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="textRight col-lg-8 col-md-8 col-sm-8 mx-auto">
+     {{ range where .Site.Pages "Type" "collated-report"}}
+     <div class = "list-item-wrapper">
+        <h3> {{ .Title }} </h3>
+        <div class = "row">
+          <a class = "col-md-4" href = {{ path.Join "collated-reports/"  (print .File.BaseFileName ".pdf") }} >
+            <h5> Download PDF report </h5>
+          </a>
+          <a  class = "col-md-4" href = {{ path.Join "collated-reports/"  (print .File.BaseFileName ".csv") }} >
+            <h5> Download Spreadsheet of reports (.CSV), this will open in Excel. </h5>
+          </a>
+        </div>
+      </div>
+    {{ end }}
+  </div>
+
+</section>
+
+{{ end }}

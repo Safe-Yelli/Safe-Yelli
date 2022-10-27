@@ -1,0 +1,159 @@
+---
+title: "March to October 2022"
+date: "Compiled on `r format(Sys.time(), '%d %B, %Y')`"
+description: A citizen centric tool to report street harassment, assault and other crimes in Bengaluru. See our community's citizen reported crime data on a map.
+draft: no
+banner:
+  title: Documenting Street Harassment in Bengaluru
+  content: "_**A citizen centric tool to report harassment, assault and other crimes on the streets in Bengaluru. See our community's citizen reported crime data on a map.**_ \n \n ಬೆಂಗಳೂರು ಗರವಾಸಿಗಳಿಗೆ  ಇಲ್ಲಿ ನಡೆಯುವ ದೌರ್ಜನ್ಯ ಮತ್ತು ಕಿರುಕುಳವನ್ನು ರಿಪೋರ್ಟ್ ಮಾಡುವ ಉಪಕರಣ. ಇಲ್ಲಿ ಸಂಗ್ರಹವಾದ ಅಪರಾಧ ವರದಿಗಳನ್ನು ನಕ್ಷೆಯ ಮೇಲೆ ಕಾಣಬಹುದು "
+  button:
+    enable: yes
+    label: Report / ಘಟನೆಯನ್ನು ರಿಪೋರ್ಟ್ ಮಾಡಿ  
+    link: report
+    
+type: collated-report
+output: pdf_document
+knit: (function(inputFile, encoding) {
+  rmarkdown::render(inputFile, encoding = encoding, output_dir = "../../static/collated-reports/") })
+geometry: margin=1.5cm  
+    
+---
+```{r message=FALSE, warning=FALSE, include=FALSE}
+library(leaflet)
+library(kableExtra)
+library(tidyverse) 
+library(htmltools)
+library(ggplot2)
+library(scales)
+library(lubridate)
+library(patchwork)
+library(dplyr)
+
+library(osmdata)
+library(ggmap)
+library(osmplotr)
+library(OpenStreetMap)
+library(tmap)
+library(tmaptools)
+library(sf)
+
+knitr::clean_cache()
+
+```
+
+This is a collection of reports submitted to SafeYelli.in.
+
+```{r Read data, message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
+mapUrl="https://api.mapbox.com/styles/v1/rungdung/cku6gh76r1dvh17o3zkfllvjz/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicnVuZ2R1bmciLCJhIjoiY2tqeWh6cXF4MDgzMjJvbWVmbGQzYjAwMyJ9.U-aJyoqyKvTXlhVk43jV1A"
+
+data<- read_csv('../../resources/assets/latestReports.csv') 
+
+data <- data %>% 
+  filter(`human verified`=="yes") %>% 
+  tibble::rowid_to_column("ReportNumber") %>% 
+  select( `date of incident`, `time of incident`, `description`, `kind of incident`, `location`) %>% 
+  separate( col = `location`, into = c("lat", "lng"), sep = "\\,") %>% 
+  mutate(lat = as.double(lat),
+         lng = as.double(lng))
+ 
+
+```
+
+
+```{r map prep, echo=FALSE, fig.width=7.5, message=FALSE, warning=FALSE}
+
+dataPlot <- data %>% 
+   st_as_sf(coords = c('lng', 'lat'),crs = 4326)
+
+# the Bounding Box of Ylk New Town that we have mapped streetlights, shops in.
+bboxC <- c(77.557125,13.095279,77.589719,13.110556)
+
+bbox <- osmplotr::get_bbox(bboxC)
+
+bg <- read_osm(bbox)
+
+
+# plot
+
+tm_shape(bg) + 
+  tm_rgb() + 
+tm_shape(dataPlot) + 
+  tm_dots(col = "kind of incident", size = 1) + 
+  tm_scale_bar() + 
+  tm_compass(type = "8star", position = c("right", "top")) +
+  tm_layout(title= 'Reported incidents on SafeYelli.in', 
+            title.position = c('left', 'top'))
+```
+
+
+```{r data mutate, echo=FALSE, fig.width=7.5, message=FALSE, warning=FALSE}
+
+data$`date and time` <- paste(data$`date of incident`, data$`time of incident`) %>% 
+  as.POSIXct() %>%  force_tzs(tzones = "Asia/Kolkata", tzone_out = "UTC")
+
+data <- data %>% 
+  mutate(date = as.Date(`date and time`, '%d/%m/%Y'),
+         year = as.integer(year(date)),
+         month = as.character(month(date)),
+         hour = as.integer(format(as_datetime(data$`date and time`, tz="Asia/Kolkata"),  
+                           format="%H"))
+         )
+
+p1 <- ggplot(data, aes(x=`hour`)) +
+  geom_line(stat="count") 
+
+p2 <- ggplot(data, aes(y=`kind of incident`)) +
+  geom_line(stat="count")
+
+p3 <- ggplot(data, aes(x=`kind of incident`)) +
+  geom_bar(stat="count") +
+  scale_x_discrete(labels = function(x) 
+    stringr::str_wrap(x, width = 5))+
+  theme(axis.text.x = element_text(angle = 50, vjust = 01, hjust=1))
+
+p1+p3
+
+  
+```
+
+
+## List of reports
+
+
+```{r print table, echo=FALSE, message=FALSE, warning=FALSE, mapecho=FALSE, paged.print=TRUE}
+
+
+data %>% 
+  select("date of incident", "time of incident", "description", "kind of incident", "lat", "lng") %>% 
+  knitr::kable(
+
+    align = "l",
+    booktabs = TRUE,
+    linesep = "-",
+    longtable = TRUE
+    ) %>% 
+  kableExtra::kable_styling(
+    latex_options = "striped",
+      position = "left",
+      stripe_color = "gray!15"
+    ) %>% 
+
+  column_spec(1, bold = T, width = "5em") %>%
+  column_spec(2, bold = T, width = "5em") %>%
+  column_spec(3, width = "21em") %>% 
+  column_spec(4, width = "5em") %>% 
+  column_spec(5, width = "5em") %>% 
+  column_spec(5, width = "5em") %>% 
+  footnote(general = "These reports were anonymously submitted and cannot be traced to the victim ")
+
+```
+
+```{r saveCSV, message=FALSE, warning=FALSE, include=FALSE}
+
+filePath = paste("../../static/collated-reports/", str_extract(knitr::current_input(), "[^.]+"),".csv") 
+  
+write.csv(data, gsub(" ", "", filePath) )
+```
+
+
+
