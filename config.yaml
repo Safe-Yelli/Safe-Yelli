@@ -16,20 +16,43 @@ ignoreFiles:
  
 menu:
   main:
-    - name: Why?
+    - name: Activities, Motivations
+    
+    - name: Why do what we do?
+      parent: Activities, Motivations
       url: /why
       weight: 1
-    - name: Community Mapping
-      url: /community-mapping/
-      weight: 2
     - name: Contact Us
+      parent: Activities, Motivations
       url: /contact/
       weight: 3
+    - name: Read more on our Blog
+      parent: Activities, Motivations
+      url: https://blog.safeyelli.in
+      weight: 4
+    
+    
+    
+    - name: Community Projects
+    
+    - name: Community Mapping
+      url: /community-mapping/
+      parent: Community Projects
+      weight: 2
+   
+#    - name: SafeYelli in Bengaluru?
+#      url: /blr-design-week/signup
+#      parent: Community Projects
+#      weight: 4
     
 
   footer_left:
       - name: Contact Us
         url: /contact/
+      - name: Find collated reports for download here
+        url: /collated-reports
+      - name: Read our blog here
+        url: https://blog.safeyelli.in
   footer_middle:
       - name: Follow our Twitter
         url: https://twitter.com/SafeYelli
