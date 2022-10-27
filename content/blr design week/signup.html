@@ -1,0 +1,198 @@
+--- 
+title: "Sign up for Blr Design week"
+output: html_document
+draft: false 
+description:
+banner:
+  title : "Sign up for Blr Design Week"
+  content : "would you like to work with us?"
+    
+form: true
+    
+RequiredQuestions: 
+  - fieldType: text
+    name: Which institution are you from?
+    id: descript
+    markUp: Institution name
+  - fieldType: select
+    name: InstitutionAreaName
+    markUp: Which area of Bangalore is your Institution in?
+    markUpP: Please select the area you consider your current residence. If you live in a hostel, please select that area.
+    id: InstitutionArea 
+    items:
+      - " Arakere "
+      - " BTM Layout "
+      - " Banashankari "
+      - " Basavanagudi "
+      - " Begur "
+      - " Bommanahalli "
+      - " Byatarayanapura "
+      - " C. V. Raman Nagar "
+      - " Chamarajpet "
+      - " Chandra Layout "
+      - " Chickpet "
+      - " Domlur "
+      - " Gali Anjaneya Temple "
+      - " Gandhinagar "
+      - " Girinagar "
+      - " Goraguntepalya "
+      - " Govindarajanagar "
+      - " HAL Airport "
+      - " HBR Layout "
+      - " Hebbal "
+      - " Hegganahalli "
+      - " Herohalli "
+      - " Hombegowdanagar "
+      - " Hoodi "
+      - " Horamavu "
+      - " J. P. Nagar "
+      - " Jagjivanram Nagar "
+      - " Jayachamarajendranagar"
+      - " Jayanagar "
+      - " Jeevanabima Nagar "
+      - " Kadugondanahalli "
+      - " Kempegowdanagar "
+      - " Kengeri "
+      - " Koramangala "
+      - " Kothanur "
+      - " Krishnarajapuram "
+      - " Laggere "
+      - " Mahalakshmi Layout "
+      - " Malleshwaram "
+      - " Marathahalli "
+      - " Maruthiseva Nagar "
+      - " Mattikere "
+      - " Nagapura "
+      - " Padmanabhanagar "
+      - " Peenya Industrial Town "
+      - " Pulakeshinagar "
+      - " Rajajinagar "
+      - " Rajarajeshwarinagar "
+      - " Shanthinagar "
+      - " Shettyhalli "
+      - " Shivajinagar "
+      - " Srirama Mandir "
+      - " T. Dasarahalli "
+      - " Uttarahalli "
+      - " Vasanthnagar "
+      - " Vidyaranyapura "
+      - " Vijayanagar "
+      - " Whitefield "
+      - " Yelahanka "
+      - " Yeshwanthpura "
+  - fieldType: text
+    name: What is your name?
+    id: name
+    markUp: Name
+  - fieldType: email
+    name: What is your Email ID?
+    id: email
+    markUp: Email
+  - fieldType: select
+    name: AreaName
+    markUp: Which area of Bangalore do you live in?
+    markUpP: Please select the area you consider your current residence. If you live in a hostel, please select that area.
+    id: area 
+    items:
+      - " Arakere "
+      - " BTM Layout "
+      - " Banashankari "
+      - " Basavanagudi "
+      - " Begur "
+      - " Bommanahalli "
+      - " Byatarayanapura "
+      - " C. V. Raman Nagar "
+      - " Chamarajpet "
+      - " Chandra Layout "
+      - " Chickpet "
+      - " Domlur "
+      - " Gali Anjaneya Temple "
+      - " Gandhinagar "
+      - " Girinagar "
+      - " Goraguntepalya "
+      - " Govindarajanagar "
+      - " HAL Airport "
+      - " HBR Layout "
+      - " Hebbal "
+      - " Hegganahalli "
+      - " Herohalli "
+      - " Hombegowdanagar "
+      - " Hoodi "
+      - " Horamavu "
+      - " J. P. Nagar "
+      - " Jagjivanram Nagar "
+      - " Jayachamarajendranagar"
+      - " Jayanagar "
+      - " Jeevanabima Nagar "
+      - " Kadugondanahalli "
+      - " Kempegowdanagar "
+      - " Kengeri "
+      - " Koramangala "
+      - " Kothanur "
+      - " Krishnarajapuram "
+      - " Laggere "
+      - " Mahalakshmi Layout "
+      - " Malleshwaram "
+      - " Marathahalli "
+      - " Maruthiseva Nagar "
+      - " Mattikere "
+      - " Nagapura "
+      - " Padmanabhanagar "
+      - " Peenya Industrial Town "
+      - " Pulakeshinagar "
+      - " Rajajinagar "
+      - " Rajarajeshwarinagar "
+      - " Shanthinagar "
+      - " Shettyhalli "
+      - " Shivajinagar "
+      - " Srirama Mandir "
+      - " T. Dasarahalli "
+      - " Uttarahalli "
+      - " Vasanthnagar "
+      - " Vidyaranyapura "
+      - " Vijayanagar "
+      - " Whitefield "
+      - " Yelahanka "
+      - " Yeshwanthpura "
+
+        
+
+
+
+notRequiredExists: false  
+notRequired:
+  - fieldType: checkbox
+    name: university campus?
+    markUp: Did this incident take place on a  University Campus?
+    items: 
+      - 
+        id: yes
+        value: "Yes"
+      - 
+        id: no
+        value: "No"
+ 
+  
+  - fieldType: number
+    name: number of companions
+    id: accompaniedby
+    markUp: How many people were you accompanied by?
+  
+  - fieldType: checkbox
+    name: environmental factor
+    id: what was wrong with the environment
+    markUp:  What was wrong with the space and environment? Please select all the options you think are relevant
+    items: 
+      - id: 1
+        value: The street lights were not functioning
+      - id: 2
+        value: It was secluded
+      - id: 3
+        value: Lots of abandoned buildings around
+      - id: 4
+        value: Cannot say definitively
+  
+---
+
+
+
