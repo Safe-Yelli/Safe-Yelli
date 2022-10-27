@@ -1,0 +1,28 @@
+{{ define "main" }}
+
+<section class="row" id="container">
+  
+  <div class="col-lg-3 col-md-3 mx-auto text-left" >
+    {{ partial "header.html"}}
+    <div class="container"  id="single-col">
+      <div id="header">
+        <h1 class="mb-2">{{ .Title | markdownify }}
+        </h1>
+      </div>
+    </div>
+  </div>
+  
+  <div class="textRight col-lg-8 col-md-8 col-sm-8 mx-auto">
+    {{ if eq .Params.form true }}
+      {{ partial "form.html" . }}
+    {{ end }}
+    {{ with .Params.coverImage }}
+      <img src=" {{ .url | safeURL }}" alt = " {{ .alt }}" class="blog-cover-image"> </img>
+    {{ end }}
+      <h4>{{ .Params.author | markdownify }} </h4>
+      {{ .Content | markdownify }}
+      
+  </div>
+
+</section>
+{{ end }}
