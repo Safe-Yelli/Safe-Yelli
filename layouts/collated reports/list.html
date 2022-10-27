@@ -15,10 +15,10 @@
      <div class = "list-item-wrapper">
         <h3> {{ .Title }} </h3>
         <div class = "row">
-          <a class = "col-md-4" href = {{ path.Join "https://safeyelli.in/collated-reports/"  (print .File.BaseFileName ".pdf") }} >
+          <a class = "col-md-4" href = {{ path.Join "https://safeyelli.in/collated-reports/"  (print .File.BaseFileName ".pdf") | absURL }} >
             <h5> Download PDF report </h5>
           </a>
-          <a  class = "col-md-4" href = {{ path.Join "https://safeyelli.in/collated-reports/"  (print .File.BaseFileName ".csv") }} >
+          <a  class = "col-md-4" href = {{ path.Join "https://safeyelli.in/collated-reports/"  (print .File.BaseFileName ".csv") | absURL}} >
             <h5> Download Spreadsheet of reports (.CSV), this will open in Excel. </h5>
           </a>
         </div>

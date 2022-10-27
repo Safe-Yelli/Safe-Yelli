@@ -41,7 +41,7 @@ knitr::clean_cache()
 
 ```
 
-This is a collection of reports submitted to SafeYelli.in.
+This is a collection of reports submitted to SafeYelli.in. More reports can be found on https://safeyelli.in/collated-reports. Or the interactive map at https://safeyelli.in can be used.
 
 ```{r Read data, message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
 mapUrl="https://api.mapbox.com/styles/v1/rungdung/cku6gh76r1dvh17o3zkfllvjz/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicnVuZ2R1bmciLCJhIjoiY2tqeWh6cXF4MDgzMjJvbWVmbGQzYjAwMyJ9.U-aJyoqyKvTXlhVk43jV1A"
