@@ -1,0 +1,166 @@
+        {{"<!-- Form start -->"  | safeHTML}}
+        <form 
+          name="report" 
+          id="report"
+          method="POST" 
+          data-netlify="true"
+          data-netlify-recaptcha="true" >
+          
+  
+          
+          
+          {{"<!-- Required question start -->"  | safeHTML}}
+          
+          {{ range .Params.RequiredQuestions}}
+            {{"<!--  Question -->"  | safeHTML}}
+            <div class="question row">
+              {{ if .markUp }}
+                <div class="formMarkUp ">
+                  <h3>{{ .markUp}}<span style="color: red">*</span></h3>
+                  {{"<!--  Question description -->"  | safeHTML}}
+                  {{ if .markUpP }}
+                    <div class="formMarkUp  ">
+                      <p>{{ .markUpP}}</p>
+                    </div>
+                  {{ end }}
+                </div>
+              {{ end }}
+              
+            
+          
+            <!-- if radio, iterate through options -->
+              {{ if  (eq .fieldType "radio")  }}
+                {{ $name := .name }}
+                {{ $fieldType := .fieldType}}
+                {{ range .items }}
+                  <div class="form-control mb-2">
+                    <input type="{{ $fieldType }}"  id="{{ .id }}" name="{{ $name }}" value="{{ .value }}" required>
+                    <label for="{{ .id }}"> {{ .value }}</label>
+                  </div>
+                {{ end }}
+              
+              <!-- if checkbox, iterate through options -->
+              {{ else if (eq .fieldType "checkbox") }}
+                {{ $name := .name }}
+                {{ $fieldType := .fieldType}}
+                {{ range .items }}
+                  <div class="form-control mb-2">
+                    <input type="{{ $fieldType }}"  id="{{ .id }}" name="{{ $name }}" value="{{ .value }}" >
+                    <label for="{{ .id }}"> {{ .value }}</label>
+                  </div>
+                {{ end }}
+          
+            {{ else if (eq .fieldType "select") }}
+                {{ $name := .name }}
+                  <div class="form-control mb-2">
+                    <label for="{{ .id }}"> {{ .value }}</label>
+                    <select id="{{ .id }}" name="{{ $name }}"  >
+                      {{ range .items }}
+                        <option value= "{{ . }}">{{ . | markdownify }}</option> 
+                      {{ end }}
+                    </select>
+                  </div>
+                  
+            <!-- if date or time, give min/max -->
+            {{ else if (or (eq .fieldType "date") (eq .fieldType "time")) }}
+              <div class="form-control mb-2">
+                <input type="{{ .fieldType }}"  id="{{ .id }}" name="{{ .name }}" value="{{ .value }}" min="" max="" required>
+              </div>
+
+            {{ else }}
+            <!-- any other form type -->
+              <input type="{{ .fieldType }}" class="form-control mb-3" id="{{ .id }}" name="{{ .name }}" placeholder="{{ .name }}" required>
+            {{ end }}
+            </div>
+          {{ end }}
+          
+          {{"<!-- Not required questions -->"  | safeHTML}}
+          {{"<!-- ---------------------- -->"  | safeHTML}}
+          
+          {{if eq .Params.notRequiredExists true}}
+          <div class=" mb-2">
+            <button type="button" class="collapsible btn btn-primary mx-auto">Answer optional questions</button>
+            <div class="question row content">
+            {{ range .Params.notRequired}}
+              {{"<!-- Not Required Question -->"  | safeHTML}}
+              
+                {{ if .markUp }}
+                  <div class="formMarkUp d-block text-left">
+                    <h3>{{ .markUp}}</h3>
+                  </div>
+                {{ end }}
+            
+              <!-- if radio, iterate through options -->
+              {{ if  (eq .fieldType "radio")  }}
+                {{ $name := .name }}
+                {{ $fieldType := .fieldType}}
+                {{ range .items }}
+                  <div class="form-control mb-2">
+                    <input type="{{ $fieldType }}"  id="{{ .id }}" name="{{ $name }}" value="{{ .value }}" >
+                    <label for="{{ .id }}"> {{ .value }}</label>
+                  </div>
+                {{ end }}
+              
+              <!-- if checkbox, iterate through options -->
+              {{ else if (eq .fieldType "checkbox") }}
+                {{ $name := .name }}
+                {{ $fieldType := .fieldType}}
+                {{ range .items }}
+                  <div class="form-control mb-2">
+                    <input type="{{ $fieldType }}"  id="{{ .id }}" name="{{ $name }}" value="{{ .value }}" >
+                    <label for="{{ .id }}"> {{ .value }}</label>
+                  </div>
+                {{ end }}
+                
+              {{ else if (eq .fieldType "select") }}
+                {{ $name := .name }}
+                  <div class="form-control mb-2">
+                    <label for="{{ .id }}"> {{ .value }}</label>
+                    <select id="{{ .id }}" name="{{ $name }}"  >
+                      {{ range .items }}
+                        <option value= "{{ . }}">{{ . }}</option> 
+                      {{ end }}
+                    </select>
+                  </div>
+                
+              <!-- if date or time, give min/max -->
+              {{ else if (or (eq .fieldType "date") (eq .fieldType "time")) }}
+                <div class="form-control mb-2">
+                  <input type="{{ .fieldType }}"  id="{{ .id }}" name="{{ .name }}" value="{{ .value }}" >
+                </div>
+
+              {{ else }}
+              <!-- any other form type -->
+                <input type="{{ .fieldType }}" class="form-control mb-3" id="{{ .id }}" name="{{ .name }}" placeholder="{{ .name }}" >
+              {{ end }}
+              {{ end }}
+              
+            
+          </div>
+          {{ end }}
+          <div data-netlify-recaptcha="true"></div>
+          <button type="submit" onclick="return validate(event);" value="send" class="btn btn-primary  my-4 mx-auto">Submit</button>
+          </div>
+        </div>
+          </div>      
+
+          </div>
+        </form>
+        
+        <script>
+  //script to open collapsibles
+  var coll = document.getElementsByClassName("collapsible");
+  var i;
+  
+  for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+      var content = this.nextElementSibling;
+      if (content.style.display === "block") {
+        content.style.display = "none";
+      } else {
+        content.style.display = "block";
+      }
+    });
+  }
+</script>
