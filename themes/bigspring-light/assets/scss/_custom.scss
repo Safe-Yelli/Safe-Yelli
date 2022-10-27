@@ -12,9 +12,16 @@ header{
 }
 
 .navbar-expand-lg{
-  flex-flow: row wrap;
-  overflow: wrap;
+  flex-flow: row wrap !important;
+  overflow: wrap !important;
+}
 
+.navbar-expand-lg .navbar-nav .nav-link{
+  padding:2px;
+}
+
+.navbar{
+  max-width: 300px !important;
 }
 body {
   background-image: url(/images/bg.svg);
@@ -32,14 +39,13 @@ body {
 label {
   display: inline;
 }
+
 .map-section {
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex !important;
   flex-wrap: wrap;
 }
-
-
 
 .RHS {
   height: 100vh;
@@ -79,6 +85,12 @@ label {
 
 .navigation {
   padding: 2em 0;
+
+}
+
+#navigation{
+    width: 100px !important;
+  flex-wrap: overflow !important;
 }
 
 #text-mobile {
