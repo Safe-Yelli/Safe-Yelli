@@ -111,6 +111,13 @@ label {
   border-radius: 3%;
 }
 
+.list-item-wrapper{
+  background-color: white;
+  width:100%;
+  padding: 1em 1em;
+  border-radius: 1em;
+  margin: 1em 1em;
+}
 //-----------------------
 // mobile features
 @media (max-width: 800px) {
@@ -164,6 +171,8 @@ label {
     padding: 0 2em;
   }
 }
+
+
 // desktop font-feature-settings
 @media (min-width: 800px) {
   .map-section {
@@ -178,7 +187,7 @@ label {
   .textRight,
   .contact {
     margin-top: 15em;
-    padding-right: 20em;
+    padding-right: 10em;
   }
 
   .crosstalk-filters {

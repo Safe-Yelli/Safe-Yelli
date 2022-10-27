@@ -39,8 +39,7 @@ label {
   flex-wrap: wrap;
 }
 
-.sliders {
-}
+
 
 .RHS {
   height: 100vh;
@@ -112,6 +111,13 @@ label {
   border-radius: 3%;
 }
 
+.list-item-wrapper{
+  background-color: white;
+  width:100%;
+  padding: 1em 1em;
+  border-radius: 1em;
+  margin: 1em 1em;
+}
 //-----------------------
 // mobile features
 @media (max-width: 800px) {
@@ -165,6 +171,8 @@ label {
     padding: 0 2em;
   }
 }
+
+
 // desktop font-feature-settings
 @media (min-width: 800px) {
   .map-section {
@@ -179,16 +187,20 @@ label {
   .textRight,
   .contact {
     margin-top: 15em;
-    padding-right: 20em;
+    padding-right: 10em;
   }
 
   .crosstalk-filters {
     position: absolute;
     bottom: 10px;
 
-    margin: 3em;
-    padding: 0.5em 2em;
+    margin: 2em !important;
+    padding: 0.5em 2em !important;
     background-color: white;
     border-radius: 20px;
+  }
+  
+  .crosstalk-input{
+    margin-bottom: 0.2em !important;
   }
 } ;
