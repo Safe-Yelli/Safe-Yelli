@@ -1,5 +1,6 @@
 ---
-title: "March to October 2022"
+title: "Reports on SafeYelli.in from March to October 2022"
+subtitle: "SafeYelli.in collects anonymous reports on street incidents of harassment and assault in Bengaluru."
 date: "Compiled on `r format(Sys.time(), '%d %B, %Y')`"
 description: A citizen centric tool to report street harassment, assault and other crimes in Bengaluru. See our community's citizen reported crime data on a map.
 draft: no
@@ -16,7 +17,7 @@ output: pdf_document
 knit: (function(inputFile, encoding) {
   rmarkdown::render(inputFile, encoding = encoding, output_dir = "../../static/collated-reports/") })
 geometry: margin=1.5cm  
-    
+mainfont: Trebuchet MS
 ---
 ```{r message=FALSE, warning=FALSE, include=FALSE}
 library(leaflet)
@@ -48,10 +49,14 @@ mapUrl="https://api.mapbox.com/styles/v1/rungdung/cku6gh76r1dvh17o3zkfllvjz/tile
 
 data<- read_csv('../../resources/assets/latestReports.csv') 
 
+
+
+data$`date of incident` <- data$`date of incident` %>%  as.Date()
 data <- data %>% 
   filter(`human verified`=="yes") %>% 
+  arrange(`date of incident`) %>% 
   tibble::rowid_to_column("ReportNumber") %>% 
-  select( `date of incident`, `time of incident`, `description`, `kind of incident`, `location`) %>% 
+  select( `ReportNumber`, `date of incident`, `time of incident`, `description`, `kind of incident`, `location`) %>% 
   separate( col = `location`, into = c("lat", "lng"), sep = "\\,") %>% 
   mutate(lat = as.double(lat),
          lng = as.double(lng))
@@ -70,7 +75,7 @@ bboxC <- c(77.557125,13.095279,77.589719,13.110556)
 
 bbox <- osmplotr::get_bbox(bboxC)
 
-bg <- read_osm(bbox)
+bg <- tmaptools::read_osm(bbox)
 
 
 # plot
@@ -78,11 +83,17 @@ bg <- read_osm(bbox)
 tm_shape(bg) + 
   tm_rgb() + 
 tm_shape(dataPlot) + 
-  tm_dots(col = "kind of incident", size = 1) + 
+  tm_dots( size = 0.09, alpha('red', 0.6)) + 
+  tm_text("ReportNumber", size = 1/2, xmod = 0.4, ymod = 0.1) +
   tm_scale_bar() + 
   tm_compass(type = "8star", position = c("right", "top")) +
   tm_layout(title= 'Reported incidents on SafeYelli.in', 
             title.position = c('left', 'top'))
+
+# qmplot(lng, lat, data = data, geom = "point", 
+#  zoom = 10, maptype = "toner-lite"
+#)
+
 ```
 
 
@@ -122,35 +133,41 @@ p1+p3
 
 ```{r print table, echo=FALSE, message=FALSE, warning=FALSE, mapecho=FALSE, paged.print=TRUE}
 
+data["kind of incident"][data["kind of incident"] == "Harassment,Rape/Assault,Stalking,Groping"] <- "Harassment, Rape/Assault, Stalking, Groping" #Introduce spaces
 
 data %>% 
-  select("date of incident", "time of incident", "description", "kind of incident", "lat", "lng") %>% 
+  rename("No" = "ReportNumber",
+         "Date" = "date of incident",
+         "Time" = "time of incident",
+         "Description" = "description",
+         "Kind of Incident" = "kind of incident")  %>% 
+  select("No", "Date", "Time", "Description", "Kind of Incident", "lat", "lng") %>% 
   knitr::kable(
-
     align = "l",
     booktabs = TRUE,
-    linesep = "-",
     longtable = TRUE
     ) %>% 
+  
   kableExtra::kable_styling(
     latex_options = "striped",
       position = "left",
       stripe_color = "gray!15"
     ) %>% 
 
-  column_spec(1, bold = T, width = "5em") %>%
+  column_spec(1, bold = T, width = "1em") %>%
   column_spec(2, bold = T, width = "5em") %>%
-  column_spec(3, width = "21em") %>% 
-  column_spec(4, width = "5em") %>% 
+  column_spec(3, bold = T, width = "5em") %>%
+  column_spec(4, width = "20em") %>% 
   column_spec(5, width = "5em") %>% 
-  column_spec(5, width = "5em") %>% 
+  column_spec(6, width = "4em") %>% 
+  column_spec(7, width = "4em") %>% 
   footnote(general = "These reports were anonymously submitted and cannot be traced to the victim ")
 
 ```
 
 ```{r saveCSV, message=FALSE, warning=FALSE, include=FALSE}
 
-filePath = paste("../../static/collated-reports/", str_extract(knitr::current_input(), "[^.]+"),".csv") 
+filePath = paste("../../static/collated-reports/", str_extract(knitr::current_input(), "[^.]+"),".csv") #remove the file format
   
 write.csv(data, gsub(" ", "", filePath) )
 ```
