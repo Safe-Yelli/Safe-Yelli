@@ -1,5 +1,6 @@
 ---
-title: "Reports on SafeYelli.in from March to October 2022"
+title: |
+  Reports on SafeYelli.in from March to October 2022
 subtitle: "SafeYelli.in collects anonymous reports on street incidents of harassment and assault in Bengaluru."
 date: "Compiled on `r format(Sys.time(), '%d %B, %Y')`"
 description: A citizen centric tool to report street harassment, assault and other crimes in Bengaluru. See our community's citizen reported crime data on a map.
@@ -13,11 +14,35 @@ banner:
     link: report
     
 type: collated-report
-output: pdf_document
+output: 
+  pdf_document:
+    latex_engine: xelatex
+
+mainfont: Trebuchet MS
+fontsize: 24pt
+
 knit: (function(inputFile, encoding) {
   rmarkdown::render(inputFile, encoding = encoding, output_dir = "../../static/collated-reports/") })
 geometry: margin=1.5cm  
-mainfont: Trebuchet MS
+
+header-includes: 
+      - \usepackage{graphicx}
+      - \usepackage{fancyhdr}
+      - \pagestyle{fancy}
+      - \usepackage{titling}
+      - \usepackage{adjustbox}
+      - \fancyhead[R]{\includegraphics[width=0.7cm]{../../static/images/logo.png}}
+      - \renewcommand{\headrulewidth}{0.4pt}
+      - \renewcommand{\footrulewidth}{0.4pt}
+      - \pretitle{\begin{flushleft}
+        \includegraphics[width=2cm]{../../static/images/logo.png}
+        \newline
+        \LARGE}
+      - \posttitle{\end{flushleft}}
+      - \predate{\begin{flushleft}}
+      - \postdate{\end{flushleft}
+        \vspace{0.7in}}
+
 ---
 ```{r message=FALSE, warning=FALSE, include=FALSE}
 library(leaflet)
@@ -40,6 +65,8 @@ library(sf)
 
 knitr::clean_cache()
 
+extrafont::loadfonts(device="win")
+windowsFonts(Corbel =windowsFont("Corbel"))
 ```
 
 This is a collection of reports submitted to SafeYelli.in. More reports can be found on https://safeyelli.in/collated-reports. Or the interactive map at https://safeyelli.in can be used.
@@ -50,8 +77,6 @@ mapUrl="https://api.mapbox.com/styles/v1/rungdung/cku6gh76r1dvh17o3zkfllvjz/tile
 data<- read_csv('../../resources/assets/latestReports.csv') 
 
 
-
-data$`date of incident` <- data$`date of incident` %>%  as.Date()
 data <- data %>% 
   filter(`human verified`=="yes") %>% 
   arrange(`date of incident`) %>% 
@@ -59,19 +84,19 @@ data <- data %>%
   select( `ReportNumber`, `date of incident`, `time of incident`, `description`, `kind of incident`, `location`) %>% 
   separate( col = `location`, into = c("lat", "lng"), sep = "\\,") %>% 
   mutate(lat = as.double(lat),
-         lng = as.double(lng))
+         lng = as.double(lng)) 
  
 
 ```
 
 
-```{r map prep, echo=FALSE, fig.width=7.5, message=FALSE, warning=FALSE}
+```{r map prep, echo=FALSE, fig.height=7, fig.width=9, message=FALSE, warning=FALSE}
 
 dataPlot <- data %>% 
    st_as_sf(coords = c('lng', 'lat'),crs = 4326)
 
 # the Bounding Box of Ylk New Town that we have mapped streetlights, shops in.
-bboxC <- c(77.557125,13.095279,77.589719,13.110556)
+bboxC <- c(77.552919,13.086428,77.592058,13.113592)
 
 bbox <- osmplotr::get_bbox(bboxC)
 
@@ -80,16 +105,22 @@ bg <- tmaptools::read_osm(bbox)
 
 # plot
 
-tm_shape(bg) + 
+map <- tm_shape(bg) + 
   tm_rgb() + 
 tm_shape(dataPlot) + 
-  tm_dots( size = 0.09, alpha('red', 0.6)) + 
-  tm_text("ReportNumber", size = 1/2, xmod = 0.4, ymod = 0.1) +
+  tm_dots( size = 1, col="red", alpha=0.5) + 
+  tm_text("ReportNumber", size = 3/4, xmod = 0.4, ymod = 0.1) +
   tm_scale_bar() + 
   tm_compass(type = "8star", position = c("right", "top")) +
-  tm_layout(title= 'Reported incidents on SafeYelli.in', 
-            title.position = c('left', 'top'))
+  tm_layout(title= '', 
+            title.position = c('left', 'top'),
+            frame= FALSE,
+            outer.margins=0,
+            frame.lwd = 800
+            )
 
+
+map
 # qmplot(lng, lat, data = data, geom = "point", 
 #  zoom = 10, maptype = "toner-lite"
 #)
@@ -102,27 +133,64 @@ tm_shape(dataPlot) +
 data$`date and time` <- paste(data$`date of incident`, data$`time of incident`) %>% 
   as.POSIXct() %>%  force_tzs(tzones = "Asia/Kolkata", tzone_out = "UTC")
 
-data <- data %>% 
+dataPlotting <- data %>% 
   mutate(date = as.Date(`date and time`, '%d/%m/%Y'),
          year = as.integer(year(date)),
          month = as.character(month(date)),
-         hour = as.integer(format(as_datetime(data$`date and time`, tz="Asia/Kolkata"),  
+         hourOfIncident = as.integer(format(as_datetime(data$`date and time`, tz="Asia/Kolkata"),  
                            format="%H"))
-         )
+         ) %>% 
+  separate('kind of incident', paste("Category", 1:4, sep="_"), sep=",", extra="drop")
 
-p1 <- ggplot(data, aes(x=`hour`)) +
-  geom_line(stat="count") 
+dataPlottingLongFormat <- dataPlotting %>% 
+  pivot_longer(cols=`Category_1`:`Category_4`,
+               values_to = "kind of incident") %>% 
+  drop_na(`kind of incident`) 
 
-p2 <- ggplot(data, aes(y=`kind of incident`)) +
-  geom_line(stat="count")
+p1 <- ggplot(dataPlottingLongFormat, aes(y= after_stat(count), x=`kind of incident`)) + 
+  geom_bar() + 
+  scale_y_continuous(breaks= pretty_breaks()) +
+  labs(x = "Kind of Incident", y="Number of Incidents")+
+  theme(axis.text.x = element_text(angle = 50, vjust = 01, hjust=1),
+        rect = element_rect(fill = "transparent",
+                            colour = NA_character_), # necessary to avoid drawing panel outline
+        text = element_text(size = 14, 
+                            colour = "gray"), 
+        plot.title = element_text(size = 20, 
+                                  color = "white"),
+        panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(), 
+        panel.background = element_rect(fill="transparent",
+                                        colour = NA_character_), # necessary to avoid drawing panel outline
+        axis.line = element_line(colour = "gray")) 
 
-p3 <- ggplot(data, aes(x=`kind of incident`)) +
+
+p2 <- ggplot(dataPlottingLongFormat, aes(x=`hourOfIncident`)) +
+  geom_bar(stat="count") +
+  scale_y_continuous(breaks= pretty_breaks()) +
+  labs(x = "Hour of Incident (24Hr format)", y="Number of Incidents") +
+  theme(axis.text.x = element_text(angle = 50, vjust = 01, hjust=1),
+        rect = element_rect(fill = "transparent",
+                            colour = NA_character_), # necessary to avoid drawing panel outline
+        text = element_text(size = 14, 
+                            colour = "gray"), 
+        plot.title = element_text(size = 20,
+                                  color = "white"),
+        panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(), 
+        panel.background = element_rect(fill="transparent",
+                                        colour = NA_character_), # necessary to avoid drawing panel outline
+        axis.line = element_line(colour = "gray")) 
+
+
+p3 <- ggplot(dataPlottingLongFormat, aes(x=`kind of incident`)) +
   geom_bar(stat="count") +
   scale_x_discrete(labels = function(x) 
-    stringr::str_wrap(x, width = 5))+
+    stringr::str_wrap(x, width = 5)
+    ) +
   theme(axis.text.x = element_text(angle = 50, vjust = 01, hjust=1))
 
-p1+p3
+p1+p2
 
   
 ```
