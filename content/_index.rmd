@@ -116,13 +116,27 @@ darkMapUrl= "https://api.mapbox.com/styles/v1/rungdung/cl3jusid0001g15odcz3f1dcb
 allData <- bind_rows(oldData, newData)
 allData <- rename(allData, lat=Location.lat, lng = Location.lon)
 
-# Attach a coordinate reference 
-allData <- allData %>%
-  st_as_sf(coords = c('lng', 'lat'),crs = 4326)
+
 ```
 
 ```{r operations on data, echo=FALSE, message=FALSE, warning=FALSE}
 # create unique date and time fields to simplify leaflet
+
+allData$kindCopy <- allData$`kind of incident`
+allData <- allData %>%  
+  separate('kind of incident', paste("Category", 1:5, sep="_"), sep=",") %>% 
+  pivot_longer(cols=`Category_1`:`Category_5`,
+               values_to = "kind of incident") %>% 
+  drop_na(`kind of incident`) %>% 
+  pivot_wider(id_cols = c(`description`,`date and time`, `lat`, `lng`, `kindCopy`),
+              names_from = `kind of incident`, 
+              values_from = `kind of incident`)
+
+
+# Attach a coordinate reference 
+allData <- allData %>%
+  st_as_sf(coords = c('lng', 'lat'),crs = 4326)
+
 allData <- allData %>% 
   mutate(date = as.Date(`date and time`, '%d/%m/%Y'),
          year = as.integer(year(date)),
@@ -135,30 +149,17 @@ allData <- allData %>%
 ```{r Formatting popup text, message=FALSE, warning=FALSE, include=FALSE}
 # create popup text for the leaflet map, all formatting is done in html
 
-if(!is.na(allData$`time of incident`)){
+
   allData$popupText <-
   paste0(
     '<strong>',
-    allData$`kind of incident`,
-    '</strong> <br/> <br/>',
-    allData$`date of incident`, ',' , allData$`time of incident`,
-    '<br/> <br/>',
-    allData$`description`,
-    ' '
-  )
-} else {
-  allData$popupText <-
-  paste0(
-    '<strong>',
-    allData$`kind of incident`,
+    allData$`kindCopy`,
     '</strong> <br/> <br/>',
     format(allData$`date and time`, tz="Asia/Kolkata"),
     '<br/> <br/>',
     allData$`description`,
     ' '
-  )
-}
- allData$popupText %>%
+  ) %>%
   lapply(htmltools::HTML)
 ```
 
@@ -249,9 +250,10 @@ map <- leaflet(sharedD, height = "100vh") %>%
 
 ```{r formatting output,echo=FALSE, message=FALSE, warning=FALSE, out.width='100%'}
 
+
 # filters
 #dateFilter <- filter_slider("date", "", sharedD, column= ~date, step=3, width=800)
-typeFilter <- filter_checkbox("Incident type", "Type", sharedD, group= ~`kind of incident`, inline = TRUE )
+
 yearFilter <- filter_slider("Year", "Year", sharedD, column= ~year, step=1, width="100%")
 timeOfDayFilter <- filter_slider("Hour","Time of Day (24H format)", sharedD,  column=~hour, step=1, width="100%")
 
@@ -275,7 +277,16 @@ tags$div(
              ),
              tags$div(class = "row",
                       tags$div(class = "col-md-12",
-                               typeFilter))
+                               filter_select("Incident type", "Type", sharedD, group= ~`kindCopy`)
+                               # filter_checkbox("Incident type",  sharedD, group= ~`Harassment`, inline=TRUE) ,
+                               # filter_checkbox("Incident type",  sharedD, group= ~`Assault`, inline=TRUE) ,
+                               # filter_checkbox("Incident type", "Type", sharedD, group= ~`Catcalling`, inline=TRUE) ,
+                               # filter_checkbox("Incident type", "Type", sharedD, group= ~`Groping`, inline=TRUE) ,
+                               # filter_checkbox("Incident type", "Type", sharedD, group= ~`I felt unsafe`, inline=TRUE) ,
+                               # filter_checkbox("Incident type", "Type", sharedD, group= ~`I do not know what it is`, inline=TRUE) ,
+                               # filter_checkbox("Incident type", "Type", sharedD, group= ~`Stalking`, inline=TRUE) ,
+                               # filter_checkbox("Incident type", "Type", sharedD, group= ~` Theft`, inline=TRUE) 
+                               ))
            )),
   
 )
