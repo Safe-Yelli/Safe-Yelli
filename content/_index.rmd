@@ -1,5 +1,5 @@
 ---
-title: "Documenting harassment in Bengaluru"
+title: "Documenting Street Harassment in Bengaluru"
 description: A citizen centric tool to report street harassment, assault and other crimes in Bengaluru. See our community's citizen reported crime data on a map.
 draft: no
 banner:
@@ -117,20 +117,12 @@ allData <- bind_rows(oldData, newData)
 allData <- rename(allData, lat=Location.lat, lng = Location.lon)
 
 
+
+
 ```
 
 ```{r operations on data, echo=FALSE, message=FALSE, warning=FALSE}
 # create unique date and time fields to simplify leaflet
-
-allData$kindCopy <- allData$`kind of incident`
-allData <- allData %>%  
-  separate('kind of incident', paste("Category", 1:5, sep="_"), sep=",") %>% 
-  pivot_longer(cols=`Category_1`:`Category_5`,
-               values_to = "kind of incident") %>% 
-  drop_na(`kind of incident`) %>% 
-  pivot_wider(id_cols = c(`description`,`date and time`, `lat`, `lng`, `kindCopy`),
-              names_from = `kind of incident`, 
-              values_from = `kind of incident`)
 
 
 # Attach a coordinate reference 
@@ -144,6 +136,16 @@ allData <- allData %>%
          hour = as.integer(format(as_datetime(allData$`date and time`, tz="Asia/Kolkata"), 
                            format="%H"))
          )
+
+allData <- allData %>% 
+  arrange(`date and time`) %>% 
+  rowid_to_column(var="rowID")
+
+allDataFilter <- allData %>%  
+  separate('kind of incident', paste("Category", 1:5, sep="_"), sep=",") %>% 
+  pivot_longer(cols=`Category_1`:`Category_5`,
+               values_to = "kind of incident") %>% 
+  drop_na(`kind of incident`) 
 ```
 
 ```{r Formatting popup text, message=FALSE, warning=FALSE, include=FALSE}
@@ -153,7 +155,7 @@ allData <- allData %>%
   allData$popupText <-
   paste0(
     '<strong>',
-    allData$`kindCopy`,
+    allData$`kind of incident`,
     '</strong> <br/> <br/>',
     format(allData$`date and time`, tz="Asia/Kolkata"),
     '<br/> <br/>',
@@ -165,7 +167,8 @@ allData <- allData %>%
 
 ```{r Creating shared data frame for crosstalk, echo=FALSE, message=FALSE, warning=FALSE}
 # sharedData is the format for crosstalk. Crosstalk enables filters by sharing dataframes on a static site.
-sharedD <- SharedData$new(allData)
+sharedD <- SharedData$new(allData, ~rowID, group="map")
+sharedDFilter <- SharedData$new(allDataFilter, ~rowID, group="map")
 ```
 
 ```{r get Street Lamp Data, echo=FALSE, message=FALSE, warning=FALSE}
@@ -252,8 +255,6 @@ map <- leaflet(sharedD, height = "100vh") %>%
 
 
 # filters
-#dateFilter <- filter_slider("date", "", sharedD, column= ~date, step=3, width=800)
-
 yearFilter <- filter_slider("Year", "Year", sharedD, column= ~year, step=1, width="100%")
 timeOfDayFilter <- filter_slider("Hour","Time of Day (24H format)", sharedD,  column=~hour, step=1, width="100%")
 
@@ -277,16 +278,9 @@ tags$div(
              ),
              tags$div(class = "row",
                       tags$div(class = "col-md-12",
-                               filter_select("Incident type", "Type", sharedD, group= ~`kindCopy`)
-                               # filter_checkbox("Incident type",  sharedD, group= ~`Harassment`, inline=TRUE) ,
-                               # filter_checkbox("Incident type",  sharedD, group= ~`Assault`, inline=TRUE) ,
-                               # filter_checkbox("Incident type", "Type", sharedD, group= ~`Catcalling`, inline=TRUE) ,
-                               # filter_checkbox("Incident type", "Type", sharedD, group= ~`Groping`, inline=TRUE) ,
-                               # filter_checkbox("Incident type", "Type", sharedD, group= ~`I felt unsafe`, inline=TRUE) ,
-                               # filter_checkbox("Incident type", "Type", sharedD, group= ~`I do not know what it is`, inline=TRUE) ,
-                               # filter_checkbox("Incident type", "Type", sharedD, group= ~`Stalking`, inline=TRUE) ,
-                               # filter_checkbox("Incident type", "Type", sharedD, group= ~` Theft`, inline=TRUE) 
-                               ))
+                               filter_checkbox("Incident type", "Type", sharedDFilter, group= ~`kind of incident`, inline=TRUE)),
+                    )
+                    
            )),
   
 )
