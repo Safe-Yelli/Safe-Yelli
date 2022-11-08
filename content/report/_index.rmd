@@ -42,6 +42,12 @@ RequiredQuestions:
       -
         id: category6
         value: I felt unsafe
+      -
+        id: category7
+        value: Theft
+      - 
+        id: category8
+        value: Trespass
         
   
   - fieldType: date
@@ -54,6 +60,18 @@ RequiredQuestions:
     markUp: At what time did this happen?
     id: time
   
+  - fieldType: radio
+    name: policeReport
+    markUp: Has this incident been reported to the Police?
+    id: policeReport
+    items:
+      - id: Yes
+        value: "Yes"
+      - id: No
+        value: "No"
+      - id: To be reported
+        value: this will be reported
+         
   - fieldType: radio
     name: gender
     markUp: What is your gender?
