@@ -11,15 +11,6 @@ header{
   margin-left: -3em;  
 }
 
-.navbar-expand-lg{
-  flex-flow: row wrap !important;
-  overflow: wrap !important;
-}
-
-.navbar-expand-lg .navbar-nav .nav-link{
-  padding-right:2px;
-}
-
 .navbar{
   max-width: 300px !important;
 }
@@ -38,6 +29,10 @@ body {
 
 label {
   display: inline;
+}
+
+.ext-logo{
+  width:150px;
 }
 
 .map-section {
