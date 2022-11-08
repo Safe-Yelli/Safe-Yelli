@@ -1,0 +1,195 @@
+--- 
+title: "Sign up for Mapping Hebbala Workshop"
+output: html_document
+draft: false 
+description:
+banner:
+  title : "Signup for Mapping for Public Accountability (Workshop)"
+  content : |
+    This workshop will be hosted at the Atria Institute of Technology </br>
+    Co-Hosts: </br> <img class="ext-logo" src="./BDW-assets/bdwLogo.webp" >
+    <img class="ext-logo" src="./BDW-assets/rotaractAtria.webp" >
+    
+form:  
+  exists: true
+  name: "BDW-signup"
+  id: "BDW-signup"
+  customSuccessPage: /mapping-hebbala/form-confirmation
+
+RequiredQuestions:
+  - fieldType: text
+    name: Which institution are you from?
+    id: instituteName
+    markUp: Institution name
+    markUpP: If you are not from a educational Institution, please enter 'NA'
+  - fieldType: select
+    name: InstitutionAreaName
+    markUp: Which area of Bangalore is your Institution in?
+    markUpP: If you live in a hostel, please select that area. If you are not from an institution, please select 'NA'
+    id: InstitutionArea 
+    items:
+      - " NA "
+      - " Arakere "
+      - " BTM Layout "
+      - " Banashankari "
+      - " Basavanagudi "
+      - " Begur "
+      - " Bommanahalli "
+      - " Byatarayanapura "
+      - " C. V. Raman Nagar "
+      - " Chamarajpet "
+      - " Chandra Layout "
+      - " Chickpet "
+      - " Domlur "
+      - " Gali Anjaneya Temple "
+      - " Gandhinagar "
+      - " Girinagar "
+      - " Goraguntepalya "
+      - " Govindarajanagar "
+      - " HAL Airport "
+      - " HBR Layout "
+      - " Hebbal "
+      - " Hegganahalli "
+      - " Herohalli "
+      - " Hombegowdanagar "
+      - " Hoodi "
+      - " Horamavu "
+      - " J. P. Nagar "
+      - " Jagjivanram Nagar "
+      - " Jayachamarajendranagar"
+      - " Jayanagar "
+      - " Jeevanabima Nagar "
+      - " Kadugondanahalli "
+      - " Kempegowdanagar "
+      - " Kengeri "
+      - " Koramangala "
+      - " Kothanur "
+      - " Krishnarajapuram "
+      - " Laggere "
+      - " Mahalakshmi Layout "
+      - " Malleshwaram "
+      - " Marathahalli "
+      - " Maruthiseva Nagar "
+      - " Mattikere "
+      - " Nagapura "
+      - " Padmanabhanagar "
+      - " Peenya Industrial Town "
+      - " Pulakeshinagar "
+      - " Rajajinagar "
+      - " Rajarajeshwarinagar "
+      - " Shanthinagar "
+      - " Shettyhalli "
+      - " Shivajinagar "
+      - " Srirama Mandir "
+      - " T. Dasarahalli "
+      - " Uttarahalli "
+      - " Vasanthnagar "
+      - " Vidyaranyapura "
+      - " Vijayanagar "
+      - " Whitefield "
+      - " Yelahanka "
+      - " Yeshwanthpura "
+      
+  - fieldType: select
+    name: homeAreaName
+    markUp: Which area of Bangalore is your home in?
+    markUpP: Please select the area you consider your current residence. This is to get an idea of what other regions we can map and run workshops in. Please select 'NA' if you do not want to provide this detail.
+    id: homeArea 
+    items:
+      - " NA "
+      - " Arakere "
+      - " BTM Layout "
+      - " Banashankari "
+      - " Basavanagudi "
+      - " Begur "
+      - " Bommanahalli "
+      - " Byatarayanapura "
+      - " C. V. Raman Nagar "
+      - " Chamarajpet "
+      - " Chandra Layout "
+      - " Chickpet "
+      - " Domlur "
+      - " Gali Anjaneya Temple "
+      - " Gandhinagar "
+      - " Girinagar "
+      - " Goraguntepalya "
+      - " Govindarajanagar "
+      - " HAL Airport "
+      - " HBR Layout "
+      - " Hebbal "
+      - " Hegganahalli "
+      - " Herohalli "
+      - " Hombegowdanagar "
+      - " Hoodi "
+      - " Horamavu "
+      - " J. P. Nagar "
+      - " Jagjivanram Nagar "
+      - " Jayachamarajendranagar"
+      - " Jayanagar "
+      - " Jeevanabima Nagar "
+      - " Kadugondanahalli "
+      - " Kempegowdanagar "
+      - " Kengeri "
+      - " Koramangala "
+      - " Kothanur "
+      - " Krishnarajapuram "
+      - " Laggere "
+      - " Mahalakshmi Layout "
+      - " Malleshwaram "
+      - " Marathahalli "
+      - " Maruthiseva Nagar "
+      - " Mattikere "
+      - " Nagapura "
+      - " Padmanabhanagar "
+      - " Peenya Industrial Town "
+      - " Pulakeshinagar "
+      - " Rajajinagar "
+      - " Rajarajeshwarinagar "
+      - " Shanthinagar "
+      - " Shettyhalli "
+      - " Shivajinagar "
+      - " Srirama Mandir "
+      - " T. Dasarahalli "
+      - " Uttarahalli "
+      - " Vasanthnagar "
+      - " Vidyaranyapura "
+      - " Vijayanagar "
+      - " Whitefield "
+      - " Yelahanka "
+      - " Yeshwanthpura "
+  - fieldType: text
+    name: What is your name?
+    id: name
+    markUp: Name
+  - fieldType: email
+    name: What is your Email ID?
+    id: email
+    markUp: Email
+  - fieldType: select
+    name: DayOfAttendance
+    id: DayOfAttendance
+    markUp: Which start date will you be attending?
+    markUpP: The workshop runs late into the evening so that we will be able to map dark areas under the flyover
+    items: 
+      - 18th November, Friday, 2 to 7pm
+      - 19th November, Saturday, 2 to 7pm
+  - fieldType: radio
+    name: consent
+    id: consent
+    markUp: Can we email you for workshops or newsletters in the future?
+    items: 
+      - id: Yes
+        value: "Yes"
+      - id: No
+        value: "No"
+        
+
+
+
+notRequiredExists: false  
+
+  
+---
+
+
+
