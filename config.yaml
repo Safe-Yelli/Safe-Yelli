@@ -1,7 +1,7 @@
 
 baseurl: /
 languageCode: en-us
-title: Safe Yelli
+title: Safe Yelli in Bengaluru?
 theme: "bigspring-light"
 googleAnalytics: 'G-SC10M5SL96'
 disqusShortname: ''
@@ -39,6 +39,10 @@ menu:
       url: /community-mapping/
       parent: Community Projects
       weight: 2
+    - name: Mapping Hebala workshop
+      url: /blr-design-week/
+      parent: Community Projects
+      weight: 1
    
 #    - name: SafeYelli in Bengaluru?
 #      url: /blr-design-week/signup
@@ -65,7 +69,7 @@ menu:
 params:
   MathJaxCDN: //cdnjs.cloudflare.com/ajax/libs
   MathJaxVersion: 2.7.5
-  description: Mapping Harassment in Yelahanka
+  description: Mapping safety in Bengaluru City
   favicon: "/images/faviconLogo.ico"
   highlightjsCDN: //cdnjs.cloudflare.com/ajax/libs
   highlightjsLang:

@@ -1,0 +1,46 @@
+---
+title: "Sign up for Blr Design week"
+output: html_document
+draft: false 
+description:
+  
+banner:
+  title : "Mapping Hebbala for Public Accountability (Workshop) "
+  content : |
+    This workshop will be hosted at the Atria Institute of Technology, Hebbal </br>
+    Co-Hosts: 
+    <br>
+    18th and 19th 2pm to 6:30pm
+    </br> <img class="ext-logo" src="./BDW-assets/bdwLogo.webp" >
+    <img class="ext-logo" src="./BDW-assets/rotaractAtria.webp" >
+  button:
+    enable: yes
+    label: Sign up to participate 
+    link: /blr-design-week/signup
+
+text:
+  - title: 
+    content: 
+    
+textRight: 
+  - 
+    title: Lack of infrastructure means lack of accesibility
+    content: |
+     Women find dark, dingy spaces inaccesible. How do we gather data on what causes the roads to be unwalkable? What streets are unlit, dark and inaccessible? We map! </br>
+     We will map
+     - Streetlights like we have done in Yelahanka
+     - Pavement conditions
+     - Trash spots
+     - Road conditions
+     <br>
+     ### Workshop Activities
+     This workshop will introduce participants to mapping on their own and contributing to open data platforms like openstreetmap.in. We will test apps and tools that SafeYelli has been developing on the ground. 
+     
+     #### Start on 18th and 19th
+     **Participants can attend any one start day out of the two.** Both days will be a 4 hour orientation and workshop on mapping different things on the ground. We will head out to the Hebbal Railway station to map.
+     #### Map for a week
+     Participants will continue mapping near their institutions at their own pace for a week
+     #### Survey of what people say after the workshop
+     On the 26th, all participants will head out and conduct a survey on what citizens feel about the same space that the participants mapped
+      
+---
