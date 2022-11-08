@@ -39,15 +39,11 @@ menu:
       url: /community-mapping/
       parent: Community Projects
       weight: 2
-    - name: Mapping Hebala workshop
-      url: /blr-design-week/
+    - name: Mapping for accountability, Hebbala 
+      url: /mapping-hebbala/
       parent: Community Projects
       weight: 1
    
-#    - name: SafeYelli in Bengaluru?
-#      url: /blr-design-week/signup
-#      parent: Community Projects
-#      weight: 4
     
 
   footer_left:
