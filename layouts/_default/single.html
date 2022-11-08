@@ -6,14 +6,15 @@
     {{ partial "header.html"}}
     <div class="container"  id="single-col">
       <div id="header">
-        <h1 class="mb-2">{{ .Title | markdownify }}
+        <h1 class="mb-2">{{ .Params.Banner.title | markdownify }}
         </h1>
+        <p> {{ .Params.Banner.content | markdownify }}</p>
       </div>
     </div>
   </div>
   
   <div class="textRight col-lg-8 col-md-8 col-sm-8 mx-auto">
-    {{ if eq .Params.form true }}
+    {{ if eq .Params.form.exists true }}
       {{ partial "form.html" . }}
     {{ end }}
     {{ with .Params.coverImage }}

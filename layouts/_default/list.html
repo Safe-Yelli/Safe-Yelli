@@ -10,7 +10,7 @@
     <div class="container">
       <div id="header">
         <h1 class="mb-2">{{ .title | markdownify }}</h1>
-        <h2>{{ .content | markdownify }}</h2>
+        <p>{{ .content | markdownify }}</p>
         {{ if .button.enable }} {{ with .button }}
         <div>
           <a
@@ -55,7 +55,7 @@
   {{range .Params.textRight}}
 
   <div class="textRight col-lg-8 col-md-8 mr-1">
-    <h2>{{ .title }}</h2>
+    <h3>{{ .title }}</h3>
     <p>{{ .content | markdownify }}</p>
   </div>
   <!-- /text on the right -->
