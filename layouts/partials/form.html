@@ -1,7 +1,10 @@
         {{"<!-- Form start -->"  | safeHTML}}
         <form 
-          name="report" 
-          id="report"
+          name= "{{ .Params.form.name }}"
+          id= "{{ .Params.form.id }}"
+          {{ if .Params.form.customSuccessPage }}
+          action = "{{ .Params.form.customSuccessPage }} "
+          {{ end }}
           method="POST" 
           data-netlify="true"
           data-netlify-recaptcha="true" >
