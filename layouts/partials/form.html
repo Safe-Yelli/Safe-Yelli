@@ -58,6 +58,7 @@
                   <div class="form-control mb-2">
                     <label for="{{ .id }}"> {{ .value }}</label>
                     <select id="{{ .id }}" name="{{ $name }}"  >
+                      <option disabled selected value> -- select an option -- </option>
                       {{ range .items }}
                         <option value= "{{ . }}">{{ . | markdownify }}</option> 
                       {{ end }}
@@ -120,6 +121,7 @@
                   <div class="form-control mb-2">
                     <label for="{{ .id }}"> {{ .value }}</label>
                     <select id="{{ .id }}" name="{{ $name }}"  >
+                      <option disabled selected value> -- select an option -- </option>
                       {{ range .items }}
                         <option value= "{{ . }}">{{ . }}</option> 
                       {{ end }}
