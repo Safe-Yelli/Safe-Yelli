@@ -152,7 +152,7 @@
           </div>
         </form>
         
-        <script>
+<script>
   //script to open collapsibles
   var coll = document.getElementsByClassName("collapsible");
   var i;
@@ -168,4 +168,16 @@
       }
     });
   }
+</script>
+<script>
+function validate(e){
+        if (grecaptcha.getResponse().length > 0) { //grecaptcha returns whether the captcha box is ticked or not
+        form.submit()
+      } else { // reject the submission show an error, but don't call form.reset(), so the data stays as it is
+        e.preventDefault();
+        alert( 'Please tick the captcha field' );
+        return false;
+      }
+}
+
 </script>
