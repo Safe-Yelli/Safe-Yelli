@@ -64,6 +64,15 @@
                       {{ end }}
                     </select>
                   </div>
+            {{ else if (eq .fieldType "phone") }}
+                {{ $name := .name }}
+                  <div class="form-control mb-2">
+                    <label for="{{ .id }}"> {{ .value }}</label>
+                    <input type="tel" title="Please enter a valid 10 digit phone number" id="{{ .id }}" name="{{ $name }}"
+                      pattern="[6-9]{1}[0-9]{9}"      
+                      required>
+                    </select>
+                  </div>
                   
             <!-- if date or time, give min/max -->
             {{ else if (or (eq .fieldType "date") (eq .fieldType "time")) }}
