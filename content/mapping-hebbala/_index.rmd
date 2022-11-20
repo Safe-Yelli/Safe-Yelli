@@ -15,19 +15,17 @@ banner:
     <img class="ext-logo" src="./BDW-assets/bdwLogo.webp" >
     <img class="ext-logo" src="./BDW-assets/rotaractAtria.webp" >
   button:
-    enable: yes
+    enable: no
     label: Sign up to participate 
     link: /mapping-hebbala/signup
 
-text:
-  - title: 
-    content: 
+map: true
     
-textRight: 
+text:
   - 
-    title: Lack of infrastructure means lack of accesibility
+    title: Lack of infrastructure means lack of accessibility
     content: |
-     Women find dark, dingy spaces inaccesible. How do we gather data on what causes the roads to be unwalkable? What streets are unlit, dark and inaccessible? We map! </br>
+     Women find dark, dingy spaces inaccessible. How do we gather data on what causes the roads to be unwalkable? What streets are unlit, dark and inaccessible? We map! </br>
      We will map
      - Streetlights like we have done in Yelahanka
      - Pavement conditions
@@ -46,3 +44,195 @@ textRight:
      On the 26th, all participants will head out and conduct a survey on what citizens feel about the same space that the participants mapped
       
 ---
+```{r include=FALSE}
+library(osmdata)
+library(osmplotr)
+library(leaflet)
+library(leaflet.extras)
+library(leaflet.extras2)
+library(htmltools)
+library(viridis)
+library(rgdal)
+library(tidyverse)
+library(sf)
+library(RColorBrewer)
+```
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+
+
+
+lamps <- read_sf("../../resources/assets/Mapping-Hebbala/streetlamps.geojson")
+roads <- read_sf("../../resources/assets/Mapping-Hebbala/roads.geojson")
+sidewalks <- read_sf("../../resources/assets/Mapping-Hebbala/sidewalks.geojson")
+crossings <- read_sf("../../resources/assets/Mapping-Hebbala/crossings.geojson")
+
+
+lamps$status <- lamps$status %>% 
+  str_replace_all("not working", replacement = "not_working") %>% 
+  str_replace_all("needs maintenance", replacement = "needs_maintenance")
+
+
+# map tiles from mapbox
+mapUrl="https://api.mapbox.com/styles/v1/rungdung/cku6gh76r1dvh17o3zkfllvjz/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicnVuZ2R1bmciLCJhIjoiY2tqeWh6cXF4MDgzMjJvbWVmbGQzYjAwMyJ9.U-aJyoqyKvTXlhVk43jV1A"
+
+darkMapUrl= "https://api.mapbox.com/styles/v1/rungdung/cl3jusid0001g15odcz3f1dcb/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicnVuZ2R1bmciLCJhIjoiY2tqeWh6cXF4MDgzMjJvbWVmbGQzYjAwMyJ9.U-aJyoqyKvTXlhVk43jV1A"
+```
+
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+
+illuminationTrace<- read.csv("../../resources/assets/Mapping-Hebbala/traces.csv")
+
+
+illuminationTrace$callibrated <- ((illuminationTrace$Reading - illuminationTrace$CP2) * 1700)/ (illuminationTrace$CP1 - illuminationTrace$CP2)
+
+cuts <- cut(illuminationTrace$callibrated, 
+            labels=c( "low", "medium", "lit", "directly lit"),
+            breaks=c(0, 100, 1000, 3000,20000),
+            right=FALSE)
+
+pallete <- colorFactor(brewer.pal(n = 5, name = "RdYlGn"),
+                     domain = cuts) 
+
+```
+
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+#https://www.edureka.co/community/57180/how-to-add-legend-or-any-text-on-the-map-in-leaflet
+colourLegWalkability <- colorFactor(brewer.pal(n = 3, name = "YlOrRd"),
+                                    levels = c("Gaps", "Shaky"), 
+                                    sidewalks$Walkability)
+colourLegSmoothness<- colorFactor(brewer.pal(n = 5, name = "RdYlGn"),
+                                   levels = c("Very bad", "bad", "intermediate", "good", "excellent"),roads$Smoothness)
+colourLegLight<- colorFactor(brewer.pal(n = 5, name = "BrBG"),
+                              levels = c("not_working", "needs_maintenance", "dull", "working"),
+                             lamps$status)
+colourLegCrossings<- colorFactor(brewer.pal(n = 3, name = "YlOrRd"),
+                                  levels = c("unmarked",
+                                             "zebra",
+                                             "traffic_light"),
+                                 crossings$crossing)
+
+count <- function(x, n){ length((which(x == n))) }
+labelCount <- function(label, table){paste0(label, " n=", count(table, label))}
+
+ 
+```
+
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+map <- leaflet( roads,
+                 width="100%", 
+                  height="100vh",
+                ) %>%
+  addTiles(urlTemplate = darkMapUrl,
+           attribution =  'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+           ) %>%
+  fitBounds(77.578648,13.036753,77.606285,13.049463) %>%
+  setMaxBounds(77.564031,13.028562,77.619306,13.053940) %>% 
+
+ addPolylines(data = sidewalks,
+              group = "sidewalks",
+              color = colourLegWalkability(sidewalks$Walkability),
+              stroke=0.7,
+              dashArray = "4 9",
+              popup = paste0(
+                '<h4> Surveyed on: ', sidewalks$`Survey Time`, "</h4>",
+                '<h4> Walkability: ', sidewalks$Walkability, "</h4>",
+                '<p> Estimated width: ', sidewalks$est_width, 'm </p>'
+              ) %>% 
+                lapply(htmltools::HTML)) %>% 
+  addLegend(position="bottomright",
+            values = sidewalks$Walkability,
+            title = paste0("Status of sidewalk segments, (", nrow(sidewalks), ")"),
+            colors = c('#9a4032', "#ddd095", "gray"),
+            labels = c(labelCount("Gaps", sidewalks$Walkability)
+                      ,labelCount("Shaky", sidewalks$Walkability)
+                      , "NA"),
+            group = "sidewalks") %>% 
+  # ---------------------------------------------
+  addPolylines(data = crossings,
+              group = "crossings",
+              color = colourLegCrossings(crossings$crossing),
+              dashArray = "4 9",
+              popup = paste0(
+                '<h4> Surveyed on: ', crossings$`survey:date`, "</h4>"
+              ) %>% 
+                lapply(htmltools::HTML)) %>%
+  addLegend(position="bottomright",
+            values = crossings$crossing,
+            title= paste0("Status of crossings, (", nrow(crossings), ")"),
+            colors = c('#ffffb2', "#fecc5cC", "#fd8d3c"),
+            labels = c(labelCount("unmarked", crossings$crossing)
+                      ,labelCount("zebra", crossings$crossing)
+                      ,labelCount("traffic lights", crossings$crossing)
+                      ),
+            group = "crossings") %>%
+  # ---------------------------------------------
+  addPolylines(data = roads,
+              group = "roads",
+              stroke = 2,
+              color = colourLegSmoothness(roads$Smoothness),
+              popup = paste0(
+                '<h4> Surveyed on: ', roads$`Survey Time`, "</h4>"
+              ) %>% 
+                lapply(htmltools::HTML)) %>% 
+  addLegend(position="bottomright",
+            values = roads$Smoothness,
+            title= paste0("Status of roads, (", nrow(roads), ")"),
+            colors = c('#a40025', "#f27149", "#fddf8a", "#d9ee8a", "#66bc62" ),
+            labels = c(labelCount("Very bad", roads$Smoothness)
+                      ,labelCount("bad", roads$Smoothness)
+                      ,labelCount("intermediate", roads$Smoothness)
+                      ,labelCount("good", roads$Smoothness)
+                      ,labelCount("excellent", roads$Smoothness)),
+            group = "roads") %>% 
+  # ---------------------------------------------
+  addCircleMarkers(data = lamps,
+              group = "street lamps",
+              color = colourLegLight(lamps$status),
+              radius = 2,
+              opacity = 0.5,
+              popup = paste0(
+                '<h4> Surveyed on: ', lamps$`survey:date`, "</h4>"
+              ) %>% 
+                lapply(htmltools::HTML)) %>% 
+  addLegend(position="bottomleft",
+            values = lamps$status,
+            title= paste0("Status of street lamps, (", nrow(lamps), ")"),
+            colors = c('#8c510a', "#bf812e", "#c7e9e4", "#00665d"),
+            labels = c(labelCount("not_working", lamps$status)
+                      ,labelCount("needs_maintenance", lamps$status)
+                      ,labelCount("dull", lamps$status)
+                      ,labelCount("working", lamps$status)
+                      ),
+            group = "street lamps") %>% 
+  
+  addHeatmap(data = illuminationTrace,
+             intensity =  cuts,
+             radius = 2,
+             blur=4,
+             group = "illumination traces",
+             max=5,
+             gradient = pallete(cuts)) %>% 
+
+  addLayersControl(
+                   overlayGroups = c("sidewalks", "roads", "street lamps","crossings", "illumination traces"),
+                   options = layersControlOptions(collapsed = FALSE)
+) %>%
+   hideGroup("roads")%>%
+   hideGroup("crossings") %>% 
+   hideGroup("illumination traces")
+```
+
+```{r render, echo=FALSE, message=FALSE, warning=FALSE}
+tags$div(
+  class = "map-section",
+  #dateFilter,
+  tags$div(class = "crosstalk-map",
+           map),
+)
+```
+
+
