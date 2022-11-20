@@ -3,7 +3,7 @@
 
 $btn-white-space: wrap;
 .leaflet-heatmap-layer {
-  opacity: 0.3;
+  opacity: 0.7;
 }
 
 header{
@@ -141,7 +141,7 @@ label {
   
   // map
   .crosstalk-map {
-    padding: 1em 2em;
+    padding: 1em 0em;
   }
   .crosstalk-map,
   .crosstalk-filters {
