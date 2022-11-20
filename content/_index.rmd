@@ -205,8 +205,11 @@ map <- leaflet(sharedD, height = "100vh") %>%
   setMaxBounds(77.071139,12.707331,78.114153,13.228584) %>%
   addScaleBar() %>%
   
-  addMarkers(
+  addCircleMarkers(
     popup = paste(allData$popupText),
+    radius = 4,
+    opacity = 0.8,
+    color = '#be0915',
     popupOptions = popupOptions(maxWidth = 400),
     #clusterOptions = clusterOptions(),
     group = "Incidents",
@@ -229,12 +232,10 @@ map <- leaflet(sharedD, height = "100vh") %>%
     group = "Street Lamps"
   ) %>%
   
-  addHeatmap(radius = 20,
-             blur = 20, 
-    intensity = 0.7,
-    cellSize = 0.1,
-    minOpacity = 0.4,
-    max = 0.9,
+  addHeatmap(radius = 12,
+             blur = 6, 
+    intensity = 1,
+    max = 1,
     group = "Heat Map"
   ) %>% 
   
