@@ -37,6 +37,10 @@ body {
         display:flex;
           max-width: 70%;
   }
+  .legend > i{
+     height: auto !important;
+     margin-left: 5px;
+   }
 
 label {
   display: inline;
@@ -162,12 +166,15 @@ label {
   
    .leaflet-bottom{
     max-height: 60vh;
-  
   }
   .legend.leaflet-control{
-        display:flex;
-          max-width: 90%;
+    font-size: 10px !important;
+    line-height: 15px !important;
+    display:flex;
+    max-width: 90%;
   }
+  
+   
   
 
   
