@@ -56,6 +56,7 @@ library(rgdal)
 library(tidyverse)
 library(sf)
 library(RColorBrewer)
+library(leaflegend)
 ```
 
 ```{r message=FALSE, warning=FALSE, include=FALSE}
@@ -69,8 +70,8 @@ crossings <- read_sf("../../resources/assets/Mapping-Hebbala/crossings.geojson")
 
 
 lamps$status <- lamps$status %>% 
-  str_replace_all("not working", replacement = "not_working") %>% 
-  str_replace_all("needs maintenance", replacement = "needs_maintenance")
+  str_replace_all("not_working", replacement = "not working") %>% 
+  str_replace_all("needs_maintenance", replacement = "needs maintenance")
 
 
 # map tiles from mapbox
@@ -106,7 +107,7 @@ colourLegWalkability <- colorFactor(brewer.pal(n = 3, name = "YlOrRd"),
 colourLegSmoothness<- colorFactor(brewer.pal(n = 5, name = "RdYlGn"),
                                    levels = c("Very bad", "bad", "intermediate", "good", "excellent"),roads$Smoothness)
 colourLegLight<- colorFactor(brewer.pal(n = 5, name = "BrBG"),
-                              levels = c("not_working", "needs_maintenance", "dull", "working"),
+                              levels = c("not working", "needs maintenance", "dull", "working"),
                              lamps$status)
 colourLegCrossings<- colorFactor(brewer.pal(n = 3, name = "YlOrRd"),
                                   levels = c("unmarked",
@@ -114,6 +115,8 @@ colourLegCrossings<- colorFactor(brewer.pal(n = 3, name = "YlOrRd"),
                                              "traffic_light"),
                                  crossings$crossing)
 
+icon <- makeSymbol('cross', width = 100, height = 100, color = 'black', fillColor = 'red',
+           opacity = .7, fillOpacity = .5)
 count <- function(x, n){ length((which(x == n))) }
 labelCount <- function(label, table){paste0(label, " n=", count(table, label))}
 
@@ -145,12 +148,13 @@ map <- leaflet( roads,
                 lapply(htmltools::HTML)) %>% 
   addLegend(position="bottomright",
             values = sidewalks$Walkability,
-            title = paste0("Status of sidewalk segments, (", nrow(sidewalks), ")"),
+            title = paste0("sidewalks (", nrow(sidewalks), ")"),
             colors = c('#9a4032', "#ddd095", "gray"),
             labels = c(labelCount("Gaps", sidewalks$Walkability)
                       ,labelCount("Shaky", sidewalks$Walkability)
                       , "NA"),
-            group = "sidewalks") %>% 
+            group = "sidewalks",
+            className = "info legend sidewalks") %>% 
   # ---------------------------------------------
   addPolylines(data = crossings,
               group = "crossings",
@@ -162,13 +166,14 @@ map <- leaflet( roads,
                 lapply(htmltools::HTML)) %>%
   addLegend(position="bottomright",
             values = crossings$crossing,
-            title= paste0("Status of crossings, (", nrow(crossings), ")"),
+            title= paste0("crossings (", nrow(crossings), ")"),
             colors = c('#ffffb2', "#fecc5cC", "#fd8d3c"),
             labels = c(labelCount("unmarked", crossings$crossing)
                       ,labelCount("zebra", crossings$crossing)
                       ,labelCount("traffic lights", crossings$crossing)
                       ),
-            group = "crossings") %>%
+            group = "crossings",
+            className = "info legend crossings") %>%
   # ---------------------------------------------
   addPolylines(data = roads,
               group = "roads",
@@ -180,14 +185,15 @@ map <- leaflet( roads,
                 lapply(htmltools::HTML)) %>% 
   addLegend(position="bottomright",
             values = roads$Smoothness,
-            title= paste0("Status of roads, (", nrow(roads), ")"),
+            title= paste0("roads (", nrow(roads), ")"),
             colors = c('#a40025', "#f27149", "#fddf8a", "#d9ee8a", "#66bc62" ),
             labels = c(labelCount("Very bad", roads$Smoothness)
                       ,labelCount("bad", roads$Smoothness)
                       ,labelCount("intermediate", roads$Smoothness)
                       ,labelCount("good", roads$Smoothness)
                       ,labelCount("excellent", roads$Smoothness)),
-            group = "roads") %>% 
+            group = "roads",
+            className = "info legend roads") %>% 
   # ---------------------------------------------
   addCircleMarkers(data = lamps,
               group = "street lamps",
@@ -198,16 +204,18 @@ map <- leaflet( roads,
                 '<h4> Surveyed on: ', lamps$`survey:date`, "</h4>"
               ) %>% 
                 lapply(htmltools::HTML)) %>% 
-  addLegend(position="bottomleft",
+  addLegend(position="bottomright",
             values = lamps$status,
-            title= paste0("Status of street lamps, (", nrow(lamps), ")"),
+            title= paste0("street lamps (", nrow(lamps), ")"),
             colors = c('#8c510a', "#bf812e", "#c7e9e4", "#00665d"),
-            labels = c(labelCount("not_working", lamps$status)
-                      ,labelCount("needs_maintenance", lamps$status)
+            labels = c(labelCount("not working", lamps$status)
+                      ,labelCount("needs maintenance", lamps$status)
                       ,labelCount("dull", lamps$status)
                       ,labelCount("working", lamps$status)
                       ),
-            group = "street lamps") %>% 
+            group = "street lamps",
+            className = "info legend streetlamps",
+            layerId = "streetlamps") %>% 
   
   addHeatmap(data = illuminationTrace,
              intensity =  cuts,
@@ -218,10 +226,10 @@ map <- leaflet( roads,
              gradient = pallete(cuts)) %>% 
 
   addLayersControl(
-                   overlayGroups = c("sidewalks", "roads", "street lamps","crossings", "illumination traces"),
+                   overlayGroups = c("street lamps","crossings", "illumination traces", "sidewalks"),
+                   baseGroups = c("roads"),
                    options = layersControlOptions(collapsed = FALSE)
 ) %>%
-   hideGroup("roads")%>%
    hideGroup("crossings") %>% 
    hideGroup("illumination traces")
 ```
