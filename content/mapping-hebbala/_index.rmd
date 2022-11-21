@@ -150,8 +150,8 @@ map <- leaflet( roads,
             values = sidewalks$Walkability,
             title = paste0("sidewalks (", nrow(sidewalks), ")"),
             colors = c('#9a4032', "#ddd095", "gray"),
-            labels = c(labelCount("Gaps", sidewalks$Walkability)
-                      ,labelCount("Shaky", sidewalks$Walkability)
+            labels = c(labelCount("Shaky", sidewalks$Walkability)
+                      ,labelCount("Gaps", sidewalks$Walkability)
                       , "NA"),
             group = "sidewalks",
             className = "info legend sidewalks") %>% 
