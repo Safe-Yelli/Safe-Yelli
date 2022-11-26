@@ -19,6 +19,12 @@ header{
   width: auto;
 }
 
+.dropdown-menu{
+  position: absolute !important;
+  top: auto !important;
+  left: auto !important;
+}
+
 .nav-item{
 
     margin-right: 10px;
@@ -108,6 +114,7 @@ label {
 .navbar-nav{
     flex-direction: row !important;
     margin-right: 3px;
+    
   }
 
 #navigation{
@@ -177,6 +184,7 @@ label {
   }
   
   .dropdown-menu{
+    position: absolute;
     margin-right: 2em;
     max-width: 70vw;
   }
@@ -278,3 +286,5 @@ label {
     margin-bottom: 0.2em !important;
   }
 } ;
+
+
