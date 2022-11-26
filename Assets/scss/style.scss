@@ -11,7 +11,7 @@ $light: {{.light | default "#EDF6F5"}};
 
 // Font Variables
 $primary-font: '{{ replaceRE ":[ital,]*wght@[0-9,;]+" "" .primary_font | default "Lato"}}', {{.primary_font_type | default "sans-serif"}};
-$icon-font: '{{.icon_font | default "Font Awesome 5 Free"}}';
+$icon-font: '{{.icon_font }}';
 {{ end }}
 
 @import 'mixins';
