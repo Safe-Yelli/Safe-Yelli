@@ -14,7 +14,14 @@ header{
 }
 
 .navbar{
-  max-width: 300px !important;
+ 
+  display: flex;
+  width: auto;
+}
+
+.nav-item{
+
+    margin-right: 10px;
 }
 body {
   background-image: url(/images/bg.svg);
@@ -98,8 +105,14 @@ label {
 
 }
 
+.navbar-nav{
+    flex-direction: row !important;
+    margin-right: 3px;
+  }
+
 #navigation{
-    width: 100px !important;
+  display: flex-wrap;
+  width: 400px !important;
   flex-wrap: overflow !important;
 }
 
@@ -150,6 +163,29 @@ label {
     margin-left: 0em;  
   }
   
+  .nav-item{
+    font-size: 10pt;
+    margin-right: 5px;
+  }
+  
+  .btn{
+    white-space: nowrap;
+  }
+  
+  .btn-sm{
+    padding: 5px 10px;
+  }
+  
+  .dropdown-menu{
+    margin-right: 2em;
+    max-width: 70vw;
+  }
+  
+  .dropdown-item{
+    white-space: normal !important;
+    padding-left: 1em;
+  }
+
   .navbar-expand-lg .navbar-nav .nav-link {
   padding: 15px;
   }
