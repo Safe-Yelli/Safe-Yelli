@@ -1,290 +1,274 @@
-// This file is empty within the template
-// You can use it to override CSS from within your project
 
-$btn-white-space: wrap;
 .leaflet-heatmap-layer {
-  opacity: 0.7;
+    opacity: 0.7;
 }
 
-
-
-header{
-  padding: 3em 0;
-  margin-left: -3em;  
+header {
+    padding: 3em 0;
+    margin-left: -3em;
 }
 
-.navbar{
- 
-  display: flex;
-  width: auto;
+.navbar {
+    display: flex;
+    width: auto;
 }
 
-.dropdown-menu{
-  position: absolute !important;
-  top: auto !important;
-  left: auto !important;
+.dropdown-menu {
+    position: absolute !important;
+    top: auto !important;
+    left: auto !important;
 }
 
-.nav-item{
-
+.nav-item {
     margin-right: 10px;
 }
 body {
-  background-image: url(/images/bg.svg);
-  background-repeat: no-repeat;
-  background-position: 0 90%;
-  background-size: cover;
+    background-image: url(/images/bg.svg);
+    background-repeat: no-repeat;
+    background-position: 0 90%;
+    background-size: cover;
 }
 
 .crosstalk-map {
-  width: 100%;
-  padding: 0;
-  margin: 0;
+    width: 100%;
+    padding: 0;
+    margin: 0;
 }
 
-  .leaflet-bottom{
-    height: 30vh;
-  
-  }
-  .legend.leaflet-control{
-        display:flex;
-          max-width: 70%;
-  }
-  .legend > i{
-     height: auto !important;
-     margin-left: 5px;
-   }
+.leaflet-bottom {
+    
+    max-height: 30vh;
+    display: inline-block;
+    vertical-align: bottom;
+}
+.legend.leaflet-control {
+    
+    max-width: 70%;
+}
+.legend > i {
+    height: auto !important;
+    margin-left: 5px;
+}
 
 label {
-  display: inline;
+    display: inline;
 }
 
-.ext-logo{
-  width:150px;
+.ext-logo {
+    width: 150px;
 }
 
 .map-section {
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex !important;
-  flex-wrap: wrap;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex !important;
+    flex-wrap: wrap;
 }
 
 .RHS {
-  height: 100vh;
-  margin: 0;
-  padding: 0;
-  top: 0;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    top: 0;
 }
 
 .question {
-  margin: 40px;
+    margin: 40px;
 }
 
 .formMarkUp {
-  margin: 20px 10px;
-  text-align: left;
-  align-items: left;
+    margin: 20px 10px;
+    text-align: left;
+    align-items: left;
 }
 
 .text {
-  margin-top: 2em;
+    margin-top: 2em;
 }
 
 .hiddenForm {
-  display: none;
-  visibility: hidden;
+    display: none;
+    visibility: hidden;
 }
 
 #logo {
-  width: 500px;
-  display: flex;
-  min-width: 100%;
+    width: 500px;
+    display: flex;
+    min-width: 100%;
 }
 
 #text {
-  padding: 2em 0;
+    padding: 2em 0;
 }
 
 .navigation {
-  padding: 2em 0;
-
+    padding: 2em 0;
 }
 
-.navbar-nav{
+.navbar-nav {
     flex-direction: row !important;
     margin-right: 3px;
-    
-  }
+}
 
-#navigation{
-  display: flex-wrap;
-  width: 400px !important;
-  flex-wrap: overflow !important;
+#navigation {
+    display: flex-wrap;
+    width: 400px !important;
+    flex-wrap: overflow !important;
 }
 
 #text-mobile {
-  display: none;
+    display: none;
 }
 
-// report page 
+// report page
 
 .collapsible {
-  background-color: #777;
-  color: white;
-  cursor: pointer;
-  padding: 18px;
-  width: 100%;
-  border: none;
-  text-align: left;
-  outline: none;
-  font-size: 15px;
+    background-color: #777;
+    color: white;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
 }
 
-.active, .collapsible:hover {
-  background-color: #555;
+.active,
+.collapsible:hover {
+    background-color: #555;
 }
 
 .content {
-  padding: 0 12px;
-  display: none;
-  overflow: hidden;
-  background-color: #f1f1f1;
-  border-radius: 3%;
+    padding: 0 12px;
+    display: none;
+    overflow: hidden;
+    background-color: #f1f1f1;
+    border-radius: 3%;
 }
 
-.list-item-wrapper{
-  background-color: white;
-  width:100%;
-  padding: 1em 1em;
-  border-radius: 1em;
-  margin: 1em 1em;
+.list-item-wrapper {
+    background-color: white;
+    width: 100%;
+    padding: 1em 1em;
+    border-radius: 1em;
+    margin: 1em 1em;
 }
 //-----------------------
 // mobile features
 @media (max-width: 800px) {
-  
-  //navigation 
-  header{
-    padding: 3em 0;
-    margin-left: 0em;  
-  }
-  
-  .nav-item{
-    font-size: 10pt;
-    margin-right: 5px;
-  }
-  
-  .btn{
-    white-space: nowrap;
-  }
-  
-  .btn-sm{
-    padding: 5px 10px;
-  }
-  
-  .dropdown-menu{
-    position: absolute;
-    margin-right: 2em;
-    max-width: 70vw;
-  }
-  
-  .dropdown-item{
-    white-space: normal !important;
-    padding-left: 1em;
-  }
+    //navigation
+    header {
+        padding: 3em 0;
+        margin-left: 0em;
+    }
 
-  .navbar-expand-lg .navbar-nav .nav-link {
-  padding: 15px;
-  }
-  
-  // map
-  .crosstalk-map {
-    padding: 1em 0em;
-  }
-  .crosstalk-map,
-  .crosstalk-filters {
-    min-width: 100%;
-    flex: 1;
-  }
-  
-   .leaflet-bottom{
-    max-height: 60vh;
-  }
-  .legend.leaflet-control{
-    font-size: 10px !important;
-    line-height: 15px !important;
-    display:flex;
-    max-width: 90%;
-  }
-  
-   
-  
+    .nav-item {
+        font-size: 10pt;
+        margin-right: 5px;
+    }
 
-  
+    .btn {
+        white-space: nowrap;
+    }
 
+    .btn-sm {
+        padding: 5px 10px;
+    }
 
-  .crosstalk-filters {
-    max-width: 80%;
-    margin-right: 5em;
-    padding: 0;
-    background-color: white;
-    border-radius: 10px;
-  }
+    .dropdown-menu {
+        position: absolute;
+        margin-right: 2em;
+        max-width: 70vw;
+    }
 
-  #logo {
-    min-width: 50%;
-  }
+    .dropdown-item {
+        white-space: normal !important;
+        padding-left: 1em;
+    }
 
-  .textRight,
-  .contact,
-  #text-mobile {
-    margin-top: 2em;
-    padding: 0 3em;
-  }
-  #text {
-    display: none;
-  }
+    .navbar-expand-lg .navbar-nav .nav-link {
+        padding: 15px;
+    }
 
-  #text-mobile {
-    display: block;
-  }
-  #map {
-    padding: 0 2em;
-  }
+    // map
+    .crosstalk-map {
+        padding: 1em 0em;
+    }
+    .crosstalk-map,
+    .crosstalk-filters {
+        min-width: 100%;
+        flex: 1;
+    }
+
+    .leaflet-bottom {
+        max-height: 60vh;
+    }
+    .legend.leaflet-control {
+        font-size: 10px !important;
+        line-height: 15px !important;
+        display: flex;
+        max-width: 90%;
+    }
+
+    .crosstalk-filters {
+        max-width: 80%;
+        margin-right: 5em;
+        padding: 0;
+        background-color: white;
+        border-radius: 10px;
+    }
+
+    #logo {
+        min-width: 50%;
+    }
+
+    .textRight,
+    .contact,
+    #text-mobile {
+        margin-top: 2em;
+        padding: 0 3em;
+    }
+    #text {
+        display: none;
+    }
+
+    #text-mobile {
+        display: block;
+    }
+    #map {
+        padding: 0 2em;
+    }
 }
-
 
 // desktop font-feature-settings
 @media (min-width: 800px) {
-  .map-section {
-    position: -webkit-sticky; /* Safari */
-    position: sticky !important;
-    top: 0;
+    .map-section {
+        position: -webkit-sticky; /* Safari */
+        position: sticky !important;
+        top: 0;
 
-    width: 100%;
-    height: 100vh;
-  }
+        width: 100%;
+        height: 100vh;
+    }
 
-  .textRight,
-  .contact {
-    margin-top: 15em;
-    padding-right: 10em;
-  }
+    .textRight,
+    .contact {
+        margin-top: 15em;
+        padding-right: 10em;
+    }
 
-  .crosstalk-filters {
-    position: absolute;
-    bottom: 10px;
+    .crosstalk-filters {
+        position: absolute;
+        bottom: 10px;
 
-    margin: 2em !important;
-    padding: 0.5em 2em !important;
-    background-color: white;
-    border-radius: 20px;
-  }
-  
-  .crosstalk-input{
-    margin-bottom: 0.2em !important;
-  }
+        margin: 2em !important;
+        padding: 0.5em 2em !important;
+        background-color: white;
+        border-radius: 20px;
+    }
+
+    .crosstalk-input {
+        margin-bottom: 0.2em !important;
+    }
 } ;
-
-
