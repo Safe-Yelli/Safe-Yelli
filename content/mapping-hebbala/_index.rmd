@@ -130,7 +130,7 @@ map <- leaflet( roads,
                   height="100vh",
                 ) %>%
   addTiles(urlTemplate = darkMapUrl,
-           attribution =  'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+           attribution =  'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Infrastructure layers &copy SafeYelli contributors Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
            ) %>%
   fitBounds(77.578648,13.036753,77.606285,13.049463) %>%
   setMaxBounds(77.564031,13.028562,77.619306,13.053940) %>% 
