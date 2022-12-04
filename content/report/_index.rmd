@@ -7,7 +7,10 @@ banner:
   title : "Report an incident on this form"
   content : "Click on the location where this incident happened and answer these questions"
     
-    
+form:  
+  name: "report"
+  id: "report"
+  customSuccessPage: /mapping-hebbala/form-confirmation
     
 RequiredQuestions: 
   - fieldType: text
