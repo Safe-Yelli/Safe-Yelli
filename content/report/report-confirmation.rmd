@@ -5,15 +5,9 @@ draft: false
 description:
   
 banner:
-  title : Your form has been submitted
+  title : Your report has been recorded
   content : |
-    You will soon get an email with more details and required materials. Mappy time!<br>
-    This workshop will be hosted at the Atria Institute of Technology, Hebbal 
-    18th and 19th 2pm to 6:30pm. 
-    </br>
-    Co-Hosts: 
-    </br> <img class="ext-logo" src="./BDW-assets/bdwLogo.webp" >
-    <img class="ext-logo" src="./BDW-assets/rotaractAtria.webp" >
+      Your submission has been received. It will be reviewed and then displayed on the site. Please check after 2-3 days. 
     
 text:
   - title: 
@@ -21,7 +15,7 @@ text:
     
 textRight: 
   - 
-    title: Your form has been submitted
+    title: Your report has been recorded
     content: |
       
 ---
