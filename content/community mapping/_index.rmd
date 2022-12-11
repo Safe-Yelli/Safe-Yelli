@@ -74,13 +74,14 @@ library(leaflet.extras)
 library(htmltools)
 library(viridis)
 library(htmltools)
+library(rgdal)
+library(tidyverse)
 ```
 
 ```{r message=FALSE, warning=FALSE, include=FALSE}
 
 # the Bounding Box of Ylk New Town that we have mapped streetlights, shops in.
 bboxC <- c(77.557125,13.095279,77.589719,13.110556)
-
 bbox <- osmplotr::get_bbox(bboxC)
 
 # Data from OSM
@@ -90,12 +91,31 @@ dat_streetLamps <- extract_osm_objects (key = "highway", value="street_lamp", re
 # shops from OSM 
 dat_shops <- extract_osm_objects (key = 'shop', return_type = 'point', bbox = bbox)
 
+# data from street light illumination tracker app
+
+GPX_file <- '../../resources/assets/Community-Mapping/Adhavan_on_5_11_SFS.gpx'
+illuminationTrack <- readOGR(GPX_file, verbose = FALSE)
+
 # map tiles from mapbox
 mapUrl="https://api.mapbox.com/styles/v1/rungdung/cku6gh76r1dvh17o3zkfllvjz/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicnVuZ2R1bmciLCJhIjoiY2tqeWh6cXF4MDgzMjJvbWVmbGQzYjAwMyJ9.U-aJyoqyKvTXlhVk43jV1A"
 
 darkMapUrl= "https://api.mapbox.com/styles/v1/rungdung/cl3jusid0001g15odcz3f1dcb/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicnVuZ2R1bmciLCJhIjoiY2tqeWh6cXF4MDgzMjJvbWVmbGQzYjAwMyJ9.U-aJyoqyKvTXlhVk43jV1A"
 ```
 
+```{r message=FALSE, warning=FALSE, include=FALSE}
+
+cuts <- cut(illuminationTrack$ogr_lux, 
+            labels=c("nil", "low", "medium", "directly lit"),
+            breaks=c(0, 7, 10, 200, 70000),
+            right=FALSE)
+illuminationTrack$lightLevel = cuts
+
+
+pallete <- colorFactor(viridis(4, option = "B"),
+                     domain = cuts) 
+palleteNum <- colorNumeric(c("brown", "yellow", "green", "blue"),
+                     domain = c(0:4))
+```
 
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
@@ -103,7 +123,10 @@ darkMapUrl= "https://api.mapbox.com/styles/v1/rungdung/cl3jusid0001g15odcz3f1dcb
 
 colourLeg <- colorFactor(viridis(8), dat_streetLamps$status)
 
-streetLights <- leaflet(dat_streetLamps, width="100%", height="100vh") %>%
+streetLights <- leaflet(dat_streetLamps, 
+                        width="100%", 
+                        height="100vh",
+                        ) %>%
   addTiles(urlTemplate = darkMapUrl,
            attribution =  'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
            ) %>%
@@ -113,28 +136,27 @@ streetLights <- leaflet(dat_streetLamps, width="100%", height="100vh") %>%
                    color = ~colourLeg(status), 
                    radius= 2, 
                    label = ~htmlEscape(status), 
-                   # labelOptions = labelOptions(noHide = TRUE, 
-                   #                             direction="bottom", 
-                   #                             textOnly = TRUE, 
-                   #                             style=list(
-                   #                               "font-size"= "14px"
-                   #                               )
-                   #                             )
+                   group = "Locations"
                    ) %>% 
+  addHeatmap(lng = illuminationTrack$ogr_lng,
+               lat = illuminationTrack$ogr_lat,
+               intensity =  cuts,
+               radius = 3,
+               blur=5,
+               group = "Traces",
+             max=10,
+             cellSize = 1,
+             gradient = pallete(cuts)
+            ) %>% 
+
+  addLayersControl(
+                   overlayGroups = c("Locations", "Traces"),
+                   options = layersControlOptions(collapsed = FALSE)
+                  ) %>% 
   addLegend(position="bottomright",
             pal = colourLeg,
             values = ~status,
             title="Status of mapped streetlights")
-  
-  # addHeatmap(
-  #   radius = 10,
-  #   blur = 14,
-  #   intensity = 0.7,
-  #   cellSize = 0.1,
-  #   minOpacity = 0.4,
-  #   max = 0.9,
-  #   group = "Heat Map"
-  # ) 
 
 tags$div(class = "map-section",
          streetLights
