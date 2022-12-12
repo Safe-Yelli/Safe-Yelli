@@ -23,7 +23,7 @@ command = "hugo --baseURL='https://blog.safeyelli.in'"
 
 
 [[redirects]]
-  from = "https://safeyelli.netlify.app/*"
-  to = "https://safeyelli.in/"
+  from = "https://blog.safeyelli.netlify.app/*"
+  to = "https://blog.safeyelli.in/"
   status = 301
   force = true
