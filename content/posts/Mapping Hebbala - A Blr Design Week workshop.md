@@ -3,7 +3,7 @@ title: "Mapping Hebbala from the lens of Gender Accessibility - A Blr Design Wee
 
 description: ""
 
-draft: true
+draft: false
 type: blog
 
 author: Adhavan
