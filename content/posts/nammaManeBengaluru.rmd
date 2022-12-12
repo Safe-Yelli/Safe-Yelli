@@ -6,6 +6,7 @@ description: "A release on how we are looking for college students to join hands
 draft: false
 type: blog
 
+date: 2022-09-09
 banner:
   title: "We need your help in reaching your neighbours and communities"
   content: "A release on how we are looking for college students to join hands with us in conducting outreach sessions"
