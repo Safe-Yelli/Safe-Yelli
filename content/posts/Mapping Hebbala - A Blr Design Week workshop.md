@@ -55,8 +55,10 @@ For a man to see and understand before conceding to the status-quo. This one is 
 
 ### To encourage the idea that spaces are gendered
 - There was too less time for connections of empathy to be made
+- 
 
 ### To reach the majority of the participating crowd
 - We worked in too large a group the first day.
+- The second day was much more fruitful
 
 
