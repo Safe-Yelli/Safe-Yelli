@@ -6,6 +6,14 @@ $btn-white-space: wrap;
   opacity: 0.3;
 }
 
+h2{
+  padding-top: 0.6em;
+  padding-bottom: 0.2em
+}
+h3{
+  padding-top: 0.4em;
+  padding-bottom: 0.2em
+}
 html{
   min-height: 100%;
 }
@@ -14,6 +22,10 @@ header{
   margin-left: -3em;  
 }
 
+img{
+  max-width: 100%;
+  margin: 1em 0;
+}
 .navbar-expand-lg{
   flex-flow: row wrap;
   overflow: wrap;
@@ -83,16 +95,21 @@ label {
 
 .blog-item-wrapper{
   background-color: white;
-  width:100%;
+  width:90%;
   padding: 1em 1em;
   border-radius: 1em;
   margin: 1em 1em;
 }
 
+.blog-post-title{
+  padding: 0 !important;
+  font-size: 2em;
+}
+
 .blog-cover-image{
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
+  width: 100% !important;
+  height: 200px !important  ;
+  object-fit: cover !important;
   border-radius: 10px;
   margin-bottom: 1em;
 }
@@ -116,6 +133,10 @@ label {
 // mobile features
 @media (max-width: 585px) {
   
+  img{
+    max-width: 100vw;
+    max-height: 30vh;
+  }
   //navigation 
   header{
     padding: 3em 0;
