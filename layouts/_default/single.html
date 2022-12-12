@@ -8,8 +8,9 @@
     {{ with .Params.coverImage }}
       <img src=" {{ .url | safeURL }}" alt = " {{ .alt }}" class="blog-cover-image"> </img>
     {{ end }}
-      <h2>{{ .Title }}</h2>
-      <h4>{{ .Params.author | markdownify }} </h4>
+      {{ if .Params.author }}
+        <p> Written with hope by {{ .Params.author | markdownify }} </p>
+      {{ end }}
       {{ .Content  }}
   </div>
 

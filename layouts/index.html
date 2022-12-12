@@ -8,14 +8,18 @@
   
 <div class="blogHome col-lg-8">
   <!-- blog post single -->
-    {{ range where .Site.Pages "Type" "blog"}}
+    {{ range (where .Site.Pages "Type" "blog").Reverse}}
       <a href="{{ .Permalink | safeURL }}" class="a-block">
-          <div class="blog-item-wrapper">
-            {{ with .Params.coverImage }}
+          <div class="blog-item-wrapper row">
+            <div class="col-md-5">
+              {{ with .Params.coverImage }}
               <img src=" {{ .url | safeURL }}" alt = " {{ .alt }}" class="blog-cover-image"> </img>
-            {{ end }}
-            <h2>{{.Title}}</h2>
-            <p>{{.Description}}</p>
+              {{ end }}
+            </div>
+            <div class="col-md-6">
+              <h2 class="blog-post-title">{{.Title}}</h2>
+              <p>{{.Description}}</p>
+            </div>
           </div>
       </a>
     {{ end }}
