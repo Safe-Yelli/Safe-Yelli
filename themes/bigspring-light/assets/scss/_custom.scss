@@ -119,10 +119,9 @@ label {
 
 .blog-item-wrapper{
   background-color: white;
-  width:100%;
+  margin: 1em 0em;
   padding: 1em 1em;
   border-radius: 1em;
-  margin: 1em 1em;
   border: 1px solid $primary-color;
 }
 
@@ -196,7 +195,7 @@ label {
   #text-mobile {
     margin-top: 2em;
     padding: 5em 3em;
-    margin: 0 10vh;
+    margin: 0 15vh;
   }
   #text {
     display: none;

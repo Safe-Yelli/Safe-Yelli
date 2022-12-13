@@ -1,6 +1,6 @@
 {{ with .Params.banner}}
 
-  <div class="col-lg-3 col-md-12 col-sm-12 mx-5 text-left">
+  <div class="col-lg-3 col-md-12 col-sm-12 mx-lg-5 mx-sm-auto mx-md-auto text-left">
     {{ partial "header.html"}}
     <div class="container">
       <div id="header">
@@ -16,9 +16,11 @@
           >
         </div>
         {{ end }} {{ end }} {{ end }}
+        {{ if .TableOfContents }}
         <div class="toc">
           {{ .TableOfContents }}
         </div>
+        {{ end }}
       </div>
       <!-- text -->
       {{range .Params.text}}
