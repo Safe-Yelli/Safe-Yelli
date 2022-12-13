@@ -22,7 +22,6 @@ We had over 25 participants which slowly dwindled down to 20 in the mapping sess
 
 ### To introduce the idea that we avoid spaces
 
-![Participants drawing out their personal perspectives on streets](blogs/bottu-map-people-draw.jpg)
 Sometimes we are not conscious of particular motivations that stop us from visiting a particular space at certain times, how do we underline this?
 
 We had a 4ft tall map that people used to place some of their favorite places to visit in the city. Do you go to Icecream shops, your Aunt's house?
