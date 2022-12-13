@@ -4,7 +4,7 @@
   
   {{partial "banner.html" . }}
   
-  <div class="textRight col-lg-8 col-md-12 col-sm-12 ">
+  <div class="textRight mx-auto col-lg-8 col-md-10 col-sm-10 ">
     
     {{ with .Params.coverImage }}
       <img src=" {{ .url | safeURL }}" alt = " {{ .alt }}" class="blog-cover-image"> </img>

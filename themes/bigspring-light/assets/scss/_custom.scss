@@ -6,6 +6,10 @@ $btn-white-space: wrap;
   opacity: 0.3;
 }
 
+ul{
+  margin-bottom: 1rem
+}
+
 .toc, .bookmark{
   margin: 0 2px 40px;
   border: 1px solid $border-color;
@@ -115,7 +119,7 @@ label {
 
 .blog-item-wrapper{
   background-color: white;
-  width:90%;
+  width:100%;
   padding: 1em 1em;
   border-radius: 1em;
   margin: 1em 1em;
@@ -191,7 +195,8 @@ label {
   .contact,
   #text-mobile {
     margin-top: 2em;
-    padding: 0 3em;
+    padding: 5em 3em;
+    margin: 0 10vh;
   }
   #text {
     display: none;
@@ -203,7 +208,7 @@ label {
 
 }
 // desktop font-feature-settings
-@media (min-width: 600px) {
+@media (min-width: 1020px) {
   .map-section {
     position: -webkit-sticky; /* Safari */
     position: sticky !important;
@@ -217,7 +222,6 @@ label {
   .textRight,
   .contact {
     margin-top: 30vh;
-    padding-left: 0vw;
-    padding-right: 15vw;
+    padding-right: 25vh
   }
 } ;
