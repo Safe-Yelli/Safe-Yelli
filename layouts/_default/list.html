@@ -3,13 +3,13 @@
 <!-- banner -->
 
 <section class="row" id="container">
-  {{ partial "banner.html" .}}
+  {{ partial "banner.html" . }}
 
 
   <!-- text on the right -->
   {{range .Params.textRight}}
 
-  <div class="textRight col-lg-8 col-md-8 mr-1">
+  <div class="textRight col-lg-8 col-md-12 col-xs-12 mr-1">
     <h2>{{ .title }}</h2>
     <p>{{ .content | markdownify }}</p>
   </div>

@@ -6,7 +6,7 @@
 
   {{partial "banner.html" .}}
   
-<div class="blogHome col-lg-8">
+<div class="blogHome mx-auto col-lg-8 col-md-12 col-sm-12">
   <!-- blog post single -->
     {{ range (where .Site.Pages "Type" "blog").Reverse}}
       <a href="{{ .Permalink | safeURL }}" class="a-block">

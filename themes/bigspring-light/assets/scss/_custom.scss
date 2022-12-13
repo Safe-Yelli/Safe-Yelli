@@ -6,6 +6,26 @@ $btn-white-space: wrap;
   opacity: 0.3;
 }
 
+.toc, .bookmark{
+  margin: 0 2px 40px;
+  border: 1px solid $border-color;
+  background: $border-color;
+  border-radius: 10px;
+  padding: 2em 3em 2em 0;
+  color: #4c6c80;
+}
+
+.bookmark{
+
+  border: 1px solid $primary-color;
+  display: block;
+
+  padding: 2em 1em !important
+}
+
+.toc a{
+  color: #79accc
+}
 h2{
   padding-top: 0.6em;
   padding-bottom: 0.2em
@@ -99,16 +119,18 @@ label {
   padding: 1em 1em;
   border-radius: 1em;
   margin: 1em 1em;
+  border: 1px solid $primary-color;
 }
 
 .blog-post-title{
   padding: 0 !important;
   font-size: 2em;
+  margin-top: 0.5em
 }
 
 .blog-cover-image{
   width: 100% !important;
-  height: 200px !important  ;
+  height: auto !important  ;
   object-fit: cover !important;
   border-radius: 10px;
   margin-bottom: 1em;
@@ -131,10 +153,12 @@ label {
 }
 //-----------------------
 // mobile features
-@media (max-width: 585px) {
-  
+@media (max-width: 500px) {
+  .toc ul{
+    padding-left: 20px;
+  }
   img{
-    max-width: 100vw;
+    max-width: 85vw;
     max-height: 30vh;
   }
   //navigation 
@@ -179,7 +203,7 @@ label {
 
 }
 // desktop font-feature-settings
-@media (min-width: 585px) {
+@media (min-width: 600px) {
   .map-section {
     position: -webkit-sticky; /* Safari */
     position: sticky !important;
@@ -189,13 +213,11 @@ label {
     height: 100vh;
   }
   
-  .blogHome{
-  margin-top: 15em;
-  padding-right: 5em;
-}
+  .blogHome,
   .textRight,
   .contact {
-    margin-top: 15em;
-    padding-right: 20em;
+    margin-top: 30vh;
+    padding-left: 0vw;
+    padding-right: 15vw;
   }
 } ;

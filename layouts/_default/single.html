@@ -2,9 +2,10 @@
 
 <section class="row" id="container">
   
-  {{partial "banner.html" .}}
+  {{partial "banner.html" . }}
   
-  <div class="textRight col-lg-8 col-md-8 col-sm-8 mx-auto">
+  <div class="textRight col-lg-8 col-md-12 col-sm-12 ">
+    
     {{ with .Params.coverImage }}
       <img src=" {{ .url | safeURL }}" alt = " {{ .alt }}" class="blog-cover-image"> </img>
     {{ end }}
