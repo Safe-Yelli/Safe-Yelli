@@ -2,12 +2,13 @@
 title: |
   Reports on SafeYelli.in from March to October 2022
 subtitle: "SafeYelli.in collects anonymous reports on street incidents of harassment and assault in Bengaluru."
-date: "Compiled on `r format(Sys.time(), '%d %B, %Y')`"
+
 description: A citizen centric tool to report street harassment, assault and other crimes in Bengaluru. See our community's citizen reported crime data on a map.
 draft: no
 banner:
   title: Documenting Street Harassment in Bengaluru
-  content: "_**A citizen centric tool to report harassment, assault and other crimes on the streets in Bengaluru. See our community's citizen reported crime data on a map.**_ \n \n ಬೆಂಗಳೂರು ಗರವಾಸಿಗಳಿಗೆ  ಇಲ್ಲಿ ನಡೆಯುವ ದೌರ್ಜನ್ಯ ಮತ್ತು ಕಿರುಕುಳವನ್ನು ರಿಪೋರ್ಟ್ ಮಾಡುವ ಉಪಕರಣ. ಇಲ್ಲಿ ಸಂಗ್ರಹವಾದ ಅಪರಾಧ ವರದಿಗಳನ್ನು ನಕ್ಷೆಯ ಮೇಲೆ ಕಾಣಬಹುದು "
+  content: "_**A citizen centric tool to report harassment, assault and other crimes on the streets in Bengaluru. See our comm
+  unity's citizen reported crime data on a map.**_ \n \n ಬೆಂಗಳೂರು ಗರವಾಸಿಗಳಿಗೆ  ಇಲ್ಲಿ ನಡೆಯುವ ದೌರ್ಜನ್ಯ ಮತ್ತು ಕಿರುಕುಳವನ್ನು ರಿಪೋರ್ಟ್ ಮಾಡುವ ಉಪಕರಣ. ಇಲ್ಲಿ ಸಂಗ್ರಹವಾದ ಅಪರಾಧ ವರದಿಗಳನ್ನು ನಕ್ಷೆಯ ಮೇಲೆ ಕಾಣಬಹುದು "
   button:
     enable: yes
     label: Report / ಘಟನೆಯನ್ನು ರಿಪೋರ್ಟ್ ಮಾಡಿ  
@@ -18,6 +19,9 @@ output:
   pdf_document:
     latex_engine: xelatex
 
+downloadFormat:
+  CSV: true
+   
 mainfont: Trebuchet MS
 fontsize: 24pt
 
