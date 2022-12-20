@@ -1,23 +1,52 @@
 ---
-title: "Reports on SafeYelli.in from March to October 2022"
+title: |
+  Reports on SafeYelli.in from March to October 2022
 subtitle: "SafeYelli.in collects anonymous reports on street incidents of harassment and assault in Bengaluru."
-date: "Compiled on 30 October, 2022"
+
 description: A citizen centric tool to report street harassment, assault and other crimes in Bengaluru. See our community's citizen reported crime data on a map.
 draft: no
 banner:
   title: Documenting Street Harassment in Bengaluru
-  content: "_**A citizen centric tool to report harassment, assault and other crimes on the streets in Bengaluru. See our community's citizen reported crime data on a map.**_ \n \n ಬೆಂಗಳೂರು ಗರವಾಸಿಗಳಿಗೆ  ಇಲ್ಲಿ ನಡೆಯುವ ದೌರ್ಜನ್ಯ ಮತ್ತು ಕಿರುಕುಳವನ್ನು ರಿಪೋರ್ಟ್ ಮಾಡುವ ಉಪಕರಣ. ಇಲ್ಲಿ ಸಂಗ್ರಹವಾದ ಅಪರಾಧ ವರದಿಗಳನ್ನು ನಕ್ಷೆಯ ಮೇಲೆ ಕಾಣಬಹುದು "
+  content: "_**A citizen centric tool to report harassment, assault and other crimes on the streets in Bengaluru. See our comm
+  unity's citizen reported crime data on a map.**_ \n \n ಬೆಂಗಳೂರು ಗರವಾಸಿಗಳಿಗೆ  ಇಲ್ಲಿ ನಡೆಯುವ ದೌರ್ಜನ್ಯ ಮತ್ತು ಕಿರುಕುಳವನ್ನು ರಿಪೋರ್ಟ್ ಮಾಡುವ ಉಪಕರಣ. ಇಲ್ಲಿ ಸಂಗ್ರಹವಾದ ಅಪರಾಧ ವರದಿಗಳನ್ನು ನಕ್ಷೆಯ ಮೇಲೆ ಕಾಣಬಹುದು "
   button:
     enable: yes
     label: Report / ಘಟನೆಯನ್ನು ರಿಪೋರ್ಟ್ ಮಾಡಿ  
     link: report
     
 type: collated-report
-output: pdf_document
+output: 
+  pdf_document:
+    latex_engine: xelatex
+
+downloadFormat:
+  CSV: true
+   
+mainfont: Trebuchet MS
+fontsize: 24pt
+
 knit: (function(inputFile, encoding) {
   rmarkdown::render(inputFile, encoding = encoding, output_dir = "../../static/collated-reports/") })
 geometry: margin=1.5cm  
-mainfont: Trebuchet MS
+
+header-includes: 
+      - \usepackage{graphicx}
+      - \usepackage{fancyhdr}
+      - \pagestyle{fancy}
+      - \usepackage{titling}
+      - \usepackage{adjustbox}
+      - \fancyhead[R]{\includegraphics[width=0.7cm]{../../static/images/logo.png}}
+      - \renewcommand{\headrulewidth}{0.4pt}
+      - \renewcommand{\footrulewidth}{0.4pt}
+      - \pretitle{\begin{flushleft}
+        \includegraphics[width=2cm]{../../static/images/logo.png}
+        \newline
+        \LARGE}
+      - \posttitle{\end{flushleft}}
+      - \predate{\begin{flushleft}}
+      - \postdate{\end{flushleft}
+        \vspace{0.7in}}
+
 ---
 
 <script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
@@ -25,7 +54,7 @@ mainfont: Trebuchet MS
 
 
 <p>This is a collection of reports submitted to SafeYelli.in. More reports can be found on <a href="https://safeyelli.in/collated-reports" class="uri">https://safeyelli.in/collated-reports</a>. Or the interactive map at <a href="https://safeyelli.in" class="uri">https://safeyelli.in</a> can be used.</p>
-<p><img src="/collated reports/SafeYelli-reports-march2022-oct2022_files/figure-html/map%20prep-1.png" width="720" /></p>
+<p><img src="/collated reports/SafeYelli-reports-march2022-oct2022_files/figure-html/map%20prep-1.png" width="864" /></p>
 <p><img src="/collated reports/SafeYelli-reports-march2022-oct2022_files/figure-html/data%20mutate-1.png" width="720" /></p>
 <div id="list-of-reports" class="section level2">
 <h2>List of reports</h2>
@@ -33,16 +62,19 @@ mainfont: Trebuchet MS
 <thead>
 <tr>
 <th style="text-align:left;">
-date of incident
+No
 </th>
 <th style="text-align:left;">
-time of incident
+Date
 </th>
 <th style="text-align:left;">
-description
+Time
 </th>
 <th style="text-align:left;">
-kind of incident
+Description
+</th>
+<th style="text-align:left;">
+Kind of Incident
 </th>
 <th style="text-align:left;">
 lat
@@ -54,423 +86,739 @@ lng
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;width: 5em; font-weight: bold;">
-2022-03-22
+<td style="text-align:left;width: 1em; font-weight: bold;">
+1
 </td>
 <td style="text-align:left;width: 5em; font-weight: bold;">
-21:15:00
+2019-11-22
 </td>
-<td style="text-align:left;width: 18em; ">
-A man on a bike… “slapped my ass” and drove past. I had pepper spray in my hand but he went away before I could see his face, note the bike no. Or use my weapon
+<td style="text-align:left;width: 5em; font-weight: bold;">
+12:20:00
 </td>
-<td style="text-align:left;width: 7em; ">
+<td style="text-align:left;width: 20em; ">
+I was mugged by two people who were in a scooty.
+</td>
+<td style="text-align:left;width: 5em; ">
+Harassment,Stalking,I felt unsafe, Theft
+</td>
+<td style="text-align:left;width: 4em; ">
+12.91684
+</td>
+<td style="text-align:left;width: 4em; ">
+77.59749
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 1em; font-weight: bold;">
+2
+</td>
+<td style="text-align:left;width: 5em; font-weight: bold;">
+2019-11-30
+</td>
+<td style="text-align:left;width: 5em; font-weight: bold;">
+09:25:00
+</td>
+<td style="text-align:left;width: 20em; ">
+NA
+</td>
+<td style="text-align:left;width: 5em; ">
 Harassment
 </td>
-<td style="text-align:left;width: 4em; width: 4em; ">
-13.09887
+<td style="text-align:left;width: 4em; ">
+12.95272
 </td>
-<td style="text-align:left;">
-77.57111
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 5em; font-weight: bold;">
-2022-03-24
-</td>
-<td style="text-align:left;width: 5em; font-weight: bold;">
-10:10:00
-</td>
-<td style="text-align:left;width: 18em; ">
-A friend and i were walking in a street near the Sandhya Pg mess when a man on a bike (he wore a black jacket, had short black hair, was dark and the bike had a red end), pinched my ass and sped off. Later on, he was seen outside my pg while i was returning home by my friend who dropped me home.
-</td>
-<td style="text-align:left;width: 7em; ">
-Groping
-</td>
-<td style="text-align:left;width: 4em; width: 4em; ">
-13.10021
-</td>
-<td style="text-align:left;">
-77.57421
+<td style="text-align:left;width: 4em; ">
+77.49996
 </td>
 </tr>
 <tr>
-<td style="text-align:left;width: 5em; font-weight: bold;">
-2022-03-26
+<td style="text-align:left;width: 1em; font-weight: bold;">
+3
 </td>
 <td style="text-align:left;width: 5em; font-weight: bold;">
-22:30:00
+2022-02-23
 </td>
-<td style="text-align:left;width: 18em; ">
-My friend and I were walking to House 40 at 10pm, we were quite alert about a white sports bike following us, but when we almost approached the house, we noticed he had slowed down, and was inches away from groping us. We were able to dodge the attack, and he immediately fled.
+<td style="text-align:left;width: 5em; font-weight: bold;">
+21:30:00
 </td>
-<td style="text-align:left;width: 7em; ">
-Groping
+<td style="text-align:left;width: 20em; ">
+Phone snatching
 </td>
-<td style="text-align:left;width: 4em; width: 4em; ">
-13.09895
+<td style="text-align:left;width: 5em; ">
+I felt unsafe, Theft
 </td>
-<td style="text-align:left;">
-77.57204
+<td style="text-align:left;width: 4em; ">
+12.91242
+</td>
+<td style="text-align:left;width: 4em; ">
+77.63514
 </td>
 </tr>
 <tr>
-<td style="text-align:left;width: 5em; font-weight: bold;">
-2022-03-26
+<td style="text-align:left;width: 1em; font-weight: bold;">
+4
 </td>
-<td style="text-align:left;width: 5em; font-weight: bold;">
-22:15:00
-</td>
-<td style="text-align:left;width: 18em; ">
-Me and two of my friends were followed by a man in a black honda city DL10CK2303 . The man kept making rounds again and again and would stop near us. The car stopped outside H.N. 112 since were standing outside
-</td>
-<td style="text-align:left;width: 7em; ">
-Stalking
-</td>
-<td style="text-align:left;width: 4em; width: 4em; ">
-13.10404
-</td>
-<td style="text-align:left;">
-77.57308
-</td>
-</tr>
-<tr>
 <td style="text-align:left;width: 5em; font-weight: bold;">
 2022-03-18
 </td>
 <td style="text-align:left;width: 5em; font-weight: bold;">
 20:00:00
 </td>
-<td style="text-align:left;width: 18em; ">
+<td style="text-align:left;width: 20em; ">
 A man , probably drunk or high followed me while making odd noises
 </td>
-<td style="text-align:left;width: 7em; ">
+<td style="text-align:left;width: 5em; ">
 Stalking
 </td>
-<td style="text-align:left;width: 4em; width: 4em; ">
+<td style="text-align:left;width: 4em; ">
 13.09905
 </td>
-<td style="text-align:left;">
+<td style="text-align:left;width: 4em; ">
 77.57224
 </td>
 </tr>
 <tr>
-<td style="text-align:left;width: 5em; font-weight: bold;">
-2022-04-03
+<td style="text-align:left;width: 1em; font-weight: bold;">
+5
 </td>
 <td style="text-align:left;width: 5em; font-weight: bold;">
-22:15:00
-</td>
-<td style="text-align:left;width: 18em; ">
-I was standing with two three of my friends on the footpath. An obviously drunk man was walking towards us and began to approach us. We started walking away but he continued to follow us and blatantly kept coming closer. At some point, we were half-running and saw him laughing at us being scared. We finally asked the NCC guards if we could stand inside and they let us. But the drunk man continued to hand around and try and approach us. When he was asked to go away he pretended to make calls which we could see while hanging around and the guards let him sit with them for a while which made us even more uncomfortable.
-</td>
-<td style="text-align:left;width: 7em; ">
-Stalking
-</td>
-<td style="text-align:left;width: 4em; width: 4em; ">
-13.09818
-</td>
-<td style="text-align:left;">
-77.57170
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 5em; font-weight: bold;">
-2022-04-05
+2022-03-22
 </td>
 <td style="text-align:left;width: 5em; font-weight: bold;">
-22:25:00
+21:15:00
 </td>
-<td style="text-align:left;width: 18em; ">
-My friend and I were walking back home at around 10:20pm and I saw a man wearing a blue checked shirt peeing behind a tree. He saw me looking at him. I looked away and i was just walking further ahead on that road. The man came behind in fast speed on his bike and spanked me and rushed past
+<td style="text-align:left;width: 20em; ">
+A man on a bike… “slapped my ass” and drove past. I had pepper spray in my hand but he went away before I could see his face, note the bike no. Or use my weapon
 </td>
-<td style="text-align:left;width: 7em; ">
+<td style="text-align:left;width: 5em; ">
 Harassment
 </td>
-<td style="text-align:left;width: 4em; width: 4em; ">
-13.09987
+<td style="text-align:left;width: 4em; ">
+13.09887
 </td>
-<td style="text-align:left;">
-77.57077
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 5em; font-weight: bold;">
-2022-04-01
-</td>
-<td style="text-align:left;width: 5em; font-weight: bold;">
-23:00:00
-</td>
-<td style="text-align:left;width: 18em; ">
-a dark coloured Honda car followed us, circled the place where we were standing about 5-6 times, rolled down the window around us and yelled obscenities at us and then parked the car about 5 mtrs away from us and stared at us. Number plate: DL 10 CK 2303
-</td>
-<td style="text-align:left;width: 7em; ">
-Harassment
-</td>
-<td style="text-align:left;width: 4em; width: 4em; ">
-13.10262
-</td>
-<td style="text-align:left;">
-77.57179
+<td style="text-align:left;width: 4em; ">
+77.57111
 </td>
 </tr>
 <tr>
-<td style="text-align:left;width: 5em; font-weight: bold;">
-2022-04-08
+<td style="text-align:left;width: 1em; font-weight: bold;">
+6
 </td>
-<td style="text-align:left;width: 5em; font-weight: bold;">
-09:35:00
-</td>
-<td style="text-align:left;width: 18em; ">
-A middle aged man on a scooter slowed down beside me and asked if I wanted a drop somewhere. When I shook my head and continued to walk forward, he sped up and slowed down next to me again and asked I was tee to talk. I continued to walk and he left.
-</td>
-<td style="text-align:left;width: 7em; ">
-Harassment
-</td>
-<td style="text-align:left;width: 4em; width: 4em; ">
-13.10600
-</td>
-<td style="text-align:left;">
-77.57399
-</td>
-</tr>
-<tr>
 <td style="text-align:left;width: 5em; font-weight: bold;">
 2022-03-22
 </td>
 <td style="text-align:left;width: 5em; font-weight: bold;">
 18:00:00
 </td>
-<td style="text-align:left;width: 18em; ">
+<td style="text-align:left;width: 20em; ">
 2 men on the bike threw something on me from a bottle. The bike didn’t stop so I couldn’t see any number but I could see they were laughing.
 </td>
-<td style="text-align:left;width: 7em; ">
+<td style="text-align:left;width: 5em; ">
 Harassment
 </td>
-<td style="text-align:left;width: 4em; width: 4em; ">
+<td style="text-align:left;width: 4em; ">
 13.10498
 </td>
-<td style="text-align:left;">
+<td style="text-align:left;width: 4em; ">
 77.57299
 </td>
 </tr>
 <tr>
-<td style="text-align:left;width: 5em; font-weight: bold;">
-2022-04-24
+<td style="text-align:left;width: 1em; font-weight: bold;">
+7
 </td>
 <td style="text-align:left;width: 5em; font-weight: bold;">
-13:09:00
+2022-03-24
 </td>
-<td style="text-align:left;width: 18em; ">
-I was riding my cycle at around 1 noon back to my pg, I was coming from the direction of the n5 campus and my pg is close to the taste of india restaurant. So when I turned in that right turn to take that road, I immediately noticed that there were group of me, possibly drunk, possibly, and one of then tried to intercept my way. He stuck his hand out as if he was asking for a ride and kept asking me to stop. He saw me drivert from a longer distance and tried intercept again. I was riding fast so as the distance between us reduced I could quickly take a bigger diversion and avoid any physical contact, or crash. There were other people on the road they did notice what was going on but said nothing about it. After I crossed them I heard one of the other men say that “forget it she’s wearing headphones” in kannada, I heard it because I didn’t have any music on and the cord was not even connected to my phone. I quickly reached my pg and reported on the whatsApp group but it was a scary moment because God forbid it was a narrow road I would been in a much much worse situation, without being able to take that divertion. I feel I narrowing escaped a very ugly incident.
+<td style="text-align:left;width: 5em; font-weight: bold;">
+10:10:00
 </td>
-<td style="text-align:left;width: 7em; ">
-Catcalling
+<td style="text-align:left;width: 20em; ">
+A friend and i were walking in a street near the Sandhya Pg mess when a man on a bike (he wore a black jacket, had short black hair, was dark and the bike had a red end), pinched my ass and sped off. Later on, he was seen outside my pg while i was returning home by my friend who dropped me home.
 </td>
-<td style="text-align:left;width: 4em; width: 4em; ">
-13.10598
+<td style="text-align:left;width: 5em; ">
+Groping
 </td>
-<td style="text-align:left;">
-77.57405
+<td style="text-align:left;width: 4em; ">
+13.10021
+</td>
+<td style="text-align:left;width: 4em; ">
+77.57421
 </td>
 </tr>
 <tr>
+<td style="text-align:left;width: 1em; font-weight: bold;">
+8
+</td>
+<td style="text-align:left;width: 5em; font-weight: bold;">
+2022-03-26
+</td>
+<td style="text-align:left;width: 5em; font-weight: bold;">
+22:30:00
+</td>
+<td style="text-align:left;width: 20em; ">
+My friend and I were walking to House 40 at 10pm, we were quite alert about a white sports bike following us, but when we almost approached the house, we noticed he had slowed down, and was inches away from groping us. We were able to dodge the attack, and he immediately fled.
+</td>
+<td style="text-align:left;width: 5em; ">
+Groping
+</td>
+<td style="text-align:left;width: 4em; ">
+13.09895
+</td>
+<td style="text-align:left;width: 4em; ">
+77.57204
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 1em; font-weight: bold;">
+9
+</td>
+<td style="text-align:left;width: 5em; font-weight: bold;">
+2022-03-26
+</td>
+<td style="text-align:left;width: 5em; font-weight: bold;">
+22:15:00
+</td>
+<td style="text-align:left;width: 20em; ">
+Me and two of my friends were followed by a man in a black honda city DL10CK2303 . The man kept making rounds again and again and would stop near us. The car stopped outside H.N. 112 since were standing outside
+</td>
+<td style="text-align:left;width: 5em; ">
+Stalking
+</td>
+<td style="text-align:left;width: 4em; ">
+13.10404
+</td>
+<td style="text-align:left;width: 4em; ">
+77.57308
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 1em; font-weight: bold;">
+10
+</td>
+<td style="text-align:left;width: 5em; font-weight: bold;">
+2022-04-01
+</td>
+<td style="text-align:left;width: 5em; font-weight: bold;">
+23:00:00
+</td>
+<td style="text-align:left;width: 20em; ">
+a dark coloured Honda car followed us, circled the place where we were standing about 5-6 times, rolled down the window around us and yelled obscenities at us and then parked the car about 5 mtrs away from us and stared at us. Number plate: DL 10 CK 2303
+</td>
+<td style="text-align:left;width: 5em; ">
+Harassment
+</td>
+<td style="text-align:left;width: 4em; ">
+13.10262
+</td>
+<td style="text-align:left;width: 4em; ">
+77.57179
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 1em; font-weight: bold;">
+11
+</td>
+<td style="text-align:left;width: 5em; font-weight: bold;">
+2022-04-03
+</td>
+<td style="text-align:left;width: 5em; font-weight: bold;">
+22:15:00
+</td>
+<td style="text-align:left;width: 20em; ">
+I was standing with two three of my friends on the footpath. An obviously drunk man was walking towards us and began to approach us. We started walking away but he continued to follow us and blatantly kept coming closer. At some point, we were half-running and saw him laughing at us being scared. We finally asked the NCC guards if we could stand inside and they let us. But the drunk man continued to hand around and try and approach us. When he was asked to go away he pretended to make calls which we could see while hanging around and the guards let him sit with them for a while which made us even more uncomfortable.
+</td>
+<td style="text-align:left;width: 5em; ">
+Stalking
+</td>
+<td style="text-align:left;width: 4em; ">
+13.09818
+</td>
+<td style="text-align:left;width: 4em; ">
+77.57170
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 1em; font-weight: bold;">
+12
+</td>
+<td style="text-align:left;width: 5em; font-weight: bold;">
+2022-04-05
+</td>
+<td style="text-align:left;width: 5em; font-weight: bold;">
+22:25:00
+</td>
+<td style="text-align:left;width: 20em; ">
+My friend and I were walking back home at around 10:20pm and I saw a man wearing a blue checked shirt peeing behind a tree. He saw me looking at him. I looked away and i was just walking further ahead on that road. The man came behind in fast speed on his bike and spanked me and rushed past
+</td>
+<td style="text-align:left;width: 5em; ">
+Harassment
+</td>
+<td style="text-align:left;width: 4em; ">
+13.09987
+</td>
+<td style="text-align:left;width: 4em; ">
+77.57077
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 1em; font-weight: bold;">
+13
+</td>
 <td style="text-align:left;width: 5em; font-weight: bold;">
 2022-04-07
 </td>
 <td style="text-align:left;width: 5em; font-weight: bold;">
 22:20:00
 </td>
-<td style="text-align:left;width: 18em; ">
+<td style="text-align:left;width: 20em; ">
 A man on a motorcycle kept going past us on our walk, almost 2-3 times during a 1 hour long walk. Eventually, he slowed down near us and groped by butt and sped away. On instict, I yelled at him and ran behind him but he was too fast and he went out of sight within a matter of seconds.
 </td>
-<td style="text-align:left;width: 7em; ">
-Harassment,Rape/Assault,Stalking,Groping
+<td style="text-align:left;width: 5em; ">
+Harassment, Rape/Assault, Stalking, Groping
 </td>
-<td style="text-align:left;width: 4em; width: 4em; ">
+<td style="text-align:left;width: 4em; ">
 13.10128
 </td>
-<td style="text-align:left;">
+<td style="text-align:left;width: 4em; ">
 77.57406
 </td>
 </tr>
 <tr>
-<td style="text-align:left;width: 5em; font-weight: bold;">
-2022-08-17
+<td style="text-align:left;width: 1em; font-weight: bold;">
+14
 </td>
 <td style="text-align:left;width: 5em; font-weight: bold;">
-19:45:00
+2022-04-08
 </td>
-<td style="text-align:left;width: 18em; ">
-I kind of remember seeing the person’s face before, we were sitting near freshmart on one of the benches. There was 4 of us. One of the guy with blond hair streaks kept on looking over and smiling at me. I was scared because my friend kept on saying my name. Then when I went into freshmart, I stayed inside because I thought he might go away, but when I came out he was still there and standing advancing towards me. That is when I sped walk in the opposite direction.
+<td style="text-align:left;width: 5em; font-weight: bold;">
+09:35:00
 </td>
-<td style="text-align:left;width: 7em; ">
-Stalking
+<td style="text-align:left;width: 20em; ">
+A middle aged man on a scooter slowed down beside me and asked if I wanted a drop somewhere. When I shook my head and continued to walk forward, he sped up and slowed down next to me again and asked I was tee to talk. I continued to walk and he left.
 </td>
-<td style="text-align:left;width: 4em; width: 4em; ">
-13.10262
+<td style="text-align:left;width: 5em; ">
+Harassment
 </td>
-<td style="text-align:left;">
-77.57176
+<td style="text-align:left;width: 4em; ">
+13.10600
+</td>
+<td style="text-align:left;width: 4em; ">
+77.57399
 </td>
 </tr>
 <tr>
+<td style="text-align:left;width: 1em; font-weight: bold;">
+15
+</td>
+<td style="text-align:left;width: 5em; font-weight: bold;">
+2022-04-24
+</td>
+<td style="text-align:left;width: 5em; font-weight: bold;">
+13:09:00
+</td>
+<td style="text-align:left;width: 20em; ">
+I was riding my cycle at around 1 noon back to my pg, I was coming from the direction of the n5 campus and my pg is close to the taste of india restaurant. So when I turned in that right turn to take that road, I immediately noticed that there were group of me, possibly drunk, possibly, and one of then tried to intercept my way. He stuck his hand out as if he was asking for a ride and kept asking me to stop. He saw me drivert from a longer distance and tried intercept again. I was riding fast so as the distance between us reduced I could quickly take a bigger diversion and avoid any physical contact, or crash. There were other people on the road they did notice what was going on but said nothing about it. After I crossed them I heard one of the other men say that “forget it she’s wearing headphones” in kannada, I heard it because I didn’t have any music on and the cord was not even connected to my phone. I quickly reached my pg and reported on the whatsApp group but it was a scary moment because God forbid it was a narrow road I would been in a much much worse situation, without being able to take that divertion. I feel I narrowing escaped a very ugly incident.
+</td>
+<td style="text-align:left;width: 5em; ">
+Catcalling
+</td>
+<td style="text-align:left;width: 4em; ">
+13.10598
+</td>
+<td style="text-align:left;width: 4em; ">
+77.57405
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 1em; font-weight: bold;">
+16
+</td>
 <td style="text-align:left;width: 5em; font-weight: bold;">
 2022-08-16
 </td>
 <td style="text-align:left;width: 5em; font-weight: bold;">
 21:10:00
 </td>
-<td style="text-align:left;width: 18em; ">
+<td style="text-align:left;width: 20em; ">
 We were walking in a group of 4 (all girls). A group of 3 boys on a scooter passed us on the right while yelling something along the lines of ‘hey baby’ while making eye contact.
 </td>
-<td style="text-align:left;width: 7em; ">
+<td style="text-align:left;width: 5em; ">
 Catcalling
 </td>
-<td style="text-align:left;width: 4em; width: 4em; ">
+<td style="text-align:left;width: 4em; ">
 13.10322
 </td>
-<td style="text-align:left;">
+<td style="text-align:left;width: 4em; ">
 77.57170
 </td>
 </tr>
 <tr>
-<td style="text-align:left;width: 5em; font-weight: bold;">
-2022-09-01
+<td style="text-align:left;width: 1em; font-weight: bold;">
+17
 </td>
 <td style="text-align:left;width: 5em; font-weight: bold;">
-22:15:00
-</td>
-<td style="text-align:left;width: 18em; ">
-When I was walking with two of my friends, this dude in a scooter comes from the back, grabs me and passed by.
-</td>
-<td style="text-align:left;width: 7em; ">
-Harassment
-</td>
-<td style="text-align:left;width: 4em; width: 4em; ">
-13.10014
-</td>
-<td style="text-align:left;">
-77.57350
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 5em; font-weight: bold;">
-2022-08-29
+2022-08-17
 </td>
 <td style="text-align:left;width: 5em; font-weight: bold;">
-19:30:00
+19:45:00
 </td>
-<td style="text-align:left;width: 18em; ">
-I was walking from my pg to the mess with 2 other people when a bike came up behind us after slowing down so that we didn’t hear hear him. He groped me, continued to ride ahead while looking back, smiling and flipping us off.
+<td style="text-align:left;width: 20em; ">
+I kind of remember seeing the person’s face before, we were sitting near freshmart on one of the benches. There was 4 of us. One of the guy with blond hair streaks kept on looking over and smiling at me. I was scared because my friend kept on saying my name. Then when I went into freshmart, I stayed inside because I thought he might go away, but when I came out he was still there and standing advancing towards me. That is when I sped walk in the opposite direction.
 </td>
-<td style="text-align:left;width: 7em; ">
-Groping
-</td>
-<td style="text-align:left;width: 4em; width: 4em; ">
-13.10203
-</td>
-<td style="text-align:left;">
-77.57058
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 5em; font-weight: bold;">
-2022-09-08
-</td>
-<td style="text-align:left;width: 5em; font-weight: bold;">
-21:00:00
-</td>
-<td style="text-align:left;width: 18em; ">
-A hey guys, a creepy man (possibly drunk) on a cycle followed us for a bit and stopped next to us and tried to whisper something in our ears. He came in very close proximity to us, and circled around our pg for a bit. This was near mahaveer and around the sandhya mess. He was wearing a blue shirt. Just be careful.
-</td>
-<td style="text-align:left;width: 7em; ">
-Harassment,Stalking,Catcalling
-</td>
-<td style="text-align:left;width: 4em; width: 4em; ">
-13.10189
-</td>
-<td style="text-align:left;">
-77.57312
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 5em; font-weight: bold;">
-2022-09-06
-</td>
-<td style="text-align:left;width: 5em; font-weight: bold;">
-20:40:00
-</td>
-<td style="text-align:left;width: 18em; ">
-2guys on an activa were cat calling me and when I reacted the took a u turn and they started following me I started running into fresh mart one of the guy got down then I saw one of my friends I ran out of the fresh mart and told her I needed help she started recording and the guy left covering his face. The we’re on a white activa and the scooty number was either 6612 or 6621
-</td>
-<td style="text-align:left;width: 7em; ">
-Catcalling
-</td>
-<td style="text-align:left;width: 4em; width: 4em; ">
-13.10229
-</td>
-<td style="text-align:left;">
-77.57172
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 5em; font-weight: bold;">
-2022-09-23
-</td>
-<td style="text-align:left;width: 5em; font-weight: bold;">
-19:00:00
-</td>
-<td style="text-align:left;width: 18em; ">
-We were returning from Kun. Five guys were sitting on a bench in front of the bus stand. They were staring hard when we walked past. Then my friend noticed they were following us. We crossed the road to the other side to just confirm and they crossed as well. But by this time we had almost reached our pg. When we looked back this time, they had vanished. We suspect they had noticed us us keeping an eye
-</td>
-<td style="text-align:left;width: 7em; ">
+<td style="text-align:left;width: 5em; ">
 Stalking
 </td>
-<td style="text-align:left;width: 4em; width: 4em; ">
-13.10590
+<td style="text-align:left;width: 4em; ">
+13.10262
 </td>
-<td style="text-align:left;">
-77.57291
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 5em; font-weight: bold;">
-2022-10-18
-</td>
-<td style="text-align:left;width: 5em; font-weight: bold;">
-20:55:00
-</td>
-<td style="text-align:left;width: 18em; ">
-NA
-</td>
-<td style="text-align:left;width: 7em; ">
-Harassment,Catcalling,I felt unsafe
-</td>
-<td style="text-align:left;width: 4em; width: 4em; ">
-13.09939
-</td>
-<td style="text-align:left;">
-77.57673
+<td style="text-align:left;width: 4em; ">
+77.57176
 </td>
 </tr>
 <tr>
+<td style="text-align:left;width: 1em; font-weight: bold;">
+18
+</td>
 <td style="text-align:left;width: 5em; font-weight: bold;">
 2022-08-19
 </td>
 <td style="text-align:left;width: 5em; font-weight: bold;">
 23:00:00
 </td>
-<td style="text-align:left;width: 18em; ">
-NA
+<td style="text-align:left;width: 20em; ">
+A man on a scooter speeding by while I was walking, leaned towards me, either to grab my phone or touch me.
 </td>
-<td style="text-align:left;width: 7em; ">
+<td style="text-align:left;width: 5em; ">
 Groping,I felt unsafe
 </td>
-<td style="text-align:left;width: 4em; width: 4em; ">
+<td style="text-align:left;width: 4em; ">
 13.10266
 </td>
-<td style="text-align:left;">
+<td style="text-align:left;width: 4em; ">
 77.57146
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 1em; font-weight: bold;">
+19
+</td>
+<td style="text-align:left;width: 5em; font-weight: bold;">
+2022-08-29
+</td>
+<td style="text-align:left;width: 5em; font-weight: bold;">
+19:30:00
+</td>
+<td style="text-align:left;width: 20em; ">
+I was walking from my pg to the mess with 2 other people when a bike came up behind us after slowing down so that we didn’t hear hear him. He groped me, continued to ride ahead while looking back, smiling and flipping us off.
+</td>
+<td style="text-align:left;width: 5em; ">
+Groping
+</td>
+<td style="text-align:left;width: 4em; ">
+13.10203
+</td>
+<td style="text-align:left;width: 4em; ">
+77.57058
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 1em; font-weight: bold;">
+20
+</td>
+<td style="text-align:left;width: 5em; font-weight: bold;">
+2022-09-01
+</td>
+<td style="text-align:left;width: 5em; font-weight: bold;">
+22:15:00
+</td>
+<td style="text-align:left;width: 20em; ">
+When I was walking with two of my friends, this dude in a scooter comes from the back, grabs me and passed by.
+</td>
+<td style="text-align:left;width: 5em; ">
+Harassment
+</td>
+<td style="text-align:left;width: 4em; ">
+13.10014
+</td>
+<td style="text-align:left;width: 4em; ">
+77.57350
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 1em; font-weight: bold;">
+21
+</td>
+<td style="text-align:left;width: 5em; font-weight: bold;">
+2022-09-06
+</td>
+<td style="text-align:left;width: 5em; font-weight: bold;">
+20:40:00
+</td>
+<td style="text-align:left;width: 20em; ">
+2guys on an activa were cat calling me and when I reacted the took a u turn and they started following me I started running into fresh mart one of the guy got down then I saw one of my friends I ran out of the fresh mart and told her I needed help she started recording and the guy left covering his face. The we’re on a white activa and the scooty number was either 6612 or 6621
+</td>
+<td style="text-align:left;width: 5em; ">
+Catcalling
+</td>
+<td style="text-align:left;width: 4em; ">
+13.10229
+</td>
+<td style="text-align:left;width: 4em; ">
+77.57172
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 1em; font-weight: bold;">
+22
+</td>
+<td style="text-align:left;width: 5em; font-weight: bold;">
+2022-09-08
+</td>
+<td style="text-align:left;width: 5em; font-weight: bold;">
+21:00:00
+</td>
+<td style="text-align:left;width: 20em; ">
+A hey guys, a creepy man (possibly drunk) on a cycle followed us for a bit and stopped next to us and tried to whisper something in our ears. He came in very close proximity to us, and circled around our pg for a bit. This was near mahaveer and around the sandhya mess. He was wearing a blue shirt. Just be careful.
+</td>
+<td style="text-align:left;width: 5em; ">
+Harassment,Stalking,Catcalling
+</td>
+<td style="text-align:left;width: 4em; ">
+13.10189
+</td>
+<td style="text-align:left;width: 4em; ">
+77.57312
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 1em; font-weight: bold;">
+23
+</td>
+<td style="text-align:left;width: 5em; font-weight: bold;">
+2022-09-23
+</td>
+<td style="text-align:left;width: 5em; font-weight: bold;">
+19:00:00
+</td>
+<td style="text-align:left;width: 20em; ">
+We were returning from Kun. Five guys were sitting on a bench in front of the bus stand. They were staring hard when we walked past. Then my friend noticed they were following us. We crossed the road to the other side to just confirm and they crossed as well. But by this time we had almost reached our pg. When we looked back this time, they had vanished. We suspect they had noticed us us keeping an eye
+</td>
+<td style="text-align:left;width: 5em; ">
+Stalking
+</td>
+<td style="text-align:left;width: 4em; ">
+13.10590
+</td>
+<td style="text-align:left;width: 4em; ">
+77.57291
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 1em; font-weight: bold;">
+24
+</td>
+<td style="text-align:left;width: 5em; font-weight: bold;">
+2022-10-18
+</td>
+<td style="text-align:left;width: 5em; font-weight: bold;">
+20:55:00
+</td>
+<td style="text-align:left;width: 20em; ">
+Catcalling
+</td>
+<td style="text-align:left;width: 5em; ">
+Harassment,Catcalling,I felt unsafe
+</td>
+<td style="text-align:left;width: 4em; ">
+13.09939
+</td>
+<td style="text-align:left;width: 4em; ">
+77.57673
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 1em; font-weight: bold;">
+25
+</td>
+<td style="text-align:left;width: 5em; font-weight: bold;">
+2022-10-20
+</td>
+<td style="text-align:left;width: 5em; font-weight: bold;">
+02:05:00
+</td>
+<td style="text-align:left;width: 20em; ">
+Got Picked and Beaten by some drunk fellow at night
+</td>
+<td style="text-align:left;width: 5em; ">
+Harassment,Rape/Assault
+</td>
+<td style="text-align:left;width: 4em; ">
+12.96043
+</td>
+<td style="text-align:left;width: 4em; ">
+77.64459
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 1em; font-weight: bold;">
+26
+</td>
+<td style="text-align:left;width: 5em; font-weight: bold;">
+2022-10-26
+</td>
+<td style="text-align:left;width: 5em; font-weight: bold;">
+01:00:00
+</td>
+<td style="text-align:left;width: 20em; ">
+Local drunk fellow started cursing in kannada saying north indian
+</td>
+<td style="text-align:left;width: 5em; ">
+Harassment,I felt unsafe
+</td>
+<td style="text-align:left;width: 4em; ">
+12.97891
+</td>
+<td style="text-align:left;width: 4em; ">
+77.64074
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 1em; font-weight: bold;">
+27
+</td>
+<td style="text-align:left;width: 5em; font-weight: bold;">
+2022-11-02
+</td>
+<td style="text-align:left;width: 5em; font-weight: bold;">
+00:00:00
+</td>
+<td style="text-align:left;width: 20em; ">
+Witnessed a stabbing
+</td>
+<td style="text-align:left;width: 5em; ">
+Harassment
+</td>
+<td style="text-align:left;width: 4em; ">
+12.93852
+</td>
+<td style="text-align:left;width: 4em; ">
+77.63230
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 1em; font-weight: bold;">
+28
+</td>
+<td style="text-align:left;width: 5em; font-weight: bold;">
+2022-11-04
+</td>
+<td style="text-align:left;width: 5em; font-weight: bold;">
+21:30:00
+</td>
+<td style="text-align:left;width: 20em; ">
+I was walking and this random guy calls me and then starts asking for my Instagram I’d
+</td>
+<td style="text-align:left;width: 5em; ">
+I felt unsafe
+</td>
+<td style="text-align:left;width: 4em; ">
+13.09846
+</td>
+<td style="text-align:left;width: 4em; ">
+77.58144
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 1em; font-weight: bold;">
+29
+</td>
+<td style="text-align:left;width: 5em; font-weight: bold;">
+2022-11-06
+</td>
+<td style="text-align:left;width: 5em; font-weight: bold;">
+20:24:00
+</td>
+<td style="text-align:left;width: 20em; ">
+We were getting on. Bus from majestic. Free i got on. A man had followed us and he stood next to the window tapping the glass and trying to get my attention. Initially I thought he was going to sk something but he just made a kissing face so I tried to ignore him. Then he put his hand in through the open window I hadn’t noticed and tried to touch me. I slapped his hand way and yelled out loud but he just walked away and I’m still shivering out of fear.
+</td>
+<td style="text-align:left;width: 5em; ">
+Harassment,Groping
+</td>
+<td style="text-align:left;width: 4em; ">
+12.97738
+</td>
+<td style="text-align:left;width: 4em; ">
+77.57217
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 1em; font-weight: bold;">
+30
+</td>
+<td style="text-align:left;width: 5em; font-weight: bold;">
+2022-11-08
+</td>
+<td style="text-align:left;width: 5em; font-weight: bold;">
+18:00:00
+</td>
+<td style="text-align:left;width: 20em; ">
+My friend got groped by a 10-13 year old kid named Sachin Suhaas on a red cycle today evening just outside Anitha Pg 96 building. On interrogation, he said that he lives in 4th phase opposite a bhajji shop.
+</td>
+<td style="text-align:left;width: 5em; ">
+Harassment
+</td>
+<td style="text-align:left;width: 4em; ">
+13.13298
+</td>
+<td style="text-align:left;width: 4em; ">
+77.59832
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 1em; font-weight: bold;">
+31
+</td>
+<td style="text-align:left;width: 5em; font-weight: bold;">
+2022-11-30
+</td>
+<td style="text-align:left;width: 5em; font-weight: bold;">
+17:10:00
+</td>
+<td style="text-align:left;width: 20em; ">
+Queens mead PG, Umesh 91
+</td>
+<td style="text-align:left;width: 5em; ">
+Indecent exposure
+</td>
+<td style="text-align:left;width: 4em; ">
+13.10704
+</td>
+<td style="text-align:left;width: 4em; ">
+77.56886
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 1em; font-weight: bold;">
+32
+</td>
+<td style="text-align:left;width: 5em; font-weight: bold;">
+2022-12-02
+</td>
+<td style="text-align:left;width: 5em; font-weight: bold;">
+08:00:00
+</td>
+<td style="text-align:left;width: 20em; ">
+Early morning when i was going to catch a bus..i was in hurry..near that starting in the corner there was a man sleeping naked
+</td>
+<td style="text-align:left;width: 5em; ">
+I felt unsafe
+</td>
+<td style="text-align:left;width: 4em; ">
+12.97760
+</td>
+<td style="text-align:left;width: 4em; ">
+77.57341
 </td>
 </tr>
 </tbody>
