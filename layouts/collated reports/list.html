@@ -1,6 +1,6 @@
 {{ define "main" }}
 <section class="row" id="container">
-  <div class="col-lg-3 col-md-3 mx-auto text-left">
+  <div class="col-lg-3 col-md-4 mx-auto text-left">
     {{ partial "header.html"}}
     <div class="container">
       <div id="header">
@@ -10,17 +10,22 @@
     </div>
   </div>
   
-  <div class="textRight col-lg-8 col-md-8 col-sm-8 mx-auto">
+  <div class="textRight col-lg-8 col-md-8 col-sm-8 mr-1">
      {{ range where .Site.Pages "Type" "collated-report"}}
      <div class = "list-item-wrapper">
         <h3> {{ .Title }} </h3>
+        <small>Date published: {{ .Params.Date }}</small>
         <div class = "row">
           <a class = "col-md-4" href = {{ path.Join "collated-reports/"  (print .File.BaseFileName ".pdf") | absURL }} >
-            <h5> Download PDF report </h5>
+            <small> Download PDF report </small>
           </a>
+
+          {{ if .Params.downloadFormat.CSV}}
           <a  class = "col-md-4" href = {{ path.Join "collated-reports/"  (print .File.BaseFileName ".csv") | absURL}} >
-            <h5> Download Spreadsheet of reports (.CSV), this will open in Excel. </h5>
+            <small> Download Spreadsheet of reports (.CSV), this will open in Excel. </small>
           </a>
+
+          {{ end }}
         </div>
       </div>
     {{ end }}
