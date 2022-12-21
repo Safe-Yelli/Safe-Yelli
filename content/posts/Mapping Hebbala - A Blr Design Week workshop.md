@@ -77,3 +77,6 @@ From the orientation activities, encourage a lens of accessibility for women thr
 - Form teams to cover different areas
 ### Output
 <a class="bookmark" href="https://safeyelli.in/mapping-hebbala">Mapping Hebbala</a>
+
+### On hosting a workshop at your institution
+If you are interested in having a similar workshop to introduce some of these ideas, email us at safeyelli [at] gmail [dot] com and we will get back to you lightening fast.
