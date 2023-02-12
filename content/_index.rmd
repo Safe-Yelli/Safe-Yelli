@@ -104,7 +104,7 @@ newData <- newData %>%
          Location.lon = as.double(Location.lon))
 
 # Map tiles from mapbox
-mapUrl="https://api.mapbox.com/styles/v1/rungdung/cku6gh76r1dvh17o3zkfllvjz/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicnVuZ2R1bmciLCJhIjoiY2tqeWh6cXF4MDgzMjJvbWVmbGQzYjAwMyJ9.U-aJyoqyKvTXlhVk43jV1A"
+mapUrl="https://api.mapbox.com/styles/v1/rungdung/clciq2jqu000515nyp3fyh54v/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicnVuZ2R1bmciLCJhIjoiY2tqeWh6cXF4MDgzMjJvbWVmbGQzYjAwMyJ9.U-aJyoqyKvTXlhVk43jV1A"
 
 darkMapUrl= "https://api.mapbox.com/styles/v1/rungdung/cl3jusid0001g15odcz3f1dcb/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicnVuZ2R1bmciLCJhIjoiY2tqeWh6cXF4MDgzMjJvbWVmbGQzYjAwMyJ9.U-aJyoqyKvTXlhVk43jV1A"
 ```
@@ -194,12 +194,15 @@ colourLeg <- colorFactor(viridis(8), dat_streetLamps$status)
 #leaflet object
 #addProviderTiles(providers$CartoDB.Positron) not working
 map <- leaflet(sharedD, height = "100vh") %>%
+  enableTileCaching() %>%
   addTiles(urlTemplate = darkMapUrl,
            attribution =  'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-           group = "Street Lamps") %>%
+           group = "Street Lamps",
+           options = tileOptions(useCache = TRUE, crossOrigin = TRUE)) %>%
   addTiles(urlTemplate = mapUrl,
            attribution =  'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-           group = "Default") %>%
+           group = "Default",
+           options = tileOptions(useCache = TRUE, crossOrigin = TRUE)) %>%
   
   fitBounds(77.439880,12.850618,77.765350,13.124871) %>%
   setMaxBounds(77.071139,12.707331,78.114153,13.228584) %>%
@@ -232,10 +235,11 @@ map <- leaflet(sharedD, height = "100vh") %>%
     group = "Street Lamps"
   ) %>%
   
-  addHeatmap(radius = 12,
-             blur = 6, 
+  addWebGLHeatmap(
     intensity = 1,
-    max = 1,
+    size = "100",
+    units="px",
+    opacity=0.5,
     group = "Heat Map"
   ) %>% 
   
@@ -247,6 +251,8 @@ map <- leaflet(sharedD, height = "100vh") %>%
   
   hideGroup("Street Lamps") %>% 
   
+  addControlGPS() %>% 
+  activateGPS() %>% 
   addSearchOSM()
 
 
