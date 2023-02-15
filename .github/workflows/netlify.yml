@@ -16,7 +16,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    container: drizzt99/vonage:1.2.0
+    container: vonterin/safeyelli-builder-imager
     steps:
       - run: echo "Building Rmarkdown into HTML..."
 
