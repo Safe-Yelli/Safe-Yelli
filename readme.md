@@ -11,10 +11,14 @@ Safe Yelli is a website that allows for victims of catcalling, assault and othe
  
  - [Community Mapping in Bengaluru](https://safeyelli.in/community-mapping)
    - [Mapping Hebbala Workshop](https://safeyelli.in/mapping-hebbala)
+   - [Report on pedestrain issues under Hebbala Flyover](https://safeyelli.in/collated-reports/Hebbala-report-November18-19.pdf)
 
  ### Development
 
  - [Prototyped] [Street Illumination tracker Android app](https://github.com/Safe-Yelli/illumination-tracker)
+ - [Prototyped] Multiple Platform data aggregation. Why should people report only through the web form? Why can't they tweet or text? 
+   - [In Progress] [Telegram Bot](https://github.com/Safe-Yelli/telegram-reporting-bot)
+   - [Prototyped] [Twitter Scraper](https://github.com/Safe-Yelli/twitter-reports-aggregator)
  - [Concept development] Sidewalk tagging using ML
 
  ### Research 
