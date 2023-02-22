@@ -1,0 +1,30 @@
+
+
+{{ with .Params.banner}}
+    
+      {{ partial "header.html"}}
+      <div class="container">
+        <div id="header">
+          <h1 class="mb-2">{{ .title | markdownify }}</h1>
+          <h4>{{ .content | markdownify }}</h4>
+          {{ if .button.enable }}
+          {{ with .button }}
+          <div>
+            <a href="{{ .link | safeURL }}" title="{{ .label }}" class="btn btn-primary">{{ .label }}</a>
+          </div>
+          {{ end }}
+          {{ end }}  
+        {{ end }}
+        <!-- text -->
+        {{range .Params.text}}
+    
+            <div class=" col-lg-10 mx-auto float-left" id="text" >
+              <h2>{{ .title }} </h2>
+              {{ .content | markdownify }}
+            </div>
+       
+        {{ end }}
+        <!-- /text -->
+      </div>
+    </div>
+  <!-- /banner -->
