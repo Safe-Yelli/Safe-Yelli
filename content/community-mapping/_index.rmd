@@ -93,7 +93,7 @@ dat_shops <- extract_osm_objects (key = 'shop', return_type = 'point', bbox = bb
 
 # data from street light illumination tracker app
 
-GPX_file <- '../../resources/assets/Community-Mapping/Adhavan_on_5_11_SFS.gpx'
+GPX_file <- '../../resources/reports/community-mapping/Adhavan_on_5_11_SFS.gpx'
 illuminationTrack <- readOGR(GPX_file, verbose = FALSE)
 
 # map tiles from mapbox

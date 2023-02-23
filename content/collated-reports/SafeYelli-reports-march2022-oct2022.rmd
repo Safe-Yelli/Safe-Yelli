@@ -78,7 +78,7 @@ This is a collection of reports submitted to SafeYelli.in. More reports can be f
 ```{r Read data, message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
 mapUrl="https://api.mapbox.com/styles/v1/rungdung/cku6gh76r1dvh17o3zkfllvjz/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicnVuZ2R1bmciLCJhIjoiY2tqeWh6cXF4MDgzMjJvbWVmbGQzYjAwMyJ9.U-aJyoqyKvTXlhVk43jV1A"
 
-data<- read_csv('../../resources/assets/latestReports.csv') 
+data<- read_csv('../../resources/reports/latestReports.csv') 
 
 
 data <- data %>% 

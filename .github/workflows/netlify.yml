@@ -23,7 +23,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Fetch CSV from Google Sheets 🔨
-        run: rm resources/assets/latestReports.csv && curl -L '${{ secrets.GOOGLE_SHEETS_URL }}' > resources/assets/latestReports.csv
+        run: rm resources/reports/latestReports.csv && curl -L '${{ secrets.GOOGLE_SHEETS_URL }}' > resources/reports/latestReports.csv
 
       - name: Build with blogdown 📄
         run: Rscript -e "blogdown::build_site(build_rmd = 'timestamp')"
