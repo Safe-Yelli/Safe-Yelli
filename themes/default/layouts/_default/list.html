@@ -1,0 +1,49 @@
+{{ define "main" }}
+<!-- any page -->
+<!-- banner -->
+{{ "<!-- list -->" | safeHTML}}
+<section class="row" id="container">
+  
+  <div class="col-lg-3 col-md-3 mx-auto text-left">
+  {{ partial "banner.html" . }}
+    <div class="container">
+      <!-- text -->
+      {{range .Params.text}}
+
+      <div class="col-lg-10 mx-auto float-left" id="text">
+        <h2>{{ .title }}</h2>
+        {{ .content | markdownify }}
+      </div>
+      {{ end }}
+      <!-- /text -->
+    </div>
+  </div>
+  <!-- /banner -->
+
+  {{ if eq .Params.map true}}
+  <!-- map -->
+  <div class="col-lg-8 col-md-8 mr-1" id="map">{{ .Content }}</div>
+
+  {{range .Params.text}}
+
+  <div class="col-lg-10 mx-auto" id="text-mobile">
+    <h2>{{ .title }}</h2>
+    {{ .content | markdownify }}
+  </div>
+
+  {{ end }}
+  <!-- /map -->
+
+  {{ else }}
+  <!-- text on the right -->
+  {{range .Params.textRight}}
+
+  <div class="textRight col-lg-8 col-md-8 mr-1">
+    <h3>{{ .title }}</h3>
+    <p>{{ .content | markdownify }}</p>
+  </div>
+  <!-- /text on the right -->
+  {{ end }} {{ end }}
+</section>
+
+{{ end }}

@@ -1,0 +1,19 @@
+{{ define "main" }}
+
+<section class="row" id="container">
+  
+  {{ partial "banner.html" .}}
+  <div class="textRight col-lg-8 col-md-8 mr-1">
+    {{ if eq .Params.form.exists true }}
+      {{ partial "form.html" . }}
+    {{ end }}
+    {{ with .Params.coverImage }}
+      <img src=" {{ .url | safeURL }}" alt = " {{ .alt }}" class="blog-cover-image"> </img>
+    {{ end }}
+      <h4>{{ .Params.author | markdownify }} </h4>
+      {{ .Content | markdownify }}
+      
+  </div>
+
+</section>
+{{ end }}

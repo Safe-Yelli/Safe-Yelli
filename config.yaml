@@ -2,7 +2,7 @@
 baseurl: /
 languageCode: en-us
 title: Safe Yelli in Bengaluru?
-theme: "bigspring-light"
+theme: "default"
 googleAnalytics: 'G-SC10M5SL96'
 disqusShortname: ''
 ignoreFiles:
@@ -89,3 +89,4 @@ markup:
   goldmark:
     renderer:
       unsafe: yes
+
