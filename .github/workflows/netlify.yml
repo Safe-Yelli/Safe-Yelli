@@ -49,5 +49,4 @@ jobs:
       - name: Update CSV in GitHub
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          file_pattern: '*.csv'
-          commit_message: 'Update CSV files'
+          commit_message: 'Update CSV files and built site assets'
