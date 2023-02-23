@@ -1,4 +1,4 @@
-name: Build and deploy to Netlify
+name: Pull report from Google Sheets and build site
 
 on:
   # Allows you to run this workflow manually from the Actions tab
@@ -22,22 +22,32 @@ jobs:
 
       - uses: actions/checkout@v3
 
-      - name: Fetch CSV from Google Sheets �
+      - name: Fetch CSV from Google Sheets 🔨
         run: rm resources/assets/latestReports.csv && curl -L '${{ secrets.GOOGLE_SHEETS_URL }}' > resources/assets/latestReports.csv
 
-      - name: Build with blogdown �
+      - name: Build with blogdown 📄
         run: Rscript -e "blogdown::build_site(build_rmd = 'timestamp')"
 
-      - name: Deploy to Netlify 🚀
-        uses: nwtgck/actions-netlify@v1.2
+      ### Uncomment the below lines if Netlify deployment needs to be done with GitHub Actions
+      #- name: Deploy to Netlify 🚀
+      #  uses: nwtgck/actions-netlify@v1.2
+      #  with:
+      #    publish-dir: './public'
+      #    production-deploy: true
+      #    production-branch: main
+      #    deploy-message: "Deploy from GitHub Actions"
+      #    enable-pull-request-comment: true
+      #    overwrites-pull-request-comment: true
+      #  env:
+      #    NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      #    NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      #  timeout-minutes: 5
+        
+      - name: Allow workflow to access Git
+        run: git config --global --add safe.directory $(realpath .)
+
+      - name: Update CSV in GitHub
+        uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          publish-dir: './public'
-          production-deploy: true
-          production-branch: main
-          deploy-message: "Deploy from GitHub Actions"
-          enable-pull-request-comment: true
-          overwrites-pull-request-comment: true
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        timeout-minutes: 5
+          file_pattern: '*.csv'
+          commit_message: 'Update CSV files'
