@@ -63,10 +63,10 @@ library(leaflegend)
 
 
 
-lamps <- read_sf("../../resources/assets/Mapping-Hebbala/streetlamps.geojson")
-roads <- read_sf("../../resources/assets/Mapping-Hebbala/roads.geojson")
-sidewalks <- read_sf("../../resources/assets/Mapping-Hebbala/sidewalks.geojson")
-crossings <- read_sf("../../resources/assets/Mapping-Hebbala/crossings.geojson")
+lamps <- read_sf("../../resources/reports/mapping-hebbala/streetlamps.geojson")
+roads <- read_sf("../../resources/reports/mapping-hebbala/roads.geojson")
+sidewalks <- read_sf("../../resources/reports/mapping-hebbala/sidewalks.geojson")
+crossings <- read_sf("../../resources/reports/mapping-hebbala/crossings.geojson")
 
 
 lamps$status <- lamps$status %>% 
@@ -83,7 +83,7 @@ darkMapUrl= "https://api.mapbox.com/styles/v1/rungdung/cl3jusid0001g15odcz3f1dcb
 
 ```{r message=FALSE, warning=FALSE, include=FALSE}
 
-illuminationTrace<- read.csv("../../resources/assets/Mapping-Hebbala/traces.csv")
+illuminationTrace<- read.csv("../../resources/reports/mapping-hebbala/traces.csv")
 
 
 illuminationTrace$callibrated <- ((illuminationTrace$Reading - illuminationTrace$CP2) * 1700)/ (illuminationTrace$CP1 - illuminationTrace$CP2)

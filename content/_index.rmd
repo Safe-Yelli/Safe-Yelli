@@ -63,8 +63,8 @@ library(viridis)
 
 ```{r reading data, include=FALSE}
 # Imports data from multiple spreadsheets and performs operations to uniformize field names
-oldData <- read_csv('../resources/assets/allUshahidiResponses.csv') 
-newData <- read_csv('../resources/assets/latestReports.csv') 
+oldData <- read_csv('../resources/reports/allUshahidiResponses.csv') 
+newData <- read_csv('../resources/reports/latestReports.csv') 
 
 # Post verification
 # If human verified is 'yes'
