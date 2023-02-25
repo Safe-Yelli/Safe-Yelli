@@ -73,7 +73,7 @@ h6,
   position: relative;
   z-index: 1;
   transition: .2s ease;
-  white-space: wrap; }
+  white-space: nowrap; }
   .btn::before {
     position: absolute;
     content: "";
@@ -280,10 +280,10 @@ textarea.form-control {
     color: #FFD815; }
 
 .navbar-expand-lg .navbar-nav .nav-link {
-  padding: 10px; }
+  padding: 20px; }
   @media (max-width: 991px) {
     .navbar-expand-lg .navbar-nav .nav-link {
-      padding: 5px; } }
+      padding: 10px; } }
 #select-language {
   background-color: transparent;
   font-weight: 700; }
@@ -553,21 +553,23 @@ a.post-title {
   color: #222; }
 
 .leaflet-heatmap-layer {
-  opacity: 0.3; }
+  opacity: 0.7; }
 
 header {
   padding: 3em 0;
   margin-left: -3em; }
 
-.navbar-expand-lg {
-  flex-flow: row wrap !important;
-  overflow: wrap !important; }
-
-.navbar-expand-lg .navbar-nav .nav-link {
-  padding-right: 2px; }
-
 .navbar {
-  max-width: 300px !important; }
+  display: flex;
+  width: auto; }
+
+.dropdown-menu {
+  position: absolute !important;
+  top: auto !important;
+  left: auto !important; }
+
+.nav-item {
+  margin-right: 10px; }
 
 body {
   background-image: url(/images/bg.svg);
@@ -580,8 +582,23 @@ body {
   padding: 0;
   margin: 0; }
 
+.leaflet-bottom {
+  max-height: 30vh;
+  display: inline-block;
+  vertical-align: bottom; }
+
+.legend.leaflet-control {
+  max-width: 70%; }
+
+.legend > i {
+  height: auto !important;
+  margin-left: 5px; }
+
 label {
   display: inline; }
+
+.ext-logo {
+  width: 150px; }
 
 .map-section {
   display: -ms-flexbox;
@@ -606,6 +623,9 @@ label {
 .text {
   margin-top: 2em; }
 
+.text-left {
+  min-height: 80vh; }
+
 .hiddenForm {
   display: none;
   visibility: hidden; }
@@ -621,8 +641,13 @@ label {
 .navigation {
   padding: 2em 0; }
 
+.navbar-nav {
+  flex-direction: row !important;
+  margin-right: 3px; }
+
 #navigation {
-  width: 100px !important;
+  display: flex-wrap;
+  width: 400px !important;
   flex-wrap: overflow !important; }
 
 #text-mobile {
@@ -639,7 +664,8 @@ label {
   outline: none;
   font-size: 15px; }
 
-.active, .collapsible:hover {
+.active,
+.collapsible:hover {
   background-color: #555; }
 
 .content {
@@ -660,14 +686,35 @@ label {
   header {
     padding: 3em 0;
     margin-left: 0em; }
+  .nav-item {
+    font-size: 10pt;
+    margin-right: 5px; }
+  .btn {
+    white-space: nowrap; }
+  .btn-sm {
+    padding: 5px 10px; }
+  .dropdown-menu {
+    position: absolute;
+    margin-right: 2em;
+    max-width: 70vw; }
+  .dropdown-item {
+    white-space: normal !important;
+    padding-left: 1em; }
   .navbar-expand-lg .navbar-nav .nav-link {
     padding: 15px; }
   .crosstalk-map {
-    padding: 1em 2em; }
+    padding: 1em 0em; }
   .crosstalk-map,
   .crosstalk-filters {
     min-width: 100%;
     flex: 1; }
+  .leaflet-bottom {
+    max-height: 60vh; }
+  .legend.leaflet-control {
+    font-size: 10px !important;
+    line-height: 15px !important;
+    display: flex;
+    max-width: 90%; }
   .crosstalk-filters {
     max-width: 80%;
     margin-right: 5em;
