@@ -624,7 +624,7 @@ label {
   margin-top: 2em; }
 
 .text-left {
-  min-height: 80vh; }
+  min-height: 20vh; }
 
 .hiddenForm {
   display: none;
