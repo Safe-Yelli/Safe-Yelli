@@ -1,0 +1,20 @@
+---
+title: "A moving market"
+
+description: "How can we look at public spaces being more active members of society through revitalising existing "
+
+draft: true
+type: blog
+
+author: Saee, Samar, Adhavan
+
+date: 2022-09-11
+banner:
+  title: "What does a Bottu mean to you?"
+  content: "Developing engagement tools for on-the-ground interactions"
+coverImage:
+  alt: An image of safe yelli stickers
+  url: blogs/stylised-workInProgress-bottu-board.jpeg
+---
+
+
