@@ -104,9 +104,10 @@ newData <- newData %>%
          Location.lon = as.double(Location.lon))
 
 # Map tiles from mapbox
-mapUrl="https://api.mapbox.com/styles/v1/rungdung/clciq2jqu000515nyp3fyh54v/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicnVuZ2R1bmciLCJhIjoiY2tqeWh6cXF4MDgzMjJvbWVmbGQzYjAwMyJ9.U-aJyoqyKvTXlhVk43jV1A"
+mapUrl = "https://api.mapbox.com/styles/v1/rungdung/clg9kg0ce006n01o5doivuqu8/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicnVuZ2R1bmciLCJhIjoiY2tqeWh6cXF4MDgzMjJvbWVmbGQzYjAwMyJ9.U-aJyoqyKvTXlhVk43jV1A"
 
-darkMapUrl= "https://api.mapbox.com/styles/v1/rungdung/cl3jusid0001g15odcz3f1dcb/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicnVuZ2R1bmciLCJhIjoiY2tqeWh6cXF4MDgzMjJvbWVmbGQzYjAwMyJ9.U-aJyoqyKvTXlhVk43jV1A"
+
+darkMapUrl = "https://api.mapbox.com/styles/v1/rungdung/cl3jusid0001g15odcz3f1dcb/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicnVuZ2R1bmciLCJhIjoiY2tqeWh6cXF4MDgzMjJvbWVmbGQzYjAwMyJ9.U-aJyoqyKvTXlhVk43jV1A"
 ```
 
 
