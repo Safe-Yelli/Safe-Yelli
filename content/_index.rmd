@@ -4,7 +4,7 @@ description: A citizen centric tool to report street harassment, assault and oth
 draft: no
 banner:
   title: Documenting Street Harassment in Bengaluru
-  content: "_**A citizen centric tool to report harassment, assault and other crimes on the streets in Bengaluru. See our community's citizen reported crime data on a map.**_ \n \n ಬೆಂಗಳೂರು ಗರವಾಸಿಗಳಿಗೆ  ಇಲ್ಲಿ ನಡೆಯುವ ದೌರ್ಜನ್ಯ ಮತ್ತು ಕಿರುಕುಳವನ್ನು ರಿಪೋರ್ಟ್ ಮಾಡುವ ಉಪಕರಣ. ಇಲ್ಲಿ ಸಂಗ್ರಹವಾದ ಅಪರಾಧ ವರದಿಗಳನ್ನು ನಕ್ಷೆಯ ಮೇಲೆ ಕಾಣಬಹುದು "
+  content: "_**A citizen centric tool to report harassment, assault and other crimes on the streets in Bengaluru. See our community's citizen reported crime data on a map.**_ \n \n ಬೆಂಗಳೂರು ನಾಗರಿಕರು ರಸ್ತೆಯಲ್ಲಿ ನಡೆಯುವ ದೌರ್ಜನ್ಯ, ಹಲ್ಲೆ ಹಾಗೂ ಇನ್ನಿತರ ಅಪರಾಧಗಳನ್ನು ಇಲ್ಲಿ ದಾಖಲಿಸಬಹುದು. ಸಂಗ್ರಹವಾದ ವರದಿಗಳನ್ನು ನಕ್ಷೆಯ ಮೇಲೆ ಕಾಣಬಹುದು." 
   button:
     enable: yes
     label: Report / ಘಟನೆಯನ್ನು ರಿಪೋರ್ಟ್ ಮಾಡಿ
