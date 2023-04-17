@@ -93,8 +93,8 @@ dat_shops <- extract_osm_objects (key = 'shop', return_type = 'point', bbox = bb
 
 # data from street light illumination tracker app
 
-GPX_file <- '../../resources/assets/Community-Mapping/Adhavan_on_5_11_SFS.gpx'
-illuminationTrack <- readOGR(GPX_file, verbose = FALSE)
+# GPX_file <- '../../resources/assets/Community-Mapping/Adhavan_on_5_11_SFS.gpx'
+# illuminationTrack <- readOGR(GPX_file, verbose = FALSE)
 
 # map tiles from mapbox
 mapUrl="https://api.mapbox.com/styles/v1/rungdung/cku6gh76r1dvh17o3zkfllvjz/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicnVuZ2R1bmciLCJhIjoiY2tqeWh6cXF4MDgzMjJvbWVmbGQzYjAwMyJ9.U-aJyoqyKvTXlhVk43jV1A"
@@ -104,24 +104,24 @@ darkMapUrl= "https://api.mapbox.com/styles/v1/rungdung/cl3jusid0001g15odcz3f1dcb
 
 ```{r message=FALSE, warning=FALSE, include=FALSE}
 
-cuts <- cut(illuminationTrack$ogr_lux, 
-            labels=c("nil", "low", "medium", "directly lit"),
-            breaks=c(0, 7, 10, 200, 70000),
-            right=FALSE)
-illuminationTrack$lightLevel = cuts
+# cuts <- cut(illuminationTrack$ogr_lux, 
+#             labels=c("nil", "low", "medium", "directly lit"),
+#             breaks=c(0, 7, 10, 200, 70000),
+#             right=FALSE)
+# illuminationTrack$lightLevel = cuts
 
 
-pallete <- colorFactor(viridis(4, option = "B"),
-                     domain = cuts) 
-palleteNum <- colorNumeric(c("brown", "yellow", "green", "blue"),
-                     domain = c(0:4))
+# pallete <- colorFactor(viridis(4, option = "B"),
+#                      domain = cuts) 
+# palleteNum <- colorNumeric(c("brown", "yellow", "green", "blue"),
+#                      domain = c(0:4))
 ```
 
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 
 
-colourLeg <- colorFactor(viridis(8), dat_streetLamps$status)
+colourLeg <- colorFactor(viridis(8), dat_streetLamps$operational_status)
 
 streetLights <- leaflet(dat_streetLamps, 
                         width="100%", 
@@ -133,21 +133,21 @@ streetLights <- leaflet(dat_streetLamps,
   fitBounds(77.567232,13.097142,77.579978,13.109009) %>%
   setMaxBounds(77.554808, 13.087922, 77.608495, 13.114213) %>% 
   addCircleMarkers(opacity=0.5, 
-                   color = ~colourLeg(status), 
+                   color = ~colourLeg(operational_status), 
                    radius= 2, 
-                   label = ~htmlEscape(status), 
+                   label = ~htmlEscape(operational_status), 
                    group = "Locations"
                    ) %>% 
-  addHeatmap(lng = illuminationTrack$ogr_lng,
-               lat = illuminationTrack$ogr_lat,
-               intensity =  cuts,
-               radius = 3,
-               blur=5,
-               group = "Traces",
-             max=10,
-             cellSize = 1,
-             gradient = pallete(cuts)
-            ) %>% 
+  # addHeatmap(lng = illuminationTrack$ogr_lng,
+  #              lat = illuminationTrack$ogr_lat,
+  #              intensity =  cuts,
+  #              radius = 3,
+  #              blur=5,
+  #              group = "Traces",
+  #            max=10,
+  #            cellSize = 1,
+  #            gradient = pallete(cuts)
+  #           ) %>% 
 
   addLayersControl(
                    overlayGroups = c("Locations", "Traces"),
@@ -155,7 +155,7 @@ streetLights <- leaflet(dat_streetLamps,
                   ) %>% 
   addLegend(position="bottomright",
             pal = colourLeg,
-            values = ~status,
+            values = ~operational_status,
             title="Status of mapped streetlights")
 
 tags$div(class = "map-section",

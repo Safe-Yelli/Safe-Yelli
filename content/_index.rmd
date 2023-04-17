@@ -187,15 +187,14 @@ dat_streetLamps <-
     bbox = bbox
   )
 
-colourLeg <- colorFactor(viridis(8), dat_streetLamps$status)
+colourLeg <- colorFactor(viridis(8), dat_streetLamps$operational_status)
 ```
 
 ```{r Mappinnng!, echo=FALSE, message=FALSE, warning=FALSE}
 
-#leaflet object
-#addProviderTiles(providers$CartoDB.Positron) not working
-map <- leaflet(sharedD, height = "100vh") %>%
-  enableTileCaching() %>%
+# leaflet object
+
+map <- leaflet(sharedD, height="100vh") %>%
   addTiles(urlTemplate = darkMapUrl,
            attribution =  'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
            group = "Street Lamps",
@@ -223,15 +222,15 @@ map <- leaflet(sharedD, height = "100vh") %>%
   addCircleMarkers(
     data = dat_streetLamps,
     opacity = 0.5,
-    color = ~ colourLeg(dat_streetLamps$status),
+    color = ~colourLeg(dat_streetLamps$operational_status),
     radius = 2,
-    label = ~ htmlEscape(dat_streetLamps$status),
+    label = ~htmlEscape(dat_streetLamps$operational_status),
     group = "Street Lamps"
   ) %>%
   addLegend(
     position = "bottomright",
     pal = colourLeg,
-    values = ~ dat_streetLamps$status,
+    values = ~dat_streetLamps$operational_status,
     title = "Status of mapped streetlights",
     group = "Street Lamps"
   ) %>%
