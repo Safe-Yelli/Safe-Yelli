@@ -1,5 +1,6 @@
 
 baseurl: /
+relativeURLs: true
 languageCode: en-us
 title: Safe Yelli's blog
 theme: "bigspring-light"
@@ -11,6 +12,9 @@ ignoreFiles:
   - _cache$
   - \.knit\.md$
   - \.utf8\.md$
+  - \.qmd$
+  - \\.ipynb$
+  - \\.py 
   
 
  
@@ -58,7 +62,6 @@ params:
     primary_color: "#FFD815"
     text_color: "#555"
 markup:
-  defaultMarkdownHandler: goldmark
   goldmark:
     renderer:
-      unsafe: yes
+      unsafe: true

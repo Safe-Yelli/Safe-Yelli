@@ -1,0 +1,136 @@
+---
+title: "Learning for the field, tools, techniques, talks"
+
+description: "Tools for the commons, data collection, adoption"
+
+draft: false
+type: blog
+
+author: Adhavan
+
+date: 2023-04-17
+banner:
+  title: "Tools for the commons, data collection, adoption"
+  content: "Developing tools for on-the-ground data collection, interaction"
+coverImage:
+  alt: An image of safe yelli stickers
+  url: blogs/hebbala-poster.jpg
+embed-resources: true
+format: hugo-md
+
+---
+This will be an attempt at documenting our search for tools, methods for data collection, primary interviews and the like.
+
+## Fielding apps for data collection
+
+### Pen and paper!
+Our first few data collection efforts in Yelahanka were on paper and pen. We tried using Google Forms, but for some reason, Google Forms does not have a location selector. That would be a major disruptor, at least in my opinion, towards crowd-sourcing geo-located data. Location selection and switching between Google Maps and Google Forms was tedious and error-prone, so Shresth, one of our founding members went on to print out a map and use it to mark the location of street lamps.
+
+### QField, QGIS
+After multiple failed attempts I discovered QField, I'd been using QGIS for a few days at that point, so that was what we went with when we mapped Hebbala. But at that point, it had already been months of trying to find a tool without much formal support and ecosystem for recommendations. Even though the term geospatial was something I had heard of and QGIS was seen as an intimidating tool, it still is. 
+
+Setting up QField is no easy task if you are new to QGIS.
+
+## Adoption, boring 
+
+Syncing was error-prone with QGIS, and onboarding was tedious with 25 people. Ideally, we would need to set this up in an earlier session, contextualise, give them time to explore and then come back
+
+### User experience
+
+The user experience is boring because we don't see other people's updates unless we manually sync. I'm sure that is for a completely logical reason, but when there is no positive feedback, it lacks. StreetComplete has an interesting team mode, alas, only if it allowed for custom projects
+
+
+
+::: {#Hebbala-apps layout-ncol=2 height=50vh}
+
+![Since there were multiple teams in each direction of the Hebbala junction, we tracked each groups live progress on a WhatsApp group](/blogs/tracking.png){height=100}
+
+![QField Android app on the Mapping Hebbala Project](/blogs/QField-sample.png){height=100}
+
+:::
+
+## Going beyond applications
+
+### Involving people, creating interest
+
+### Low-effort collection tooling
+
+We've developed applications that could potentially include a fun element. To detract from user input and allow user action to be tracked is interesting. In that, this could be testaments of routes taken, an exercise conducted, essentially data collection that does not depend on sole direction. If I had to track each streetlight's illumination, expecting full manual intent seems foolhardy.
+
+
+
+::: {#illumination-tracker layout-ncol=2}
+
+![Ugly MIT app inventor screen](/blogs/mit-app-inventor.png){height=300}
+
+![Our Illumination tracker app prototype on Android](/blogs/illumination-tracker-test.png){height=300}
+
+:::
+
+
+We developed a simple Android App using MIT App Inventor, which took a few hours to develop and test. I wish I'd known about ODK previously. But tools like the MIT app inventor are fun and simple to start with. Why not use them? 
+
+```{r }
+#| label: illumination-data
+#| fig-cap: 
+#|     - "Illumination data collected from multiple devices. GPS Accuracy threw off the data, but the general trend is clear. Phone light sensors seem to notoriously vary under different conditions, each phone was calibrated under the same light source with a light meter. Values adjust to reflect that"
+#| warning: false
+#| errors: false
+library(leaflet)
+library(leaflet.extras)
+library(RColorBrewer)
+
+darkMapUrl="https://api.mapbox.com/styles/v1/rungdung/cl3jusid0001g15odcz3f1dcb/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicnVuZ2R1bmciLCJhIjoiY2tqeWh6cXF4MDgzMjJvbWVmbGQzYjAwMyJ9.U-aJyoqyKvTXlhVk43jV1A"
+
+# Reading in and calibrating data
+illuminationTrace<- read.csv("../../resources/assets/illumination-traces-hebbala-nov-2022-18.csv", stringsAsFactors = FALSE)
+
+# CP = Calibration point
+## One calibration point was the darkest point, the other was the brightest point
+illuminationTrace$callibrated <- ((illuminationTrace$Reading - illuminationTrace$CP2) * 1700)/ (illuminationTrace$CP1 - illuminationTrace$CP2)
+
+# This needs some scientific basis for classification
+## Should refer to the standards for street lighting
+cuts <- cut(illuminationTrace$callibrated, 
+            labels=c( "low", "medium", "lit", "directly lit"),
+            breaks=c(0, 200, 1000, 3000,20000),
+            right=FALSE)
+
+pallete <- colorFactor(brewer.pal(n = 5, name = "RdYlGn"),
+                     domain = cuts) 
+
+
+# plot on map
+map <- leaflet(height="70vh"
+                ) %>%
+  addTiles(urlTemplate = darkMapUrl,
+           attribution =  'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Infrastructure layers from SafeYelli volunteers, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+           options = providerTileOptions(minZoom =15, maxZoom = 17)
+           ) %>%
+  fitBounds(77.578648,13.036753,77.606285,13.049463) %>%
+  setMaxBounds(77.564031,13.028562,77.619306,13.053940) %>% 
+  addHeatmap(data = illuminationTrace,
+             intensity =  cuts,
+             radius = 2,
+             blur=4,
+             group = "illumination traces",
+             max=5,
+             gradient = pallete(cuts)) 
+
+map
+```
+
+### Larger thoughts
+While there are concerns of explicit intent, I do not think providing civic action could be a focus of every citizen, nor is it culturally important in some ways. By expecting free time from participants who audit streets, I wonder if we are filtering those who cannot afford the free time, thus the one that might make the most use of public spaces. Language, culture and a whole load of such barriers affect this. I wish these were taught in college environments, I believe a lack of Kannada, Tamil speaking members in such teams affects such outputs 
+
+
+## Developing a profile of Hebbala
+Our Interviews at the Hebbala bus stands, including the Military Dairy Farm Bus Stand (opposite Esteem Mall), the one beside the Kempegowda Park (next to the Ramp towards the city), and the one near the Hebbala Police Station, tell us at face level that the sense of safety is not a major concern for women.
+
+We've developed a profile of Hebbala as a commute hub restricts movement primarily to Bus Stands, wait times are low, there is constant movement late in the night which somehow offsets the extreme lack of lighting
+
+While physical accessibility is still restricted, especially at the railway crossing where people hop over a low metal fence...
+
+### Developing a interview methodology for fast moving pedestrain traffic
+
+
