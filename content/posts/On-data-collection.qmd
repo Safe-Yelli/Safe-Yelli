@@ -8,15 +8,19 @@ type: blog
 
 author: Adhavan
 
-date: 2023-04-17
+date: 2023-04-26
 banner:
   title: "Tools for the commons, data collection, adoption"
   content: "Developing tools for on-the-ground data collection, interaction"
 coverImage:
   alt: An image of safe yelli stickers
   url: blogs/hebbala-poster.jpg
-embed-resources: true
-format: hugo-md
+format:
+  html:
+    toc: true
+    toc-location: left
+    embed-resources: true
+    code-fold: true
 
 ---
 This will be an attempt at documenting our search for tools, methods for data collection, primary interviews and the like.
@@ -43,9 +47,10 @@ The user experience is boring because we don't see other people's updates unless
 
 ::: {#Hebbala-apps layout-ncol=2 height=50vh}
 
-![Since there were multiple teams in each direction of the Hebbala junction, we tracked each groups live progress on a WhatsApp group](/blogs/tracking.png){height=100}
+![Since there were multiple teams in each direction of the Hebbala junction, we tracked each groups live progress on a WhatsApp group](../../static/blogs/tracking.png){height=100}
 
-![QField Android app on the Mapping Hebbala Project](/blogs/QField-sample.png){height=100}
+![QField Android app on the Mapping Hebbala Project](../../static/blogs/QField-sample.png){height=100}
+
 
 :::
 
@@ -61,9 +66,9 @@ We've developed applications that could potentially include a fun element. To de
 
 ::: {#illumination-tracker layout-ncol=2}
 
-![Ugly MIT app inventor screen](/blogs/mit-app-inventor.png){height=300}
+![Ugly MIT app inventor screen](../../static/blogs/mit-app-inventor.png){height=300}
 
-![Our Illumination tracker app prototype on Android](/blogs/illumination-tracker-test.png){height=300}
+![Our Illumination tracker app prototype on Android](../../static/blogs/illumination-tracker-test.png){height=300}
 
 :::
 
