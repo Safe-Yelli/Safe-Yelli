@@ -1,10 +1,9 @@
-
 baseurl: /
 languageCode: en-us
 title: Safe Yelli in Bengaluru?
 theme: "default"
-googleAnalytics: 'G-SC10M5SL96'
-disqusShortname: ''
+googleAnalytics: "G-SC10M5SL96"
+disqusShortname: ""
 ignoreFiles:
   - \.Rmd$
   - \.Rmarkdown$
@@ -15,13 +14,11 @@ ignoreFiles:
   - \.py$
   - Dockerfile
   - \.dockerignore
-  
 
- 
 menu:
   main:
     - name: Activities, Motivations
-    
+
     - name: Why do what we do?
       parent: Activities, Motivations
       url: /why
@@ -34,38 +31,35 @@ menu:
       parent: Activities, Motivations
       url: https://blog.safeyelli.in
       weight: 4
-    
-    
-    
+
     - name: Community Projects
-    
+
     - name: Community Mapping
       url: /community-mapping/
       parent: Community Projects
       weight: 2
-    - name: Mapping for accountability, Hebbala 
+    - name: Mapping for accountability, Hebbala
       url: /mapping-hebbala/
       parent: Community Projects
       weight: 1
-   
-    
 
   footer_left:
-      - name: Contact Us
-        url: /contact/
-      - name: Find collated reports for download here
-        url: /collated-reports
-      - name: Read our blog here
-        url: https://blog.safeyelli.in
+    - name: Contact Us
+      url: /contact/
+    - name: Find collated reports for download here
+      url: /collated-reports
+    - name: Read our blog here
+      url: https://blog.safeyelli.in
+    - name: Privacy Policy
+      url: "./privacyPolicy-SafeYelli.pdf"
   footer_middle:
-      - name: Follow our Twitter
-        url: https://twitter.com/SafeYelli
-      - name: Read the work in progress documentation at our Github
-        url: https://github.com/rungdung/harassment-in-yelli
-      - name: Instagram
-        url: https://instagram.com/safeyelli
-    
-  
+    - name: Follow our Twitter
+      url: https://twitter.com/SafeYelli
+    - name: Read the work in progress documentation at our Github
+      url: https://github.com/rungdung/harassment-in-yelli
+    - name: Instagram
+      url: https://instagram.com/safeyelli
+
 params:
   MathJaxCDN: //cdnjs.cloudflare.com/ajax/libs
   MathJaxVersion: 2.7.5
@@ -80,9 +74,9 @@ params:
   logo: "images/logo.svg"
   logo_width: "100px"
   navigation_button:
-      enable: true
-      label: "Report Incident"
-      link: "/report"
+    enable: true
+    label: "Report Incident"
+    link: "/report"
   variables:
     primary_color: "#FFD815"
     text_color: "#555"
@@ -91,4 +85,3 @@ markup:
   goldmark:
     renderer:
       unsafe: yes
-
