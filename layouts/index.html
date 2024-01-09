@@ -15,7 +15,6 @@
           {{ with .Params.coverImage }}
           <img src=" {{ .url | safeURL }}" alt=" {{ .alt }}" class="blog-cover-image"> </img>
           {{ end }}
-          {{with .Params.date}} <p class="blog-date">{{.}}</p> {{end}}
         </div>
         <div class="col-md-6">
           <h2 class="blog-post-title">{{.Title}}</h2>
