@@ -1,0 +1,36 @@
+---
+title: "A collection of Show and Tell maps"
+
+description: "Participants were asked to draw their neighbourhoods with frequent travel destinations marked. They were then asked to trace routes that family members take to the same point, with an ensuing discussion on reasons."
+
+draft: false
+type: blog
+
+author: Adhavan
+
+date: 2024-01-08
+banner:
+  title: "Show, Tell and Maps drawn by participants in Hebbala and Yelahanka events"
+  content: "A collection of maps that are drawn by participants in Hebbala and Yelahanka events. Participants were asked to draw their neighbourhoods with frequent travel destinations marked. They were then asked to trace routes that family members take to the same point, with an ensuing discussion on reasons. Most factors being dogs, lighting, theft, cultural practises, walking with others vs alone etc."
+coverImage:
+  alt: An image of safe yelli stickers
+  url: /blogs/showmaptell3.jpg
+format:
+  html:
+    toc: true
+    toc-location: left
+    embed-resources: true
+    code-fold: true
+---
+
+![](.\blogs\perceptionmaps\hebbala_2023-12-08-2.png)
+
+![](.\blogs\perceptionmaps\hebbala_2023-12-08-2.png)
+
+![](.\blogs\perceptionmaps\hebbala_2023-12-08.png)
+
+![](.\blogs\perceptionmaps\yelahanka-20231223-2.jpg)
+
+![](.\blogs\perceptionmaps\yelahanka-20231223-3.jpg)
+
+![](.\blogs\perceptionmaps\yelahanka-20231223.jpg)
