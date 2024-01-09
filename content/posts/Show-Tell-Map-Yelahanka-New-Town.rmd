@@ -1,0 +1,45 @@
+---
+title: "Show, Tell and Map at Yelahanka New Town"
+
+description: "Draw our own neighbourhoods and share what happens"
+
+draft: false
+type: blog
+
+author: Adhavan
+
+date: 2023-12-26
+banner:
+  title: "Show, Tell and Map at Yelahanka New Town"
+  content: "Draw our own neighbourhoods and share what happens"
+coverImage:
+  alt: An image of safe yelli stickers
+  url: /blogs/showmaptell2.jpg
+format:
+  html:
+    toc: true
+    toc-location: left
+    embed-resources: true
+    code-fold: true
+---
+
+![We had over ten people joining us on Saturday to draw maps (of varying qualities, but still proud maps) and talk about their neighbourhoods. Very interesting conversations came about: On street dogs, unusable streets outside womens' pgs and over policing on the streets. ](/blogs/showmaptell2.jpg)
+
+
+
+![Everybody first drew their neighbourhoods...be it their current place of residence or the homes they grew up in ](/blogs/showmaptell3.jpg)
+
+
+
+![Shadow kept sulking without the attention of the cartographers at this point ](/blogs/showmaptell5.jpg)
+
+
+![They then trace routes to a place of interest. A shop the family got milk from everyday, or the nearest bus stand or their grandparent's home. ](/blogs/showmaptell4.jpg)
+
+
+
+![Everyone took turns narrating why the route changed based on who was walking, when and where. Girlfriends were accompanied from far away. Police asked them to turn away because robberies were high...and drunkards frequent the street outside a women's PG ](/blogs/showmaptell7.jpg)
+
+Every map was a study of many different families, spaces, genders and streets. We hope to continue to host more "Show, Tell and Map" events in the coming months
+
+We then ended up mapping over 150 street lamps, 100 trees and 100 more points of interest. 
