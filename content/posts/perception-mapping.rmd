@@ -23,14 +23,14 @@ format:
     code-fold: true
 ---
 
-![](.\blogs\perceptionmaps\hebbala_2023-12-08-2.png)
+![](/blogs/perceptionmaps/hebbala_2023-12-08-2.png)
 
-![](.\blogs\perceptionmaps\hebbala_2023-12-08-2.png)
+![](/blogs/perceptionmaps/hebbala_2023-12-08-2.png)
 
-![](.\blogs\perceptionmaps\hebbala_2023-12-08.png)
+![](/blogs/perceptionmaps/hebbala_2023-12-08.png)
 
-![](.\blogs\perceptionmaps\yelahanka-20231223-2.jpg)
+![](/blogs/perceptionmaps/yelahanka-20231223-2.jpg)
 
-![](.\blogs\perceptionmaps\yelahanka-20231223-3.jpg)
+![](/blogs/perceptionmaps/yelahanka-20231223-3.jpg)
 
-![](.\blogs\perceptionmaps\yelahanka-20231223.jpg)
+![](/blogs/perceptionmaps/yelahanka-20231223.jpg)
