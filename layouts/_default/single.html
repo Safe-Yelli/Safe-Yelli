@@ -1,18 +1,19 @@
 {{ define "main" }}
 
 <section class="row" id="container">
-  
+
   {{partial "banner.html" . }}
-  
+
   <div class="textRight mx-auto col-lg-8 col-md-8 col-sm-10 ">
-    
+
     {{ with .Params.coverImage }}
-      <img src=" {{ .url | safeURL }}" alt = " {{ .alt }}" class="blog-cover-image"> </img>
+    <img src=" {{ .url | safeURL }}" alt=" {{ .alt }}" class="blog-cover-image"> </img>
     {{ end }}
-      {{ if .Params.author }}
-        <p> Written with hope by {{ .Params.author | markdownify }} </p>
-      {{ end }}
-      {{ .Content  }}
+
+    {{ if .Params.author }}
+    <p> Written by {{ .Params.author | markdownify }} on {{.Date.Format "Monday, January 2, 2006"}}</p>
+    {{ end }}
+    {{ .Content }}
   </div>
 
 </section>
