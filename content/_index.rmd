@@ -40,9 +40,9 @@ text:
     nature which: violates your dignity. makes you feel intimidated, degraded or humiliated."
 ---
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE) 
+knitr::opts_chunk$set(echo = TRUE)
 
-library(tidyverse) 
+library(tidyverse)
 library(dplyr)
 
 library(sf)
@@ -58,118 +58,121 @@ library(DT)
 library(osmdata)
 library(osmplotr)
 library(viridis)
-
 ```
 
 ```{r reading data, include=FALSE}
 # Imports data from multiple spreadsheets and performs operations to uniformize field names
-oldData <- read_csv('../resources/assets/allUshahidiResponses.csv') 
-newData <- read_csv('../resources/assets/latestReports.csv') 
+oldData <- read_csv("../resources/assets/allUshahidiResponses.csv")
+newData <- read_csv("../resources/assets/latestReports.csv")
 
 # Post verification
 # If human verified is 'yes'
-newData <- newData %>% filter(`human verified`== 'yes')
+newData <- newData %>% filter(`human verified` == "yes")
 # If published on Ushahidi (safeyelli.ushahidi.io)
-oldData <- oldData %>% filter(`Post Status` == 'published')
+oldData <- oldData %>% filter(`Post Status` == "published")
 
 
 # Match field names in the old sheet to new
-oldData <-oldData %>% rename( description = `Describe the incident in detail`,
-                   `kind of incident` = `What kind of incident was this?`,
-                   `date and time` = `When and at what time this happen?`,
-                   `gender of victim` = `What is your gender?`,
-                   `environmental factors` = `What was wrong with the space?` 
-                   )
+oldData <- oldData %>% rename(
+  description = `Describe the incident in detail`,
+  `kind of incident` = `What kind of incident was this?`,
+  `date and time` = `When and at what time this happen?`,
+  `gender of victim` = `What is your gender?`,
+  `environmental factors` = `What was wrong with the space?`
+)
 
 # Combine data and time in the new sheet
-newData$`time of incident` <- format(as_datetime(newData$`time of incident`), format = "%H:%M") 
+newData$`time of incident` <- format(as_datetime(newData$`time of incident`), format = "%H:%M")
 
 # Combine data and time in the new sheet
-                                    
 
-# Force IST time to UTC time for storage and operations. 
+
+# Force IST time to UTC time for storage and operations.
 # UTC is recommended, all time must be stored as UTC, need to modify google sheets?
 # lubridate as_datetime returns nothing here
-newData$`date and time` <- paste(newData$`date of incident`, newData$`time of incident`) %>% 
-  as.POSIXct() %>%  force_tzs(tzones = "Asia/Kolkata", tzone_out = "UTC")
+newData$`date and time` <- paste(newData$`date of incident`, newData$`time of incident`) %>%
+  as.POSIXct() %>%
+  force_tzs(tzones = "Asia/Kolkata", tzone_out = "UTC")
 
-oldData$`date and time` <- oldData$`date and time` %>%force_tzs(tzones = "Asia/Kolkata", tzone_out = "UTC")
+oldData$`date and time` <- oldData$`date and time` %>% force_tzs(tzones = "Asia/Kolkata", tzone_out = "UTC")
 
 # Split the location field into lat and lng
-newData <- newData %>% separate( col = `location`, into = c("Location.lat", "Location.lon"), sep = "\\,") 
+newData <- newData %>% separate(col = `location`, into = c("Location.lat", "Location.lon"), sep = "\\,")
 
 # Old data coords into chr for compatibility
-newData <- newData %>% 
-  mutate(Location.lat = as.double(Location.lat),
-         Location.lon = as.double(Location.lon))
+newData <- newData %>%
+  mutate(
+    Location.lat = as.double(Location.lat),
+    Location.lon = as.double(Location.lon)
+  )
 
-# Map tiles from mapbox
-mapUrl = "https://api.mapbox.com/styles/v1/rungdung/clg9kg0ce006n01o5doivuqu8/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicnVuZ2R1bmciLCJhIjoiY2tqeWh6cXF4MDgzMjJvbWVmbGQzYjAwMyJ9.U-aJyoqyKvTXlhVk43jV1A"
+# # Map tiles from mapbox
+# mapUrl = "https://api.mapbox.com/styles/v1/rungdung/clg9kg0ce006n01o5doivuqu8/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicnVuZ2R1bmciLCJhIjoiY2tqeWh6cXF4MDgzMjJvbWVmbGQzYjAwMyJ9.U-aJyoqyKvTXlhVk43jV1A"
 
 
-darkMapUrl = "https://api.mapbox.com/styles/v1/rungdung/cl3jusid0001g15odcz3f1dcb/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicnVuZ2R1bmciLCJhIjoiY2tqeWh6cXF4MDgzMjJvbWVmbGQzYjAwMyJ9.U-aJyoqyKvTXlhVk43jV1A"
+# darkMapUrl = "https://api.mapbox.com/styles/v1/rungdung/cl3jusid0001g15odcz3f1dcb/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoicnVuZ2R1bmciLCJhIjoiY2tqeWh6cXF4MDgzMjJvbWVmbGQzYjAwMyJ9.U-aJyoqyKvTXlhVk43jV1A"
 ```
 
 
 
 ```{r merging dataframes and creating sf frames, include=FALSE}
-# combine dataframes for leaflet 
+# combine dataframes for leaflet
 allData <- bind_rows(oldData, newData)
-allData <- rename(allData, lat=Location.lat, lng = Location.lon)
-
-
-
-
+allData <- rename(allData, lat = Location.lat, lng = Location.lon)
 ```
 
 ```{r operations on data, echo=FALSE, message=FALSE, warning=FALSE}
 # create unique date and time fields to simplify leaflet
 
 
-# Attach a coordinate reference 
+# Attach a coordinate reference
 allData <- allData %>%
-  st_as_sf(coords = c('lng', 'lat'),crs = 4326)
+  st_as_sf(coords = c("lng", "lat"), crs = 4326)
 
-allData <- allData %>% 
-  mutate(date = as.Date(`date and time`, '%d/%m/%Y'),
-         year = as.integer(year(date)),
-         month = as.character(month(date)),
-         hour = as.integer(format(as_datetime(allData$`date and time`, tz="Asia/Kolkata"), 
-                           format="%H"))
-         )
+allData <- allData %>%
+  mutate(
+    date = as.Date(`date and time`, "%d/%m/%Y"),
+    year = as.integer(year(date)),
+    month = as.character(month(date)),
+    hour = as.integer(format(as_datetime(allData$`date and time`, tz = "Asia/Kolkata"),
+      format = "%H"
+    ))
+  )
 
-allData <- allData %>% 
-  arrange(`date and time`) %>% 
-  rowid_to_column(var="rowID")
+allData <- allData %>%
+  arrange(`date and time`) %>%
+  rowid_to_column(var = "rowID")
 
-allDataFilter <- allData %>%  
-  separate('kind of incident', paste("Category", 1:5, sep="_"), sep=",") %>% 
-  pivot_longer(cols=`Category_1`:`Category_5`,
-               values_to = "kind of incident") %>% 
-  drop_na(`kind of incident`) 
+allDataFilter <- allData %>%
+  separate("kind of incident", paste("Category", 1:5, sep = "_"), sep = ",") %>%
+  pivot_longer(
+    cols = `Category_1`:`Category_5`,
+    values_to = "kind of incident"
+  ) %>%
+  drop_na(`kind of incident`)
 ```
 
 ```{r Formatting popup text, message=FALSE, warning=FALSE, include=FALSE}
 # create popup text for the leaflet map, all formatting is done in html
 
 
-  allData$popupText <-
+allData$popupText <-
   paste0(
-    '<strong>',
+    "<strong>",
     allData$`kind of incident`,
-    '</strong> <br/> <br/>',
-    format(allData$`date and time`, tz="Asia/Kolkata"),
-    '<br/> <br/>',
+    "</strong> <br/> <br/>",
+    format(allData$`date and time`, tz = "Asia/Kolkata"),
+    "<br/> <br/>",
     allData$`description`,
-    ' '
+    " "
   ) %>%
   lapply(htmltools::HTML)
 ```
 
 ```{r Creating shared data frame for crosstalk, echo=FALSE, message=FALSE, warning=FALSE}
 # sharedData is the format for crosstalk. Crosstalk enables filters by sharing dataframes on a static site.
-sharedD <- SharedData$new(allData, ~rowID, group="map")
-sharedDFilter <- SharedData$new(allDataFilter, ~rowID, group="map")
+sharedD <- SharedData$new(allData, ~rowID, group = "map")
+sharedDFilter <- SharedData$new(allDataFilter, ~rowID, group = "map")
 ```
 
 ```{r get Street Lamp Data, echo=FALSE, message=FALSE, warning=FALSE}
@@ -180,10 +183,10 @@ bbox <- osmplotr::get_bbox(bboxC)
 # Data from OSM
 # streetlights from OSM
 dat_streetLamps <-
-  extract_osm_objects (
+  extract_osm_objects(
     key = "highway",
     value = "street_lamp",
-    return_type = 'point',
+    return_type = "point",
     bbox = bbox
   )
 
@@ -194,102 +197,102 @@ colourLeg <- colorFactor(viridis(8), dat_streetLamps$operational_status)
 
 # leaflet object
 
-map <- leaflet(sharedD, height="100vh") %>%
-  addTiles(urlTemplate = darkMapUrl,
-           attribution =  'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-           group = "Street Lamps",
-           options = tileOptions(useCache = TRUE, crossOrigin = TRUE)) %>%
-  addTiles(urlTemplate = mapUrl,
-           attribution =  'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-           group = "Default",
-           options = tileOptions(useCache = TRUE, crossOrigin = TRUE)) %>%
-  
-  fitBounds(77.439880,12.850618,77.765350,13.124871) %>%
-  setMaxBounds(77.071139,12.707331,78.114153,13.228584) %>%
+map <- leaflet(sharedD, height = "100vh") %>%
+  addProviderTiles(providers$CartoDB.Voyager, group = "Positron") %>%
+  # addTiles(urlTemplate = darkMapUrl,
+  #          attribution =  'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+  #          group = "Street Lamps",
+  #          options = tileOptions(useCache = TRUE, crossOrigin = TRUE)) %>%
+  # addTiles(urlTemplate = mapUrl,
+  #          attribution =  'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+  #          group = "Default",
+  #          options = tileOptions(useCache = TRUE, crossOrigin = TRUE)) %>%
+
+  fitBounds(77.439880, 12.850618, 77.765350, 13.124871) %>%
+  setMaxBounds(77.071139, 12.707331, 78.114153, 13.228584) %>%
   addScaleBar() %>%
-  
   addCircleMarkers(
     popup = paste(allData$popupText),
     radius = 4,
     opacity = 0.8,
-    color = '#be0915',
+    color = "#be0915",
     popupOptions = popupOptions(maxWidth = 400),
-    #clusterOptions = clusterOptions(),
+    # clusterOptions = clusterOptions(),
     group = "Incidents",
   ) %>%
-  
   # OSM data on main map
   addCircleMarkers(
     data = dat_streetLamps,
     opacity = 0.5,
-    color = ~colourLeg(dat_streetLamps$operational_status),
+    color = ~ colourLeg(dat_streetLamps$operational_status),
     radius = 2,
-    label = ~htmlEscape(dat_streetLamps$operational_status),
+    label = ~ htmlEscape(dat_streetLamps$operational_status),
     group = "Street Lamps"
   ) %>%
   addLegend(
     position = "bottomright",
     pal = colourLeg,
-    values = ~dat_streetLamps$operational_status,
+    values = ~ dat_streetLamps$operational_status,
     title = "Status of mapped streetlights",
     group = "Street Lamps"
   ) %>%
-  
-  addWebGLHeatmap(
-    intensity = 1,
-    size = "100",
-    units="px",
-    opacity=0.5,
-    group = "Heat Map"
-  ) %>% 
-  
+  # addWebGLHeatmap(
+  #   intensity = 1,
+  #   size = "100",
+  #   units = "px",
+  #   opacity = 0.5,
+  #   group = "Heat Map"
+  # ) %>%
   addLayersControl(
     baseGroups = c("default"),
-    overlayGroups = c("Heat Map", "Incidents", "Street Lamps"),
+    overlayGroups = c("Incidents", "Street Lamps"),
     options = layersControlOptions(collapsed = FALSE)
-  ) %>% 
-  
-  hideGroup("Street Lamps") %>% 
-  
-  addControlGPS() %>% 
-  activateGPS() %>% 
+  ) %>%
+  hideGroup("Street Lamps") %>%
   addSearchOSM()
-
-
 ```
 
 ```{r formatting output,echo=FALSE, message=FALSE, warning=FALSE, out.width='100%'}
 
 
 # filters
-yearFilter <- filter_slider("Year", "Year", sharedD, column= ~year, step=1, width="100%")
-timeOfDayFilter <- filter_slider("Hour","Time of Day (24H format)", sharedD,  column=~hour, step=1, width="100%")
+yearFilter <- filter_slider("Year", "Year", sharedD, column = ~year, step = 1, width = "100%")
+timeOfDayFilter <- filter_slider("Hour", "Time of Day (24H format)", sharedD, column = ~hour, step = 1, width = "100%")
 
 
 
 # map display
 tags$div(
   class = "map-section",
-  #dateFilter,
-  tags$div(class = "crosstalk-map",
-           map),
-  tags$div(class = "crosstalk-filters  col-md-11",
-           tags$h4('Map filters:'),
-           list(
-             tags$div(
-               class = "row",
-               tags$div(class = "col-md-6",
-                        yearFilter),
-               tags$div(class = "col-md-6",
-                        timeOfDayFilter)
-             ),
-             tags$div(class = "row",
-                      tags$div(class = "col-md-12",
-                               filter_checkbox("Incident type", "Type", sharedDFilter, group= ~`kind of incident`, inline=TRUE)),
-                    )
-                    
-           )),
-  
+  # dateFilter,
+  tags$div(
+    class = "crosstalk-map",
+    map
+  ),
+  tags$div(
+    class = "crosstalk-filters  col-md-11",
+    tags$h4("Map filters:"),
+    list(
+      tags$div(
+        class = "row",
+        tags$div(
+          class = "col-md-6",
+          yearFilter
+        ),
+        tags$div(
+          class = "col-md-6",
+          timeOfDayFilter
+        )
+      ),
+      tags$div(
+        class = "row",
+        tags$div(
+          class = "col-md-12",
+          filter_checkbox("Incident type", "Type", sharedDFilter, group = ~`kind of incident`, inline = TRUE)
+        ),
+      )
+    )
+  ),
 )
 ```
 
